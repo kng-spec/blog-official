@@ -1,6 +1,96 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloudflare Pages免费建站完整教程 - 爱博·客</title>
@@ -12,124 +102,215 @@
         }
 
         body {
-            font-family: 'Microsoft YaHei', Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+            line-height: 1.8;
             color: #333;
-            background-color: #f8f9fa;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            padding-top: 70px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #ffcc2f;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 20px;
         }
 
         header {
             background: linear-gradient(135deg, #f38020, #ffcc2f);
             color: white;
-            padding: 2rem 0;
+            padding: 3rem 2rem;
             text-align: center;
-            margin-bottom: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(243, 128, 32, 0.3);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
+            opacity: 0.95;
+            margin-top: 1rem;
         }
 
         .intro {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            border-left: 5px solid #f38020;
         }
 
         .intro h2 {
             color: #f38020;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 600;
         }
 
         .intro p {
             font-size: 1.1rem;
-            margin-bottom: 1rem;
-            text-align: justify;
+            margin-bottom: 1.2rem;
+            line-height: 1.9;
+            color: #555;
         }
 
         .toc {
-            background: #fff8e1;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            border-left: 4px solid #ffc107;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         }
 
         .toc h2 {
             color: #f38020;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
         }
 
         .toc ul {
             columns: 2;
-            column-gap: 2rem;
+            column-gap: 3rem;
+            list-style: none;
         }
 
         .toc li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .toc li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #f38020;
+            font-weight: bold;
         }
 
         .toc a {
             color: #166088;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .toc a:hover {
             color: #f38020;
-            text-decoration: underline;
+            padding-left: 5px;
         }
 
         .tutorial-section {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+            transition: transform 0.3s;
+        }
+
+        .tutorial-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
         .tutorial-section h2 {
             color: #f38020;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #ffcc2f;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #ffcc2f;
+            font-weight: 600;
         }
 
         .tutorial-section h3 {
             color: #166088;
-            margin: 1.5rem 0 1rem;
+            margin: 2rem 0 1.2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .tutorial-section p {
-            margin-bottom: 1rem;
-            text-align: justify;
+            margin-bottom: 1.2rem;
+            line-height: 1.9;
+            color: #555;
         }
 
         .tutorial-section ul, .tutorial-section ol {
             margin-left: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .tutorial-section li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
         }
 
         .steps {
@@ -139,9 +320,10 @@
         }
 
         .steps li {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             position: relative;
-            padding-left: 3rem;
+            padding-left: 4rem;
+            line-height: 1.8;
         }
 
         .steps li:before {
@@ -150,89 +332,180 @@
             position: absolute;
             left: 0;
             top: 0;
-            background: #f38020;
+            background: linear-gradient(135deg, #f38020, #ff9a44);
             color: white;
-            width: 2rem;
-            height: 2rem;
+            width: 2.5rem;
+            height: 2.5rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 10px rgba(243, 128, 32, 0.3);
+        }
+
+        .note, .tip, .warning {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            font-size: 1rem;
+            line-height: 1.8;
         }
 
         .note {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 4px 4px 0;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196f3;
         }
 
         .tip {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 4px 4px 0;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left: 5px solid #4caf50;
         }
 
         .warning {
-            background: #ffebee;
-            border-left: 4px solid #f44336;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 4px 4px 0;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border-left: 5px solid #f44336;
+        }
+
+        .note strong, .tip strong, .warning strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .code-block {
             background: #2d2d2d;
             color: #f8f8f2;
-            padding: 1rem;
-            border-radius: 5px;
+            padding: 1.5rem;
+            border-radius: 10px;
             overflow-x: auto;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             font-family: 'Courier New', monospace;
-        }
-
-        .image-placeholder {
-            background: #eee;
-            border: 2px dashed #ccc;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 1rem 0;
-            color: #999;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 2rem;
             text-align: center;
-            padding: 2rem 0;
-            color: #666;
-            font-size: 0.9rem;
+            border-radius: 15px;
+            margin-top: 3rem;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ffcc2f;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #f38020;
+        }
+
+        .footer img {
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: #3498db;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
             }
-            
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
             h1 {
                 font-size: 2rem;
             }
-            
-            .toc ul {
-                columns: 1;
+
+            .tutorial-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .steps li {
+                padding-left: 3rem;
+            }
+
+            .steps li:before {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .intro, .tutorial-section {
+                padding: 1.5rem;
+            }
+
+            .tutorial-section h2 {
+                font-size: 1.4rem;
             }
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h2><a href="https://blog.aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png" alt="网站Logo"></a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">首页</a></li>
+                <li class="nav-item"><a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a></li>
+                <li class="nav-item"><a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a></li>
+                <li class="nav-item"><a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a></li>
+                <li class="nav-item"><a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a></li>
+                <li class="nav-item"><a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a></li>
+                <li class="nav-item"><a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <header>
-            <h1>免费建站完整教程</h1>
-            <p class="subtitle">从零开始搭建现代化网站的全流程指南</p>
+            <h1>免费建站完整教程：入门到精通</h1>
+            <p class="subtitle">使用 Cloudflare Pages 打造专业网站</p>
         </header>
 
         <section class="intro">
@@ -242,16 +515,16 @@
         </section>
 
         <section class="toc">
-            <h2>教程目录</h2>
+            <h2>📋 教程目录</h2>
             <ul>
-                <li><a href="#pages-setup">1. Cloudflare Pages基础设置</a></li>
-                <li><a href="#r2-storage">2. Cloudflare R2对象存储使用</a></li>
-                <li><a href="#trae-ide">3. 使用Trae IDE编写网站代码</a></li>
-                <li><a href="#domain-config">4. 域名购买与解析配置</a></li>
-                <li><a href="#customer-service">5. 客服系统搭建</a></li>
-                <li><a href="#payment-system">6. 支付系统集成</a></li>
-                <li><a href="#wordpress">7. WordPress建站方法</a></li>
-                <li><a href="#optimization">8. 性能优化与安全防护</a></li>
+                <li><a href="#pages-setup">Cloudflare Pages基础设置</a></li>
+                <li><a href="#r2-storage">Cloudflare R2对象存储使用</a></li>
+                <li><a href="#trae-ide">使用Trae IDE编写网站代码</a></li>
+                <li><a href="#domain-config">域名购买与解析配置</a></li>
+                <li><a href="#customer-service">客服系统搭建</a></li>
+                <li><a href="#payment-system">支付系统集成</a></li>
+                <li><a href="#wordpress">WordPress建站方法</a></li>
+                <li><a href="#optimization">性能优化与安全防护</a></li>
             </ul>
         </section>
 
@@ -291,7 +564,8 @@
             </ol>
 
             <div class="tip">
-                <strong>提示：</strong>首次部署完成后，Cloudflare会自动分配一个pages.dev子域名，后续可以绑定自定义域名。
+                <strong>💡 提示</strong>
+                首次部署完成后，Cloudflare会自动分配一个pages.dev子域名，后续可以绑定自定义域名。
             </div>
         </section>
 
@@ -329,8 +603,7 @@
                 <li>在代码中通过环境变量访问R2存储</li>
             </ol>
 
-            <div class="code-block">
-// 示例：在Cloudflare Worker中访问R2
+            <div class="code-block">// 示例：在Cloudflare Worker中访问R2
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -345,23 +618,12 @@ export default {
         if (object === null) {
           return new Response("Object Not Found", { status: 404 });
         }
-        const headers = new Headers();
-        object.writeHttpMetadata(headers);
-        headers.set('etag', object.httpEtag);
-        return new Response(object.body, {
-          headers,
-        });
+        return new Response(object.body);
       default:
-        return new Response("Method Not Allowed", {
-          status: 405,
-          headers: {
-            Allow: "PUT, GET",
-          },
-        });
+        return new Response("Method Not Allowed", { status: 405 });
     }
-  },
-};
-            </div>
+  }
+};</div>
         </section>
 
         <section class="tutorial-section" id="trae-ide">
@@ -383,16 +645,9 @@ export default {
                 <li>通过插件系统扩展功能</li>
             </ol>
 
-            <h3>与Cloudflare Pages集成</h3>
-            <ol class="steps">
-                <li>在Trae IDE中配置Git远程仓库</li>
-                <li>将代码推送到Github/Gitlab</li>
-                <li>在Cloudflare Pages中连接对应的仓库</li>
-                <li>设置自动部署触发条件</li>
-            </ol>
-
             <div class="tip">
-                <strong>技巧：</strong>Trae IDE支持多种编程语言和框架，可以直接创建React、Vue、Angular等项目模板。
+                <strong>💡 技巧</strong>
+                Trae IDE支持多种编程语言和框架，可以直接创建React、Vue、Angular等项目模板。
             </div>
         </section>
 
@@ -407,75 +662,27 @@ export default {
 
             <h3>Cloudflare DNS配置</h3>
             <ol class="steps">
-                <li>在Cloudflare中添加站点：
-                    <ul>
-                        <li>输入已购买的域名</li>
-                        <li>选择免费套餐</li>
-                        <li>按照指引修改域名服务器(NS记录)</li>
-                    </ul>
-                </li>
+                <li>在Cloudflare中添加站点，输入已购买的域名</li>
+                <li>选择免费套餐并修改域名服务器(NS记录)</li>
                 <li>配置DNS记录：
                     <ul>
                         <li>Type：A记录或CNAME记录</li>
                         <li>Name：@（根域名）或www</li>
-                        <li>Content：Pages提供的IP地址或CNAME值</li>
                         <li>Proxy status：Proxied（开启CDN加速）</li>
                     </ul>
                 </li>
-                <li>在Pages项目中绑定自定义域名：
-                    <ul>
-                        <li>进入Pages项目设置</li>
-                        <li>找到Custom domains选项</li>
-                        <li>添加已配置的域名</li>
-                        <li>等待SSL证书自动签发</li>
-                    </ul>
-                </li>
+                <li>在Pages项目中绑定自定义域名</li>
+                <li>等待SSL证书自动签发</li>
             </ol>
 
             <div class="note">
-                <strong>注意：</strong>域名服务器修改后需要24-48小时生效，期间可能无法访问网站。
-            </div>
-        </section>
-
-        <section class="tutorial-section" id="customer-service">
-            <h2>5. 客服系统搭建</h2>
-            <p>现代网站需要高效的客服系统来提升用户体验和转化率。</p>
-
-            <h3>在线客服工具推荐</h3>
-            <ul>
-                <li><strong>Tidio</strong>：免费版支持1个邮箱，聊天机器人功能</li>
-                <li><strong>LiveChat</strong>：功能全面，支持多渠道客服</li>
-                <li><strong>Crisp</strong>：界面简洁，免费版支持1个邮箱</li>
-                <li><strong>tawk.to</strong>：完全免费，无任何限制</li>
-            </ul>
-
-            <h3>集成步骤（以tawk.to为例）</h3>
-            <ol class="steps">
-                <li>访问 <a href="https://www.tawk.to/" target="_blank">tawk.to官网</a> 注册账户</li>
-                <li>创建Property并获取Widget代码</li>
-                <li>将代码添加到网站HTML的&lt;body&gt;标签前</li>
-                <li>配置客服团队和自动回复消息</li>
-                <li>自定义外观和功能设置</li>
-            </ol>
-
-            <div class="code-block">
-&lt;!-- tawk.to 客服代码示例 --&gt;
-&lt;script type="text/javascript"&gt;
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-&lt;/script&gt;
+                <strong>📌 注意</strong>
+                域名服务器修改后需要24-48小时生效，期间可能无法访问网站。
             </div>
         </section>
 
         <section class="tutorial-section" id="payment-system">
-            <h2>6. 支付系统集成</h2>
+            <h2>5. 支付系统集成</h2>
             <p>为网站添加支付功能是电商或服务类网站的核心需求。</p>
 
             <h3>国际支付方案</h3>
@@ -491,45 +698,6 @@ s0.parentNode.insertBefore(s1,s0);
                 <li><strong>微信支付</strong>：腾讯旗下的移动支付服务</li>
                 <li><strong>Stripe中国</strong>：支持人民币结算的国际支付平台</li>
             </ul>
-
-            <h3>集成步骤（以Stripe为例）</h3>
-            <ol class="steps">
-                <li>注册Stripe账户并通过验证</li>
-                <li>获取API密钥（Publishable Key和Secret Key）</li>
-                <li>在前端集成Stripe.js处理客户端逻辑</li>
-                <li>在后端集成Stripe API处理支付请求</li>
-                <li>配置Webhook接收支付状态通知</li>
-                <li>测试支付流程并上线</li>
-            </ol>
-
-            <div class="code-block">
-&lt;!-- Stripe前端集成示例 --&gt;
-&lt;script src="https://js.stripe.com/v3/"&gt;&lt;/script&gt;
-&lt;script&gt;
-// 注意：以下代码仅为示例，在实际使用中需要替换为您的Stripe Publishable Key
-// var stripe = Stripe('YOUR_PUBLISHABLE_KEY');
-// 
-// document.getElementById('checkout-button').addEventListener('click', function () {
-//   fetch('/create-checkout-session', {
-//     method: 'POST',
-//   })
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (session) {
-//     return stripe.redirectToCheckout({ sessionId: session.id });
-//   })
-//   .then(function (result) {
-//     if (result.error) {
-//       alert(result.error.message);
-//     }
-//   })
-//   .catch(function (error) {
-//     console.error('Error:', error);
-//   });
-// });
-&lt;/script&gt;
-            </div>
         </section>
 
         <section class="tutorial-section" id="wordpress">
@@ -543,29 +711,22 @@ s0.parentNode.insertBefore(s1,s0);
                 <li>配置自定义域名和SSL证书</li>
             </ol>
 
-            <h3>方案二：Headless WordPress + Cloudflare Workers</h3>
+            <h3>方案二：Headless WordPress</h3>
             <ol class="steps">
                 <li>将WordPress作为后端CMS，仅提供REST API</li>
                 <li>使用Cloudflare Workers作为前端渲染层</li>
                 <li>通过WP REST API获取内容并在Worker中渲染</li>
-                <li>部署到Cloudflare Pages或Workers</li>
             </ol>
 
-            <h3>方案三：替代方案</h3>
-            <p>考虑使用现代化的静态站点生成器替代WordPress：</p>
-            <ul>
-                <li><strong>Jamstack</strong>：Next.js、Nuxt.js、Gatsby等</li>
-                <li><strong>静态CMS</strong>：Contentful、Sanity、Strapi等</li>
-                <li><strong>博客系统</strong>：Ghost、Hugo、Jekyll等</li>
-            </ul>
-
             <div class="warning">
-                <strong>警告：</strong>传统的WordPress需要PHP运行环境和数据库，无法直接部署到Cloudflare Pages。建议采用静态化方案或现代替代方案。
+                <strong>⚠️ 警告</strong>
+                传统的WordPress需要PHP运行环境和数据库，无法直接部署到Cloudflare Pages。建议采用静态化方案或现代替代方案。
             </div>
         </section>
 
         <section class="tutorial-section" id="optimization">
             <h2>8. 性能优化与安全防护</h2>
+            
             <h3>性能优化</h3>
             <ul>
                 <li><strong>图片优化</strong>：使用WebP格式，启用Cloudflare Image Resizing</li>
@@ -591,7 +752,6 @@ s0.parentNode.insertBefore(s1,s0);
                 <li><strong>性能监控</strong>：PageSpeed Insights、Lighthouse等</li>
             </ul>
         </section>
-
         <footer>
  <div class="footer">
         <p style="margin-bottom: 10px;">感谢🙏订阅我的频道：<a href="https://www.youtube.com/@blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 

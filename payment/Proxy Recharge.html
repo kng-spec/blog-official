@@ -109,7 +109,52 @@
             padding: 20px;
             min-height: 100vh;
         }
+.navbar {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;  /* 使用 left 和 right 代替 width: 100% */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
 
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 20px;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;  /* 添加 padding: 0 以移除默认内边距 */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #ffcc2f;
+}
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -341,9 +386,47 @@
     </style>
 </head>
 <body>
+    <!-- 标准导航菜单 -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h2><a href="https://blog.aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png" alt="网站Logo"></a></h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">首页</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a>
+            </li>
+             <li class="nav-item">
+                <a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</nav>
     <div class="container">
         <div class="header">
-            <h1>💳 虚拟卡充值服务完整指南</h1>
+            <p>留白</p>
+            _blank
+            <h1>💳 虚拟卡充值/提现服务完整指南</h1>
             <p>免开卡费 | 无年费 | 0费率</p>
         </div>
 
@@ -351,11 +434,11 @@
             <div class="highlight-box">
                 <p style="font-size: 18px; margin-bottom: 15px;">
                     <strong>🎁 专属渠道申请：</strong>
-                    <a href="https://blog.aibochinese.com/apply-vcc/" target="_blank" rel="noopener">立即申请虚拟卡</a>
+                    <a href="apply V-cards.html" target="_blank" rel="noopener">立即申请虚拟卡</a>
                 </p>
                 <p style="font-size: 14px;">
-                    「免费<a href="https://blog.aibochinese.com/?golink=aHR0cHM6Ly9kZWRpY2F0ZWRsaW5lcy50b3AvZnJlZS10cmlhbC8=" target="_blank" rel="noopener">海外网络流量</a> + 访问<a href="https://accounts.maxweb.red/zh-CN/register?ref=H4LDZ7JS" target="_blank" rel="noopener">币安 web3</a>」使用 USDT / USDC 稳定币进行充值
-                    【<a href="https://blog.aibochinese.com/forum-post/1208.html/" target="_blank" rel="noopener">查看教程</a>】
+                    「免费<a href="https://dedicatedlines.top?ref=13" target="_blank" rel="noopener">海外网络流量</a> + 访问<a href="https://accounts.maxweb.red/register?ref=569491541" target="_blank" rel="noopener">币安 web3</a>」使用 USDT / USDC 稳定币进行充值
+                    【<a href="self recharge.html" target="_blank" rel="noopener">查看教程</a>】
                 </p>
             </div>
 
