@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用功能代码模板合集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section h2::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        pre::before {
+            content: "CODE";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7em;
+            color: #5c6370;
+            font-weight: bold;
+        }
+        
+        code {
+            font-family: "Consolas", "Monaco", "Courier New", monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .tag {
+            color: #e06c75;
+        }
+        
+        .attr {
+            color: #d19a66;
+        }
+        
+        .string {
+            color: #98c379;
+        }
+        
+        .ai-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .ai-section h2 {
+            color: white;
+            border-bottom-color: white;
+        }
+        
+        .ai-section h2::before {
+            content: "🤖";
+        }
+        
+        .ai-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ai-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section h2 {
+                font-size: 1.4em;
+            }
+            
+            pre {
+                padding: 15px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>常用功能代码模板合集</h1>
+            <p>HTML/CSS 常用嵌入代码快速参考</p>
+        </header>
+        
+        <div class="content">
+            <!-- 超链接 -->
+            <div class="section">
+                <h2>超链接</h2>
+                
+                <h3>1. 基础下划线链接</h3>
+                <div class="description">
+                    普通超链接，在新标签页打开目标网址
+                </div>
+                <pre><code><span class="tag">&lt;a</span> <span class="attr">href=</span><span class="string">"https://vip.fmkefu.com/c/zxprhl46"</span> <span class="attr">target=</span><span class="string">"_blank"</span><span class="tag">&gt;</span>联系客服<span class="tag">&lt;/a&gt;</span></code></pre>
+                
+                <h3>2. 彩色高亮链接</h3>
+                <div class="description">
+                    自定义颜色的链接，适合重点强调
+                </div>
+                <pre><code><span class="tag">&lt;a</span> <span class="attr">href=</span><span class="string">"https://example.com"</span> 
+   <span class="attr">style=</span><span class="string">"color:red"</span> 
+   <span class="attr">target=</span><span class="string">"_blank"</span> 
+   <span class="attr">rel=</span><span class="string">"noopener noreferrer"</span><span class="tag">&gt;</span>
+    红色链接
+<span class="tag">&lt;/a&gt;</span></code></pre>
+            </div>
+            
+            <!-- 图片 -->
+            <div class="section">
+                <h2>嵌入图片</h2>
+                
+                <h3>响应式图片</h3>
+                <div class="description">
+                    自适应屏幕宽度的图片，支持OSS存储
+                </div>
+                <pre><code><span class="tag">&lt;img</span> <span class="attr">src=</span><span class="string">"https://your-bucket.oss-cn-hangzhou.aliyuncs.com/west-lake.jpg"</span> 
+     <span class="attr">alt=</span><span class="string">"图片描述"</span> 
+     <span class="attr">style=</span><span class="string">"max-width: 100%; height: auto;"</span> <span class="tag">/&gt;</span></code></pre>
+            </div>
+            
+            <!-- 音频 -->
+            <div class="section">
+                <h2>嵌入音频</h2>
+                
+                <h3>OSS音频播放器</h3>
+                <div class="description">
+                    HTML5原生音频控件，支持播放、暂停、进度控制
+                </div>
+                <pre><code><span class="tag">&lt;audio</span> <span class="attr">controls</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> <span class="attr">src=</span><span class="string">"https://your-bucket.oss-cn-hangzhou.aliyuncs.com/your-audio-file.mp3"</span> 
+            <span class="attr">type=</span><span class="string">"audio/mpeg"</span><span class="tag">&gt;</span>
+    您的浏览器不支持音频播放
+<span class="tag">&lt;/audio&gt;</span></code></pre>
+            </div>
+            
+            <!-- 视频 -->
+            <div class="section">
+                <h2>嵌入视频</h2>
+                
+                <h3>OSS视频播放器</h3>
+                <div class="description">
+                    HTML5视频播放器，自定义尺寸
+                </div>
+                <pre><code><span class="tag">&lt;video</span> <span class="attr">controls</span> <span class="attr">width=</span><span class="string">"640"</span> <span class="attr">height=</span><span class="string">"360"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> <span class="attr">src=</span><span class="string">"https://your-bucket.oss-cn-hangzhou.aliyuncs.com/your-video-file.mp4"</span> 
+            <span class="attr">type=</span><span class="string">"video/mp4"</span><span class="tag">&gt;</span>
+    您的浏览器不支持视频播放
+<span class="tag">&lt;/video&gt;</span></code></pre>
+            </div>
+            
+            <!-- 图片链接 -->
+            <div class="section">
+                <h2>图片超链接</h2>
+                
+                <h3>可点击图片</h3>
+                <div class="description">
+                    将图片作为链接，点击跳转到指定页面（如YouTube视频）
+                </div>
+                <pre><code><span class="tag">&lt;a</span> <span class="attr">href=</span><span class="string">"https://youtu.be/NYGTkj2YLUY"</span> <span class="attr">target=</span><span class="string">"_blank"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;img</span> <span class="attr">src=</span><span class="string">"https://aibochinese.oss-cn-beijing.aliyuncs.com/icons8-youtube上播放-48.png"</span> 
+         <span class="attr">alt=</span><span class="string">"观看视频"</span> 
+         <span class="attr">style=</span><span class="string">"max-width: 100%; height: auto;"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/a&gt;</span></code></pre>
+            </div>
+            
+            <!-- 网页嵌入 -->
+            <div class="section">
+                <h2>嵌入外部网页</h2>
+                
+                <h3>Iframe页面嵌入</h3>
+                <div class="description">
+                    在当前页面中嵌入另一个完整网页
+                </div>
+                <pre><code><span class="tag">&lt;iframe</span> <span class="attr">src=</span><span class="string">"https://你的网站.com/目标页面/"</span> 
+        <span class="attr">width=</span><span class="string">"100%"</span> 
+        <span class="attr">height=</span><span class="string">"600px"</span> 
+        <span class="attr">frameborder=</span><span class="string">"0"</span> 
+        <span class="attr">title=</span><span class="string">"嵌入的页面内容"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/iframe&gt;</span></code></pre>
+            </div>
+            
+            <!-- AI指令 -->
+            <div class="ai-section">
+                <h2>AI 辅助指令参考</h2>
+                
+                <div class="ai-item">
+                    <strong>指令 1：器官部位图文页面</strong>
+                    请设计一个HTML页面文件，罗列人体各个器官和部位，仅罗列名称即可，名称有拼音、汉语和英文翻译，匹配图片
+                </div>
+                
+                <div class="ai-item">
+                    <strong>指令 2：图片转HTML</strong>
+                    请识别图片内容，并转化为html文件输出，且电脑和手机端响应式，尽量保留原有内容排版不变，css样式仅使用在本模块
+                </div>
+                
+                <div class="ai-item">
+                    <strong>指令 3：长篇课文排版</strong>
+                    请识别图片内容，并转化为html文件输出，且电脑和手机端响应式，尽量保留原有内容排版不变，课文和生词分两栏展示，课文部分字体稍大，生词部分字体缩小，css样式仅使用在本模块
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📚 常用功能代码模板合集 | 持续更新中</p>
+        </footer>
+    </div>
+</body>
+</html>

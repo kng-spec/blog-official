@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宝塔面板搭建教程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #20bf55 0%, #01baef 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .video-section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .video-title {
+            font-size: 1.5em;
+            color: #20bf55;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .video-title::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .step-section {
+            margin-bottom: 40px;
+        }
+        
+        .step-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
+        }
+        
+        .step-content {
+            padding-left: 20px;
+        }
+        
+        .step-content p {
+            margin-bottom: 15px;
+        }
+        
+        .step-content a {
+            color: #20bf55;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .step-content a:hover {
+            color: #01baef;
+            text-decoration: underline;
+        }
+        
+        .info-box {
+            background: #e8f5e9;
+            border-left: 4px solid #20bf55;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .system-recommend {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        pre::before {
+            content: "CODE";
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            font-size: 0.7em;
+            color: #5c6370;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+        
+        code {
+            font-family: "Consolas", "Monaco", "Courier New", monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            display: block;
+        }
+        
+        .code-label {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+        
+        .code-label + pre {
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .highlight {
+            background: #fff176;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .screenshot {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            display: block;
+        }
+        
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .note strong {
+            color: #1976d2;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .step-header {
+                font-size: 1.2em;
+                padding: 12px 15px;
+            }
+            
+            pre {
+                padding: 15px;
+                font-size: 0.85em;
+            }
+            
+            .step-content {
+                padding-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 宝塔面板搭建教程</h1>
+            <p>从零开始，快速部署Web服务器环境</p>
+        </header>
+        
+        <div class="content">
+            <!-- 视频演示 -->
+            <div class="video-section">
+                <div class="video-title">视频演示</div>
+                <div class="video-wrapper">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115099620611387&bvid=BV1queyz9E1M&cid=31973769257&p=1" allowfullscreen="allowfullscreen"></iframe>
+                </div>
+            </div>
+            
+            <!-- 步骤一 -->
+            <div class="step-section">
+                <div class="step-header">📍 步骤一：准备域名</div>
+                <div class="step-content">
+                    <p>首先需要注册并配置一个域名用于访问您的网站</p>
+                    <div class="info-box">
+                        <strong>教程资源：</strong><a href="https://blog.aibochinese.com/archives/buy-domain/" target="_blank">域名注册解析教程 &gt;&gt;</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤二 -->
+            <div class="step-section">
+                <div class="step-header">☁️ 步骤二：准备云服务器</div>
+                <div class="step-content">
+                    <p>选择合适的云服务器供应商，购买服务器实例</p>
+                    <div class="info-box">
+                        <strong>推荐资源：</strong><a href="https://blog.aibochinese.com/buy-sas/" target="_blank">服务器推荐和折扣 &gt;&gt;</a>
+                    </div>
+                    
+                    <div class="system-recommend">
+                        <strong>🖥️ 建议系统版本（按推荐程度排序）：</strong>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Centos 7.x（最推荐）</li>
+                            <li>Debian 10</li>
+                            <li>Ubuntu 20.04</li>
+                            <li>Centos 8 stream</li>
+                            <li>Ubuntu 18.04</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>💡 重要提示：</strong><br>
+                        <a href="https://blog.aibochinese.com/archives/buy-and-ssh-connection/" target="_blank">购买云服务器的注意事项以及SSH连接的详解</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 步骤三 -->
+            <div class="step-section">
+                <div class="step-header">⚙️ 步骤三：开始搭建宝塔面板</div>
+                <div class="step-content">
+                    
+                    <!-- Centos -->
+                    <div class="code-label">🔹 Centos 系统安装脚本</div>
+                    <pre><code>yum install -y wget && wget -O install.sh https://download.bt.cn/install/install_6.0.sh && sh install.sh ed8484bec</code></pre>
+                    
+                    <!-- Ubuntu -->
+                    <div class="code-label">🔹 Ubuntu/Deepin 系统安装脚本</div>
+                    <pre><code>wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && sudo bash install.sh ed8484bec</code></pre>
+                    
+                    <!-- Debian -->
+                    <div class="code-label">🔹 Debian 系统安装脚本</div>
+                    <pre><code>wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh && bash install.sh ed8484bec</code></pre>
+                    
+                    <div class="info-box">
+                        <strong>📝 安装完成后显示信息：</strong>
+                        <p style="margin-top: 10px;">安装完成后，系统界面会显示宝塔面板的登录地址、账号及密码，格式如下：</p>
+                    </div>
+                    
+                    <pre><code>Bt-Panel: http://[密文IP地址]:[端口号]/[安全入口字符串]
+username: xxxx
+password: xxxxx</code></pre>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ 重要：</strong>请妥善保存登录信息，使用外网地址即可访问宝塔面板并登录
+                    </div>
+                    
+                    <img src="https://cf.aiboculture.com/CTEP/%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-10-05%20112429.png" alt="宝塔面板登录界面" class="screenshot">
+                    
+                    <h3 style="color: #20bf55; margin-top: 30px; margin-bottom: 15px;">🔧 安装LNMP套件</h3>
+                    <p>登录宝塔面板后，系统会弹出安装推荐的LNMP套件，请按以下配置选择：</p>
+                    
+                    <div class="system-recommend">
+                        <strong>推荐配置：</strong>
+                        <pre style="background: white; color: #333; box-shadow: none; margin-top: 10px;"><code>Mysql 选择 5.6
+PHP 选择 7.2 以上或次新版本
+phpMyAdmin 选择 4.7</code></pre>
+                        <p style="margin-top: 10px; color: #666;">其他选项保持默认即可，然后选择<span class="highlight">极速安装</span></p>
+                    </div>
+                    
+                    <h3 style="color: #f5576c; margin-top: 30px; margin-bottom: 15px;">🔓 端口放行（如果无法打开宝塔面板）</h3>
+                    <p>如果不能打开宝塔面板，请执行以下命令放行端口：</p>
+                    
+                    <div class="code-label">🔸 放行端口命令</div>
+                    <pre><code># 放行8888端口
+iptables -I INPUT -p tcp --dport 8888 -j ACCEPT
+
+# 禁止防火墙
+systemctl stop firewalld.service
+systemctl disable firewalld.service</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🎯 宝塔面板搭建教程 | 快速部署Web环境</p>
+        </footer>
+    </div>
+</body>
+</html>

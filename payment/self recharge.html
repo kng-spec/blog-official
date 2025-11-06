@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="虚拟信用卡充值教程 - USDT/USDC充值指南">
+    <title>虚拟信用卡充值指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "Segoe UI", Tahoma, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .main-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .info-section {
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .info-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .info-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .info-content {
+            flex: 1;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .info-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 20px;
+            background: #fff;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-link:hover {
+            background: #667eea;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            font-size: 18px;
+            line-height: 2;
+            color: #2c3e50;
+        }
+
+        .highlight-link {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 2px 8px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-link:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .video-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .video-container {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: #fff;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .main-card {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .info-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .highlight-box {
+                padding: 20px;
+            }
+
+            .highlight-box p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .info-title {
+                font-size: 16px;
+            }
+
+            .info-link {
+                font-size: 14px;
+                padding: 6px 15px;
+            }
+
+            .section-title {
+                font-size: 18px;
+                padding-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-card">
+            <div class="header">
+                <h1>💳 虚拟信用卡充值指南</h1>
+                <p>使用 USDT / USDC 稳定币轻松充值</p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-card">
+                    <div class="info-icon">💳</div>
+                    <div class="info-content">
+                        <div class="info-title">0开卡费，无年费<span class="badge">推荐</span></div>
+                        <a href="https://blog.aibochinese.com/apply-vcc/" target="_blank" rel="noopener" class="info-link">
+                            立即开卡 →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-content">
+                        <div class="info-title">领取海外网络流量</div>
+                        <a href="https://dedicatedlines.top/free-trial/" target="_blank" rel="noopener" class="info-link">
+                            免费层级 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p>
+                    <strong>「免费<a href="https://blog.aibochinese.com/?golink=aHR0cHM6Ly9kZWRpY2F0ZWRsaW5lcy50b3AvZnJlZS10cmlhbC8=" target="_blank" rel="noopener" class="highlight-link">海外网络流量</a>」</strong>
+                    +访问
+                    <strong>「<a href="https://accounts.maxweb.red/zh-CN/register?ref=569491541" target="_blank" rel="noopener" class="highlight-link">币安 Web3</a>」</strong>
+                </p>
+                <p style="margin-top: 10px;">使用 <strong>USDT / USDC</strong> 稳定币进行充值</p>
+            </div>
+
+            <div class="video-section">
+                <h2 class="section-title">📺 充值教程视频</h2>
+
+                <div class="video-title">
+                    🎬 手把手给您演示：虚拟信用卡充值 USDT
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video controls preload="metadata" poster="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-10-23%20085623.png">
+                            <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E6%89%8B%E6%8A%8A%E6%89%8B%E7%BB%99%E6%82%A8%E6%BC%94%E7%A4%BA%EF%BC%9A%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1%E5%85%85%E5%80%BCUSDT.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                        </video>
+                    </div>
+                </div>
+
+                <div class="video-title">
+                    💰 省钱有招：USDT 链上转账怎么选择网络？
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video controls preload="metadata" poster="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F-%E5%B0%81%E9%9D%A2.jpg">
+                            <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

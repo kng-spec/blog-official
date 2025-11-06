@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客服系统服务介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.5em;
+            margin: 30px 0 20px;
+            padding-left: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        strong {
+            color: #2980b9;
+            font-weight: 600;
+        }
+
+        .intro {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+        }
+
+        .features {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .feature-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .feature-details {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #e0e0e0;
+            background: white;
+        }
+
+        tr:hover td {
+            background: #f8f9fa;
+            transition: background 0.3s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+
+        .free-trial {
+            color: #27ae60;
+            font-weight: 600;
+            background: #d5f4e6;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .warning::before {
+            content: "⚠️ ";
+            font-size: 1.3em;
+            margin-right: 8px;
+        }
+
+        .value-proposition {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .value-proposition strong {
+            color: #ffd700;
+        }
+
+        .value-proposition a {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+
+        .value-proposition a:hover {
+            color: #fff;
+        }
+
+        .video-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>客服系统服务介绍</h1>
+
+        <div class="intro">
+            <p><strong>在线人工客服</strong>,保护了客户的隐私,在网站上点开客服图标即可咨询,大幅提升付费转化率;<strong>AI智能客服</strong>,是提升网站功能和用户体验的宝器,基于网站内容或外部知识库,能更有针对性,更专业地解决客户的问题,7×24小时随时回应。</p>
+        </div>
+
+        <h2>功能介绍</h2>
+
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-title">人工在线客服</div>
+                <div class="feature-details">超链接 | 嵌入网站 | 管理后台 | 客服手机客户端 | 历史消息 | 多客服+转接 | 发图片 | 自动回复 | 话术库</div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-title">AI智能客服</div>
+                <div class="feature-details">基于知识库回答 | 可接入各类大语言模型 | 超链接 | 嵌入网站 | Tokens用量🔍</div>
+            </div>
+        </div>
+
+        <h2>服务价格</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>服务类型</th>
+                    <th>价格</th>
+                    <th>政策</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>人工客服系统</td>
+                    <td class="price">¥200/年</td>
+                    <td><span class="free-trial">可免费试用3天</span></td>
+                </tr>
+                <tr>
+                    <td>AI智能客服</td>
+                    <td class="price">¥350/年<br><span style="font-size: 0.85em; color: #666;">(Tokens消耗另算)</span></td>
+                    <td><span class="free-trial">可免费试用3天使用</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning">
+            <p><strong>自有服务器搭建服务</strong></p>
+            <p>如果您自有服务器,我们可以协助搭建,人工技术费用¥50。</p>
+            <p style="margin-top: 10px;">
+                • 人工客服系统基础配置:2核2G内存云服务器<br>
+                • AI智能客服(基于Dify)基础配置:2核8G内存云服务器
+            </p>
+        </div>
+
+        <div class="value-proposition">
+            <h2 style="color: white; border: none; padding: 0; margin-bottom: 15px;">业务价值</h2>
+            <p>两套客服系统,稍有技术基础或按教程即可搭建,主要是服务器成本,而共享服务器,<a href="https://blog.aibochinese.com/serverless-website-building/" target="_blank" rel="noopener noreferrer">搭建网站</a>或其它项目,则不需要每位有需求的客户都购买服务器,从而<strong>节省了80%的成本</strong>,更轻松地去创造收益!</p>
+        </div>
+
+        <div class="video-container">
+            <h2>演示视频</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/a4QCXu67_lU" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

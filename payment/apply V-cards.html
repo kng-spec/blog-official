@@ -1,6 +1,96 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>虚拟信用卡组件</title>
@@ -308,24 +398,24 @@
                         <h2 class="section-title">开卡福利-如下渠道享有</h2>
                         <div class="cards-grid">
                             <div class="card">
-                                <a href="https://blog.aibochinese.com/archives/roogoo-mastercard/" target="_blank">
-                                    <img src="https://blog.aibochinese.com/wp-content/uploads/10%E6%9C%8812%E6%97%A5.gif" alt="Roogoo尊享卡" />
+                                <a href="roogoo.html" target="_blank">
+                                    <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/roogoo%20cover.gif" alt="Roogoo尊享卡" />
                                 </a>
                                 <div class="card-content">
                                     <h3 class="card-title">
-                                        <a href="https://blog.aibochinese.com/archives/roogoo-mastercard/" target="_blank" rel="noopener noreferrer">Roogoo尊享卡</a>
+                                        <a href="roogoo.html" target="_blank" rel="noopener noreferrer">Roogoo尊享卡</a>
                                     </h3>
                                     <p class="card-description">免开卡费，0🈷️费，0费率消费 另赠$1，可申请实体卡，多币种钱包功能，适用丰富的国内外消费场景</p>
                                 </div>
                             </div>
 
                             <div class="card">
-                                <a href="https://blog.aibochinese.com/archives/safepal/" target="_blank">
+                                <a href="SafePal.html" target="_blank">
                                     <img src="https://cf.aibochinese.com/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251025223717_27_15.png" alt="SafePal-万事达卡" />
                                 </a>
                                 <div class="card-content">
                                     <h3 class="card-title">
-                                        <a href="https://blog.aibochinese.com/archives/safepal/" target="_blank" rel="noopener noreferrer">SafePal-万事达卡</a>
+                                        <a href="SafePal.html" target="_blank" rel="noopener noreferrer">SafePal-万事达卡</a>
                                     </h3>
                                     <p class="card-description">瑞士Fiat24银行联名MasterCard，0开卡费；用大陆身份证即可开通银行账户，0管理费；币种齐全功能完善的数字货币钱包</p>
                                 </div>
@@ -340,7 +430,7 @@
                             <div class="service-card">
                                 <div class="service-icon">📚</div>
                                 <h3 class="service-title">
-                                    <a href="https://blog.aibochinese.com/forum-post/1208.html/" target="_blank" rel="noopener noreferrer">卡充值教程</a>
+                                    <a href="self recharge.html" target="_blank" rel="noopener noreferrer">卡充值教程</a>
                                 </h3>
                                 <p class="service-description">提供详细的图文教程和视频指导，从开卡到使用，手把手教您操作，让您快速上手。</p>
                             </div>
@@ -354,7 +444,7 @@
                             <div class="service-card">
                                 <div class="service-icon">💵</div>
                                 <h3 class="service-title">
-                                    <a href="https://blog.aibochinese.com/forum-post/1334.html/" target="_blank" rel="noopener noreferrer">代充与代换RMB</a>
+                                    <a href="Proxy Recharge.html" target="_blank" rel="noopener noreferrer">代充与代换RMB</a>
                                 </h3>
                                 <p class="service-description">支持美元和USDT代充服务，同时提供便捷的提现【到账¥人民币】服务，每笔仅💲1人工费，到账快速。</p>
                             </div>

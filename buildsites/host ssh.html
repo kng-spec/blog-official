@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+             <style>
+/* 人工客服按钮样式 */
+#canCustomerServerBtn, .can-customer-server-btn {
+  right: 20px !important;
+  top: 20px !important;
+  left: auto !important;
+  bottom: auto !important;
+  position: fixed !important;
+  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+}
+</style>
+
+<!-- 人工客服脚本 -->
+<script>
+(function() {
+  _s = document.createElement('script');
+  _s.src = "https://kefu.aibochinese.com/customerServer.js";
+  _s.onload = function() {
+    var option = {
+      "authInit": true,
+      openUrl: 'https://kefu.aibochinese.com',
+      token: '7fecd3ce216cc26ebd63bf417c193b41',
+      kefuid: '',
+      isShowTip: true,
+      mobileIcon: '',
+      pcIcon: '',
+      windowStyle: 'center',
+    };
+    
+    var canCustomerServer = new initCustomerServer(option);
+    canCustomerServer.init();
+    
+    // 检查按钮是否生成并设置位置
+    var checkInterval = setInterval(function() {
+      var btn = document.querySelector('#canCustomerServerBtn') || 
+                document.querySelector('.can-customer-server-btn') ||
+                document.querySelector('[class*="customer-service"]') ||
+                document.querySelector('[id*="customer"]');
+      
+      if (btn) {
+        clearInterval(checkInterval);
+        // 强制设置位置和层级
+        btn.style.position = 'fixed';
+        btn.style.right = '20px';
+        btn.style.top = '200px';
+        btn.style.left = 'auto';
+        btn.style.bottom = 'auto';
+        btn.style.zIndex = '9997'; // 与样式保持一致
+        // 添加拖拽功能
+        makeDraggable(btn);
+      }
+    }, 300);
+  };
+  
+  document.head.appendChild(_s);
+  
+  // 拖拽功能实现
+  function makeDraggable(element) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    element.style.cursor = 'move';
+    
+    element.onmousedown = dragStart;
+    
+    function dragStart(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = dragEnd;
+      document.onmousemove = dragMove;
+    }
+    
+    function dragMove(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      element.style.top = (element.offsetTop - pos2) + "px";
+      element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+    
+    function dragEnd() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+})();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云服务器购买与SSH连接教程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .video-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #f5576c;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f5576c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: #000;
+            margin-bottom: 20px;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .info-card a {
+            color: #fff176;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card a:hover {
+            color: #ffeb3b;
+            text-decoration: underline;
+        }
+        
+        .warning-box {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .warning-box::before {
+            content: "⚠️";
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+        
+        .note-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .note-box strong {
+            color: #1976d2;
+        }
+        
+        .highlight {
+            background: #fff176;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .gif-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+            display: block;
+        }
+        
+        h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .code-label {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-top: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .code-label + pre {
+            margin-top: 0;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        pre::after {
+            content: "📋";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.2em;
+            opacity: 0.5;
+        }
+        
+        code {
+            font-family: "Consolas", "Monaco", "Courier New", monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+            display: block;
+        }
+        
+        .comment {
+            color: #5c6370;
+        }
+        
+        .step-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .step-list ol {
+            padding-left: 25px;
+        }
+        
+        .step-list li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+            
+            pre {
+                padding: 15px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☁️ 云服务器购买与SSH连接教程</h1>
+            <p>从购买到连接，完整操作指南</p>
+        </header>
+        
+        <div class="content">
+            <!-- 视频讲解 -->
+            <div class="section video-section">
+                <div class="section-title">视频讲解</div>
+                <div class="video-wrapper">
+                    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=115053701371156&bvid=BV12eeczmE5U&cid=31794923910&p=1" allowfullscreen="allowfullscreen"></iframe>
+                </div>
+            </div>
+            
+            <!-- 购买信息 -->
+            <div class="section">
+                <div class="section-title">购买推荐</div>
+                
+                <div class="info-card">
+                    <h4 style="margin-bottom: 10px; font-size: 1.2em;">💰 付费计划</h4>
+                    <p><a href="https://blog.aibochinese.com/buy-sas/" target="_blank">享爱博代理方-推广补贴（折上折）</a></p>
+                </div>
+                
+                <div class="info-card" style="background: linear-gradient(135deg, #20bf55 0%, #01baef 100%);">
+                    <h4 style="margin-bottom: 10px; font-size: 1.2em;">🆓 免费计划</h4>
+                    <p><a href="https://aws.amazon.com/cn/" target="_blank">海外亚马逊云</a> - 一年期免费计划</p>
+                    <p style="margin-top: 10px; font-size: 0.95em;">需绑定一张<strong>实体国际信用卡</strong>（推荐：美团app联名卡-美国运通）</p>
+                </div>
+                
+                <div class="warning-box">
+                    <div>
+                        <strong>重要提示：</strong>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>选<strong>香港或海外服务器</strong>，免备案</li>
+                            <li>系统推荐：<span class="highlight">Centos 7.x</span> &gt; Ubuntu 20.04 &gt; Debian 10</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 一、云服务器联网问题 -->
+            <div class="section">
+                <div class="section-title">一、云服务器联网配置</div>
+                
+                <h3>阿里云配置</h3>
+                <p>购买<a href="https://blog.aibochinese.com/buy-sas/" target="_blank" style="color: #667eea; font-weight: 600;">阿里云</a>时，网络类型选择<span class="highlight">专有网络</span>，没有特别需求选择默认配置即可。</p>
+                
+                <h3>亚马逊云配置</h3>
+                <p>购买<a href="https://aws.amazon.com/cn/" target="_blank" style="color: #667eea; font-weight: 600;">海外亚马逊云</a>时，需要设置安全组的<strong>入站和出站规则</strong>，建议配置如下：</p>
+                
+                <img src="https://aiboculture.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/%E5%AE%89%E5%85%A8%E7%BB%84%E5%87%BA%E5%85%A5%E7%AB%99%E8%AE%BE%E7%BD%AE%E5%8F%82%E8%80%83.gif" alt="安全组配置示例" class="gif-image">
+            </div>
+            
+            <!-- 二、SSH连接 -->
+            <div class="section">
+                <div class="section-title">二、SSH客户端下载与连接</div>
+                
+                <div class="info-card">
+                    <h4 style="margin-bottom: 10px; font-size: 1.2em;">📥 下载SSH客户端</h4>
+                    <p><a href="https://www.hostbuf.com/t/988.html" target="_blank">https://www.hostbuf.com/t/988.html</a></p>
+                </div>
+                
+                <h3>连接步骤说明</h3>
+                <div class="step-list">
+                    <ol>
+                        <li><strong>大多数平台：</strong>主机填写<span class="highlight">公网IP地址</span>，用户名默认为<span class="highlight">root</span>，输入密码登录</li>
+                        <li><strong>亚马逊云服务器：</strong>主机填写<span class="highlight">公网IP地址</span>，用户名默认为<span class="highlight">admin</span>，选择<span class="highlight">密钥登录</span>，导入购买时下载的<strong>.pem文件</strong></li>
+                    </ol>
+                </div>
+                
+                <img src="https://aiboculture.oss-cn-beijing.aliyuncs.com/%E7%BD%91%E7%AB%99%E5%9B%BE%E7%89%87%E7%B4%A0%E6%9D%90/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/%E8%BF%9E%E6%8E%A5SSH%E7%BB%88%E7%AB%AF.gif" alt="SSH连接过程" class="gif-image">
+            </div>
+            
+            <!-- 三、亚马逊云特别设置 -->
+            <div class="section">
+                <div class="section-title">三、亚马逊云 Root 权限设置</div>
+                
+                <div class="note-box">
+                    <strong>特别提示：</strong>亚马逊云SSH连接后，默认不是root权限，需执行以下命令切换到root用户：
+                </div>
+                
+                <div class="code-label">🔸 设置 Root 权限</div>
+                <pre><code><span class="comment"># 设置root密码</span>
+sudo passwd root
+
+<span class="comment"># 切换到root用户</span>
+su root
+
+<span class="comment"># 输入密码（注意：输入时不可见，这是正常情况）</span></code></pre>
+            </div>
+            
+            <!-- 四、端口与防火墙配置 -->
+            <div class="section">
+                <div class="section-title">四、端口放行与防火墙配置</div>
+                
+                <h3>基础防火墙操作</h3>
+                <p>在后续使用中，如需放行端口或禁止防火墙，可执行以下代码：</p>
+                
+                <div class="code-label">🔸 端口放行与防火墙管理</div>
+                <pre><code><span class="comment"># 放行指定端口（示例：22117）</span>
+iptables -I INPUT -p tcp --dport 22117 -j ACCEPT
+
+<span class="comment"># 停止防火墙服务</span>
+systemctl stop firewalld.service
+
+<span class="comment"># 禁用防火墙开机自启</span>
+systemctl disable firewalld.service</code></pre>
+                
+                <h3>iptables 无效时的解决方案</h3>
+                <p>如果iptables指令无效，请尝试以下步骤：</p>
+                
+                <div class="code-label">🔹 Ubuntu/Debian 系统修复</div>
+                <pre><code><span class="comment"># 启动iptables服务</span>
+sudo systemctl start iptables
+
+<span class="comment"># 更新软件包并安装iptables</span>
+sudo apt update
+sudo apt install -y iptables
+
+<span class="comment"># 检查PATH环境变量（针对root用户）</span>
+echo $PATH
+
+<span class="comment"># 若缺失/usr/sbin，临时添加路径</span>
+export PATH=$PATH:/usr/sbin</code></pre>
+                
+                <h3>使用 UFW 防火墙（推荐）</h3>
+                <p>UFW是Ubuntu/Debian系统的轻量级防火墙工具，操作更简便：</p>
+                
+                <div class="code-label">🔹 安装并配置 UFW</div>
+                <pre><code><span class="comment"># 安装ufw（轻量防火墙工具）</span>
+sudo apt install -y ufw
+
+<span class="comment"># 开放信令端口（TCP）</span>
+sudo ufw allow 22116/tcp
+
+<span class="comment"># 开放中继端口（UDP）</span>
+sudo ufw allow 22117/udp
+
+<span class="comment"># 重启ufw使配置生效</span>
+sudo ufw reload</code></pre>
+            </div>
+        </div>
+        
+        <footer>
+            <p>🌐 云服务器配置教程 | SSH连接与防火墙设置完全指南</p>
+        </footer>
+    </div>
+</body>
+</html>
