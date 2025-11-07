@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafePal X1 冷钱包使用指南</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .columns {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .column-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .column-right {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        h1 {
+            color: #0693e3;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #0693e3;
+            margin: 20px 0 15px;
+            font-size: 22px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .alert-box {
+            background: #f8d7da;
+            border-left: 4px solid #cf2e2e;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: #cf2e2e;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            background: #0693e3;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .invite-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #cf2e2e;
+            background: #fff3cd;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        a {
+            color: #0693e3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .image-container {
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .button-link {
+            display: inline-block;
+            background: #0693e3;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+
+        .button-link:hover {
+            background: #0576bd;
+            text-decoration: none;
+        }
+
+        .small-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .columns {
+                flex-direction: column;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 标准导航菜单 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h2><a href="https://blog.aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png" alt="网站Logo"></a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/" class="nav-link">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-link">免费资源</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/earn%20online" class="nav-link">项目推荐</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js"></script>
+    
+    <div class="container">
+        <h1>SafePal X1 冷钱包使用指南</h1>
+        
+        <div class="info-box">
+            <p>SafePal X1 是一款硬件冷钱包，提供最高级别的数字资产安全保障。它通过物理隔离网络连接来保护您的私钥，确保即使在受感染的计算机上也能安全地进行交易签名。</p>
+        </div>
+        
+        <div class="columns">
+            <div class="column-left">
+                <div class="info-box">
+                    <h2>📦 产品特点</h2>
+                    <ul>
+                        <li>物理隔离网络安全</li>
+                        <li>支持多种加密货币</li>
+                        <li>蓝牙匹配，操作便捷</li>
+                        <li>安全芯片保护私钥</li>
+                        <li>防篡改设计</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h2>🎁 获取方式</h2>
+                    <p>通过邀请码领取免费SafePal X1硬件钱包：</p>
+                    <div class="invite-code">538438</div>
+                    <p><a href="https://cf.aibochinese.com/爱博·客图片库/常用模板图片/领取SafePal硬件钱包1.png" target="_blank">查看领取演示</a></p>
+                </div>
+                
+                <div class="warning-box">
+                    <h2>⚠️ 安全提醒</h2>
+                    <ul>
+                        <li>请妥善保管助记词</li>
+                        <li>确认所有交易细节后再签名</li>
+                        <li>定期检查固件更新</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="column-right">
+                <div class="info-box">
+                    <h2>📺 视频演示</h2>
+                    <div class="video-container">
+<video controls width="640" height="360">
+  <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96SafePal%E5%86%B7%E9%92%B1%E5%8C%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C-1/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96SafePal%E5%86%B7%E9%92%B1%E5%8C%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C-1.mp4" type="video/mp4">
+</video>
+                    </div>
+                    <p>以上视频展示了SafePal X1冷钱包的完整设置和使用流程，包括初始化、资产管理和交易签名等关键步骤。</p>
+                </div>
+                
+                <div class="info-box">
+                    <h2>📋 使用步骤</h2>
+                    <ol>
+                        <li><strong>设备初始化</strong> - 开箱并按照屏幕提示完成初始设置</li>
+                        <li><strong>备份助记词</strong> - 安全记录并存储助记词</li>
+                        <li><strong>安装SafePal App</strong> - 在手机上下载并安装SafePal应用</li>
+                        <li><strong>配对设备</strong> - 通过蓝牙将X1与手机App配对</li>
+                        <li><strong>添加资产</strong> - 在App中添加您要管理的加密货币</li>
+                        <li><strong>接收资产</strong> - 生成收款地址并接收数字资产</li>
+                        <li><strong>发送资产</strong> - 通过离线签名安全发送资产</li>
+                    </ol>
+                </div>
+                
+                <div class="alert-box">
+                    <h2>🚨 紧急情况处理</h2>
+                    <p>如果遇到以下情况，请立即采取措施：</p>
+                    <ul>
+                        <li>设备丢失或被盗 - 使用助记词在新设备上恢复</li>
+                        <li>忘记密码 - 通过助记词重置设备</li>
+                        <li>设备损坏 - 联系SafePal官方客服</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <h2>🔗 相关资源</h2>
+            <ul>
+                <li><a href="SafePal.html" target="_blank">SafePal热钱包使用指南</a></li>
+                <li><a href="https://www.safepal.com/download" target="_blank">SafePal官方下载页面</a></li>
+                <li><a href="https://blog.aibochinese.com/archives/mastercard-using-guider/" target="_blank">SafePal万事达卡使用指南</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer">
+            <p style="margin-bottom: 10px;">感谢🙏订阅我的频道：<a href="https://www.youtube.com/@blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
+             style="max-width: 100%; height: auto;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+             style="max-width: 100%; height: auto;" /></a>
+            </p>
+            <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+        </div>
+    </footer>
+</body>
+</html>
