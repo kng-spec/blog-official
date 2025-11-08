@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最新文章列表</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                    },
+                },
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            padding-top: 90px; /* 为固定导航栏留出空间 */
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #ffcc2f;
+        }
+
+        /* 汉堡菜单样式 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 3px;
+            background: white; /* 修改为白色以在蓝色背景上可见 */
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 70px; /* 移动端调整 */
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px; /* 调整到与导航栏底部对齐 */
+                flex-direction: column;
+                background: linear-gradient(135deg, #3498db, #2980b9); /* 与导航栏颜色一致 */
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+                padding: 20px 0;
+                z-index: 999;
+                gap: 0.5rem; /* 减小间距 */
+            }
+
+            .nav-menu li {
+                padding: 10px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #20bf55 0%, #01baef 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .articles-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .article-card {
+            flex: 1 1 calc(50% - 15px);
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .article-card h2 {
+            color: #20bf55;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .article-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .article-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .article-card a:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: scale(1.05);
+        }
+        
+        footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                padding-top: 70px;
+            }
+            
+            .articles-container {
+                flex-direction: column;
+            }
+            
+            .article-card {
+                flex: 1 1 100%;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+        }
+        
+        /* 自定义工具类 */
+        .nav-shadow {
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item-active {
+            color: #3B82F6;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 relative">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="https://blog.aibochinese.com/" target="_blank">
+                    <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/%E5%88%86%E4%BA%AB%E7%BB%8F%E9%AA%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E7%BA%BF%E4%B8%8A%E8%87%B4%E5%AF%8C320x50.png" alt="网站Logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-link">免费资源</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/earn%20online" class="nav-link">项目推荐</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>最新文章列表</h1>
+        </header>
+        
+        <div class="content">
+            <div class="articles-container">
+                <!-- 文章卡片将在这里添加 -->
+                <div class="article-card">
+                    <h2>Cloudflare Pages 自动更新部署</h2>
+                    <p>如何使用Github Desktop上传本地源码至云端，并自动更新部署Cloudflafre Pages,提高建站效率</p>
+                    <a href="https://blog.aibochinese.com/buildsites/github-cfpages">阅读更多</a>
+                </div>
+                
+                <div class="article-card">
+                    <h2>跨境电商支付解决方案</h2>
+                    <p>针对跨境电商的支付难题，本文介绍了多种安全可靠的支付解决方案，包括加密货币支付、国际信用卡支付等，帮助您轻松解决跨境收款问题。</p>
+                    <a href="#">阅读更多</a>
+                </div>
+                
+            </div>
+        </div>
+        
+<footer>
+<div class="footer">
+        <p style="margin-bottom: 10px;">感谢🙏订阅我的频道:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>
+        </p>
+        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+    <p>_</p>
+    </div>
+    </footer>
+    </div>
+
+    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
+        <div class="flex justify-around items-center py-3">
+            <!-- 首页按钮 -->
+            <a href="https://blog.aibochinese.com/" class="flex flex-col items-center nav-item-active transition-all duration-300">
+                <i class="fa fa-home text-xl mb-1"></i>
+                <span class="text-xs">首页</span>
+            </a>
+            
+            <!-- 资源按钮 -->
+            <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="flex flex-col items-center transition-all duration-300">
+                <i class="fa fa-cloud-download text-xl mb-1"></i>
+                <span class="text-xs">资源</span>
+            </a>
+
+            <!-- 最新 - 突出显示 -->
+            <a href="https://blog.aibochinese.com/newest" class="flex flex-col items-center">
+                <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-primary/90 transition-all duration-300">
+                    <i class="fa fa-refresh text-xl"></i>
+                </div>
+                <span class="text-xs text-primary mt-1">最新</span>
+            </a>
+
+            <!-- 建站按钮 -->
+            <a href="https://blog.aibochinese.com/sitesbuild" class="flex flex-col items-center transition-all duration-300">
+                <i class="fa fa-code text-xl mb-1"></i>
+                <span class="text-xs">建站</span>
+            </a>
+
+            <!-- 淘金按钮 -->
+            <a href="https://blog.aibochinese.com/earn%20online" class="flex flex-col items-center transition-all duration-300">
+                <i class="fa fa-usd text-xl mb-1"></i>
+                <span class="text-xs">淘金</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // 移动端底部导航交互
+            const navItems = document.querySelectorAll('.fixed.bottom-0 a:not(:nth-child(3))');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // 移除所有激活状态
+                    navItems.forEach(i => i.classList.remove('nav-item-active'));
+                    // 给当前点击项添加激活状态
+                    e.currentTarget.classList.add('nav-item-active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,17 +1,88 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-             <style>
-/* 人工客服按钮样式 */
-#canCustomerServerBtn, .can-customer-server-btn {
-  right: 20px !important;
-  top: 20px !important;
-  left: auto !important;
-  bottom: auto !important;
-  position: fixed !important;
-  z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
-}
-</style>
+    <!-- 引入Font Awesome图标 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <style>
+        /* 移动端底部导航样式 */
+        .mobile-nav {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 50;
+            }
+            
+            .nav-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 12px 0;
+            }
+            
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-decoration: none;
+                color: #6b7280;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-item.nav-item-active {
+                color: #3B82F6;
+                transform: scale(1.1);
+            }
+            
+            .nav-item.center {
+                margin-top: -24px;
+            }
+            
+            .nav-item.center .icon {
+                background: #3B82F6;
+                color: white;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-item.center .icon:hover {
+                background: #2563eb;
+            }
+            
+            .icon {
+                font-size: 20px;
+                margin-bottom: 4px;
+            }
+            
+            .text {
+                font-size: 12px;
+            }
+        }
+        
+        /* 人工客服按钮样式 */
+        #canCustomerServerBtn, .can-customer-server-btn {
+            right: 20px !important;
+            top: 20px !important;
+            left: auto !important;
+            bottom: auto !important;
+            position: fixed !important;
+            z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+        }
+    </style>
 
 <!-- 人工客服脚本 -->
 <script>
@@ -92,6 +163,37 @@
 })();
 </script>
     <meta charset="UTF-8">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // 移动端底部导航按钮交互
+            const navItems = document.querySelectorAll('.mobile-nav .nav-item:not(.center)');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // 移除所有按钮的激活状态
+                    navItems.forEach(navItem => navItem.classList.remove('nav-item-active'));
+                    // 为当前点击的按钮添加激活状态
+                    this.classList.add('nav-item-active');
+                });
+            });
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>线上赚钱业务推荐 - 爱博·客</title>
     <style>
@@ -279,6 +381,71 @@
             
             h1 {
                 font-size: 2.2rem;
+            }
+        }
+        
+        /* 汉堡菜单样式 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+            padding: 10px;
+        }
+
+        .hamburger .bar {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+                padding: 20px 0;
+                z-index: 999;
+                gap: 0.5rem;
+                margin: 0;
+            }
+
+            .nav-menu li {
+                padding: 10px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
             }
         }
     </style>
@@ -485,21 +652,59 @@
             </div>
         </div>
 
-      <footer>
+<footer>
 <div class="footer">
-        <p style="margin-bottom: 10px;">感谢🙏订阅我的频道：<a href="https://www.youtube.com/@blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
-         style="max-width: 100%; height: auto;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
-         style="max-width: 100%; height: auto;" /></a>
+        <p style="margin-bottom: 10px;">感谢🙏订阅我的频道:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>
         </p>
-        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:white" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+    <p>_</p>
     </div>
     </footer>
+    </div>
+    
+    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
+    <div class="mobile-nav">
+        <div class="nav-container">
+            <!-- 首页按钮 -->
+            <a href="https://blog.aibochinese.com/" class="nav-item nav-item-active">
+                <i class="fa fa-home icon"></i>
+                <span class="text">首页</span>
+            </a>
+            
+            <!-- 资源按钮 -->
+            <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-item nav-item-active">
+                <i class="fa fa-cloud-download icon"></i>
+                <span class="text">资源</span>
+            </a>
+
+            <!-- 最新 - 突出显示 -->
+            <a href="https://blog.aibochinese.com/newest" class="nav-item center">
+                <div class="icon">
+                    <i class="fa fa-refresh"></i>
+                </div>
+                <span class="text">最新</span>
+            </a>
+
+            <!-- 建站按钮 -->
+            <a href="https://blog.aibochinese.com/sitesbuild" class="nav-item nav-item-active">
+                <i class="fa fa-code icon"></i>
+                <span class="text">建站</span>
+            </a>
+
+            <!-- 淘金按钮 -->
+            <a href="https://blog.aibochinese.com/earn%20online" class="nav-item nav-item-active">
+                <i class="fa fa-usd icon"></i>
+                <span class="text">淘金</span>
+            </a>
+        </div>
     </div>
 </body>
 </html>

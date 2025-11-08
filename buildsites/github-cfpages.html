@@ -1,208 +1,255 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Desktop 同步与 Cloudflare Pages 自动部署</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding-top: 80px; /* 为固定导航栏留出空间 */
-        }
-        
-        /* 导航栏样式 */
-        .navbar {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            padding: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Desktop 同步与 Cloudflare Pages 自动部署</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义颜色 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#10B981',
+            accent: '#F59E0B',
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .nav-shadow {
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .nav-item-active {
+        @apply text-primary scale-110;
+      }
+    }
+  </style>
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 20px;
-        }
+  <!-- 人工客服按钮样式 -->
+  <style>
+    #canCustomerServerBtn, .can-customer-server-btn {
+      right: 20px !important;
+      top: 20px !important;
+      left: auto !important;
+      bottom: auto !important;
+      position: fixed !important;
+      z-index: 9997 !important; /* 低于AI客服按钮，避免覆盖 */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+      padding-top: 80px; /* 为固定导航栏留出空间 */
+      padding-bottom: 80px; /* 为底部导航栏留出空间 */
+    }
+    
+    /* 导航栏样式 */
+    .navbar {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
 
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 20px;
+    }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
+    .logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
 
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-        .nav-link:hover {
-            color: #ffcc2f;
-        }
-        
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-        }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
 
-        .hamburger .line {
-            width: 30px;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-            transition: 0.3s;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-        
-        @media (min-width: 768px) {
-            .container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .card h2 {
-            color: #667eea;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        
-        .steps {
-            counter-reset: step-counter;
-            list-style: none;
-            padding: 0;
-        }
-        
-        .steps li {
-            counter-increment: step-counter;
-            margin-bottom: 20px;
-            padding-left: 40px;
-            position: relative;
-        }
-        
-        .steps li:before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: #667eea;
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-        
-        .video-container {
-            grid-column: 1 / -1;
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .video-placeholder {
-            background: #e9ecef;
-            border: 2px dashed #6c757d;
-            border-radius: 8px;
-            padding: 50px 20px;
-            margin: 20px 0;
-            color: #6c757d;
-        }
-        
-        .video-placeholder p {
-            margin: 0;
-            font-size: 1.2em;
-        }
-        
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .tip {
-            background: #d1ecf1;
-            border-left: 4px solid #0dcaf0;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
-        }
-    </style>
+    .nav-link:hover {
+      color: #ffcc2f;
+    }
+    
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 1001;
+    }
+
+    .hamburger .line {
+      width: 30px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    @media (min-width: 768px) {
+      .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card h2 {
+      color: #667eea;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+    
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .steps li {
+      counter-increment: step-counter;
+      margin-bottom: 20px;
+      padding-left: 40px;
+      position: relative;
+    }
+    
+    .steps li:before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #667eea;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    .video-container {
+      grid-column: 1 / -1;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-bottom: 20px; /* 为底部导航栏留出空间 */
+    }
+    
+    .video-placeholder {
+      background: #e9ecef;
+      border: 2px dashed #6c757d;
+      border-radius: 8px;
+      padding: 50px 20px;
+      margin: 20px 0;
+      color: #6c757d;
+    }
+    
+    .video-placeholder p {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    
+    .note {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .tip {
+      background: #d1ecf1;
+      border-left: 4px solid #0dcaf0;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+    }
+  </style>
 </head>
 <body>
     <!-- 导航菜单 -->
@@ -343,28 +390,107 @@
         <div class="video-container">
             <h2>操作视频教程</h2>
             <div class="video-placeholder">
-                <p>📽️ 视频教程占位符</p>
-                <p>请在此处插入您的操作视频教程</p>
+                <p><video controls width="450" height="250">
+  <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B411%E6%9C%88/Github%20Desktop%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E9%83%A8%E7%BD%B2Cloudflare%20Pages/Github%20Desktop%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E9%83%A8%E7%BD%B2Cloudflare%20Pages.mp4" type="video/mp4">
+</video></p>
             </div>
-            <p>通过视频教程，您可以更直观地了解整个操作流程。</p>
         </div>
     </div>
 
-    <footer style="background: #f8f9fa; text-align: center; padding: 20px; color: #666; font-size: 0.9em; margin-top: 30px;">
-        <div class="footer">
-            <p style="margin-bottom: 10px;">感谢🙏订阅我的频道：<a href="https://www.youtube.com/@blog.aibochinese" style="color:#667eea" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://x.com/blogaibochinese" style="color:#667eea" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:#667eea" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:#667eea" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:#667eea" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:#667eea" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:#667eea" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
-             style="max-width: 100%; height: auto;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:#667eea" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
-             style="max-width: 100%; height: auto;" /></a>
-            </p>
-            <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:#667eea" target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
-        </div>
+    <footer>
+      <div class="footer">
+        <p style="margin-bottom: 10px;">感谢🙏订阅我的频道:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/x%20logo30f1.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://v.douyin.com/7UArd_7AX6o/" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E7%9A%84tiktok-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>
+        </p>
+        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+      </div>
     </footer>
+    
+    <!-- 人工客服脚本 -->
+    <script>
+    (function() {
+      _s = document.createElement('script');
+      _s.src = "https://kefu.aibochinese.com/customerServer.js";
+      _s.onload = function() {
+        var option = {
+          "authInit": true,
+          openUrl: 'https://kefu.aibochinese.com',
+          token: '7fecd3ce216cc26ebd63bf417c193b41',
+          kefuid: '',
+          isShowTip: true,
+          mobileIcon: '',
+          pcIcon: '',
+          windowStyle: 'center',
+        };
+        
+        var canCustomerServer = new initCustomerServer(option);
+        canCustomerServer.init();
+        
+        // 检查按钮是否生成并设置位置
+        var checkInterval = setInterval(function() {
+          var btn = document.querySelector('#canCustomerServerBtn') || 
+                    document.querySelector('.can-customer-server-btn') ||
+                    document.querySelector('[class*="customer-service"]') ||
+                    document.querySelector('[id*="customer"]');
+          
+          if (btn) {
+            clearInterval(checkInterval);
+            // 强制设置位置和层级
+            btn.style.position = 'fixed';
+            btn.style.right = '20px';
+            btn.style.top = '200px';
+            btn.style.left = 'auto';
+            btn.style.bottom = 'auto';
+            btn.style.zIndex = '9997'; // 与样式保持一致
+            // 添加拖拽功能
+            makeDraggable(btn);
+          }
+        }, 300);
+      };
+      
+      document.head.appendChild(_s);
+      
+      // 拖拽功能实现
+      function makeDraggable(element) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        element.style.cursor = 'move';
+        
+        element.onmousedown = dragStart;
+        
+        function dragStart(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = dragEnd;
+          document.onmousemove = dragMove;
+        }
+        
+        function dragMove(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          element.style.top = (element.offsetTop - pos2) + "px";
+          element.style.left = (element.offsetLeft - pos1) + "px";
+        }
+        
+        function dragEnd() {
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+    })();
+    </script>
     
     <script>
         // 获取汉堡菜单和导航菜单元素
@@ -443,6 +569,59 @@
             }
         `;
         document.head.appendChild(style);
+    </script>
+    
+    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
+      <div class="flex justify-around items-center py-3">
+        <!-- 首页按钮 -->
+        <a href="https://blog.aibochinese.com/" class="flex flex-col items-center nav-item-active transition-all duration-300">
+          <i class="fa fa-home text-xl mb-1"></i>
+          <span class="text-xs">首页</span>
+        </a>
+        
+        <!-- 资源按钮 -->
+        <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="flex flex-col items-center nav-item-active transition-all duration-300">
+          <i class="fa fa-cloud-download text-xl mb-1"></i>
+          <span class="text-xs">资源</span>
+        </a>
+
+        <!-- 最新 - 突出显示 -->
+        <a href="https://blog.aibochinese.com/newest" class="flex flex-col items-center">
+          <div class="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-primary/90 transition-all duration-300">
+            <i class="fa fa-refresh text-xl"></i>
+          </div>
+          <span class="text-xs text-primary mt-1">最新</span>
+        </a>
+
+        <!-- 建站按钮 -->
+        <a href="https://blog.aibochinese.com/sitesbuild" class="flex flex-col items-center nav-item-active transition-all duration-300">
+          <i class="fa fa-code text-xl mb-1"></i>
+          <span class="text-xs">建站</span>
+        </a>
+
+        <!-- 淘金按钮 -->
+        <a href="https://blog.aibochinese.com/earn%20online" class="flex flex-col items-center nav-item-active transition-all duration-300">
+          <i class="fa fa-usd text-xl mb-1"></i>
+          <span class="text-xs">淘金</span>
+        </a>
+      </div>
+    </div>
+    
+    <script>
+      // 添加导航交互效果
+      document.addEventListener('DOMContentLoaded', () => {
+        const navItems = document.querySelectorAll('.fixed.bottom-0 a:not(:nth-child(3))');
+        
+        navItems.forEach(item => {
+          item.addEventListener('click', (e) => {
+            // 移除所有激活状态
+            navItems.forEach(i => i.classList.remove('nav-item-active'));
+            // 给当前点击项添加激活状态
+            e.currentTarget.classList.add('nav-item-active');
+          });
+        });
+      });
     </script>
 </body>
 </html>
