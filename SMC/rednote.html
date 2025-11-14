@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google AdSense收益 - 爱博·客</title>
+  <title>小红书拓客技巧 - 爱博·客</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -203,7 +203,6 @@
       gap: 15px;
       margin-bottom: 35px;
       padding-left: 10px;
-      color: #2c3e50;
     }
 
     .section-icon {
@@ -226,21 +225,47 @@
 
     .content-text h3 {
       margin: 25px 0 15px;
-      color: #2c3e50;
+      color: #3498db;
       font-size: 1.5rem;
     }
 
     .content-text p {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .content-text ul {
-      margin: 15px 0;
+      margin: 20px 0;
       padding-left: 30px;
     }
 
     .content-text li {
       margin-bottom: 10px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .tip-card {
+      background: rgba(248, 249, 250, 0.8);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .tip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .tip-card h4 {
+      color: #3498db;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
     }
 
     /* 页脚 */
@@ -315,6 +340,11 @@
       .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
       }
+
+      .tips-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -344,7 +374,11 @@
       }
 
       .content-section {
-        padding: 35px 25px;
+        padding: 30px 20px;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
       }
     }
 
@@ -357,8 +391,12 @@
         font-size: 1.4rem;
       }
 
-      .section-icon {
-        font-size: 1.5rem;
+      .content-text {
+        font-size: 1rem;
+      }
+
+      .tip-card {
+        padding: 20px;
       }
     }
 
@@ -419,177 +457,131 @@
   <div class="main-content">
     <!-- 页面标题 -->
     <div class="page-header">
-      <h1 class="page-title">Google AdSense收益</h1>
-      <p class="page-subtitle">全面指南：从创建账户到收益提现</p>
+      <h1 class="page-title">小红书拓客技巧</h1>
+      <p class="page-subtitle">掌握这些技巧，快速提升小红书获客能力</p>
     </div>
 
-    <!-- 创建AdSense账户 -->
+    <!-- 如何设置主页 -->
     <div class="content-section">
       <div class="section-header">
-        <i class="fas fa-user-plus section-icon"></i>
-        <h2 class="section-title">创建Google AdSense账户</h2>
+        <i class="fas fa-home section-icon"></i>
+        <h2 class="section-title">如何设置主页</h2>
       </div>
       <div class="content-text">
-        <h3>准备工作</h3>
-        <p>在创建AdSense账户之前，您需要准备以下内容：</p>
+        <p>一个好的主页是吸引粉丝的第一步，以下是设置主页的关键要素：</p>
+        
+        <h3>头像和昵称</h3>
+        <p>选择清晰、有辨识度的头像，昵称要简洁易记且能体现你的专业领域或个人特色。</p>
+        
+        <h3>个人简介</h3>
+        <p>用简短有力的文字介绍自己，突出你能为关注者提供的价值。可以包括：</p>
         <ul>
-          <li>网站内容完善些，原创且符合AdSense政策</li>
-          <li>有效的Gmail账户</li>
+          <li>你的专业背景或特长</li>
+          <li>你能帮助用户解决什么问题</li>
+          <li>联系方式（如微信、邮箱等）</li>
         </ul>
         
-        <h3>注册步骤</h3>
-        <p>按照以下步骤创建您的AdSense账户：</p>
+        <h3>封面图设计</h3>
+        <p>封面图应该美观且传达你的品牌信息，建议包含：</p>
         <ul>
-          <li>访问 <a href="https://www.google.com/adsense/start/" target="_blank">Google AdSense官网</a></li>
-          <li>使用您的Gmail账户登录</li>
-          <li>输入您的网站域名</li>
-          <li>填写个人信息（姓名、地址、电话等）</li>
-          <li>创建ads.txt文件，并上传至网站更目录，提交申请并等待审核</li>
-        </ul>
-        
-        <h3>审核时间</h3>
-        <p>AdSense账户审核通常需要1-2周时间。在此期间，请确保：</p>
-        <ul>
-          <li>网站正常运行且可访问</li>
-          <li>网站内容符合AdSense政策</li>
-          <li>保持联系方式畅通</li>
+          <li>品牌标识或个人IP形象</li>
+          <li>核心业务或专长展示</li>
+          <li>统一的视觉风格</li>
         </ul>
       </div>
     </div>
 
-    <!-- 搭建网站绑定AdSense -->
+    <!-- 发帖技巧 -->
     <div class="content-section">
       <div class="section-header">
-        <i class="fas fa-code section-icon"></i>
-        <h2 class="section-title">搭建网站并绑定AdSense</h2>
+        <i class="fas fa-edit section-icon"></i>
+        <h2 class="section-title">发帖技巧</h2>
       </div>
       <div class="content-text">
-        <h3>网站要求</h3>
-        <p>为了成功通过AdSense审核并获得收益，您的网站需要满足以下要求：</p>
+        <p>高质量的内容是获取流量的核心，以下是发帖的关键技巧：</p>
+        
+        <h3>标题优化</h3>
+        <p>好的标题能够吸引更多点击，建议使用以下策略：</p>
         <ul>
-          <li>网站内容原创且有价值</li>
-          <li>网站结构清晰，易于导航</li>
-          <li>网站加载速度快</li>
-          <li>永久免费建站：<a href="https://blog.aibochinese.com/sitesbuild" target="_blank">教程</a></li>
+          <li>数字+结果：如"3个步骤教你轻松涨粉1万+"</li>
+          <li>痛点+解决方案：如"为什么你的笔记没人看？原因在这里"</li>
+          <li>热点话题+个人观点：结合时下热门话题表达独特观点</li>
         </ul>
         
-        <h3>绑定AdSense代码</h3>
-        <p>账户审核通过后，您需要将AdSense代码添加到您的网站：</p>
+        <h3>内容结构</h3>
+        <p>清晰的内容结构有助于读者理解和互动：</p>
         <ul>
-          <li>登录AdSense账户控制台</li>
-          <li>进入"广告投放" > "广告单元"</li>
-          <li>创建新的广告单元</li>
-          <li>复制生成的AdSense代码</li>
-          <li>将代码粘贴到您网站的HTML中（通常放在&lt;head&gt;标签内或需要显示广告的位置）</li>
-          <li>保存并发布您的网站更改</li>
+          <li>开头：提出问题或引起共鸣</li>
+          <li>正文：分点阐述，逻辑清晰</li>
+          <li>结尾：总结要点，引导互动</li>
         </ul>
         
-        <h3>最佳实践</h3>
-        <p>为了获得更好的广告效果和用户体验：</p>
+        <h3>图片和视频</h3>
+        <p>视觉内容更能吸引用户注意力：</p>
         <ul>
-          <li>不要在页面上放置过多广告</li>
-          <li>确保广告与网站内容相关</li>
-          <li>自己不要点击广告，也不要在网站诱导他人点击</li>
-          <li>定期检查广告表现并优化</li>
+          <li>使用高清、美观的图片</li>
+          <li>保持统一的滤镜和风格</li>
+          <li>视频内容要有价值，时长控制在1分钟以内最佳</li>
+        </ul>
+        
+        <h3>标签运用</h3>
+        <p>合理使用标签可以增加曝光率：</p>
+        <ul>
+          <li>选择与内容相关的热门标签</li>
+          <li>搭配精准的垂直领域标签</li>
+          <li>避免使用过于宽泛或无关的标签</li>
         </ul>
       </div>
     </div>
 
-    <!-- 账户验证Pin码 -->
+    <!-- 私信技巧 -->
     <div class="content-section">
       <div class="section-header">
-        <i class="fas fa-key section-icon"></i>
-        <h2 class="section-title">账户验证与Pin码</h2>
+        <i class="fas fa-envelope section-icon"></i>
+        <h2 class="section-title">私信技巧</h2>
       </div>
       <div class="content-text">
-        <h3>Pin码验证流程</h3>
-        <p>为了确保账户安全和地址真实性，Google会向您的地址发送一个包含Pin码的明信片：</p>
+        <p>私信是转化潜在客户的重要渠道，以下是一些实用技巧：</p>
+        
+        <h3>开场白设计</h3>
+        <p>第一印象至关重要，需要精心设计开场白：</p>
         <ul>
-          <li>在AdSense账户中确认您的邮寄地址</li>
-          <li>Google将在几周内邮寄包含4位Pin码的明信片</li>
-          <li>收到明信片后，在AdSense账户中输入Pin码完成验证</li>
+          <li>提及用户的具体需求或痛点</li>
+          <li>引用用户发布的具体内容表示关注</li>
+          <li>提供明确的价值主张</li>
         </ul>
         
-        <h3>填写注意事项</h3>
-        <p>为确保顺利收到Pin码，请注意以下事项：</p>
+        <h3>沟通节奏</h3>
+        <p>保持适当的沟通节奏，避免过度打扰：</p>
         <ul>
-          <li>确保地址信息准确无误（包括邮政编码）</li>
-          <li>地址应使用当地语言书写</li>
-          <li>⚠️地址1填入详细的地址：市、区、街道等，并加上“电话：******；地址2 也加上电话”；平邮的方式，不加☎️邮递员联系不上您，切记</li>
-          <li>Pin码输入错误超过3次账户将被暂停</li>
+          <li>首次接触后等待用户回复再继续</li>
+          <li>间隔发送消息，避免连续轰炸</li>
+          <li>根据用户反馈调整沟通频率</li>
         </ul>
         
-      </div>
-    </div>
-
-    <!-- 优化广告设置 -->
-    <div class="content-section">
-      <div class="section-header">
-        <i class="fas fa-chart-line section-icon"></i>
-        <h2 class="section-title">优化广告设置</h2>
-      </div>
-      <div class="content-text">
-        <h3>广告格式选择</h3>
-        <p>选择合适的广告格式可以提高点击率和收益：</p>
+        <h3>转化话术</h3>
+        <p>巧妙的话术可以提高转化率：</p>
         <ul>
-          <li><strong>文字广告</strong>：与网站内容融合度高，用户体验好</li>
-          <li><strong>展示广告</strong>：视觉冲击力强，吸引注意力</li>
-          <li><strong>自适应广告</strong>：自动适配不同设备和屏幕尺寸</li>
-          <li><strong>链接单元</strong>：显示相关主题链接，增加页面浏览量</li>
-        </ul>
-        
-        <h3>广告位置优化</h3>
-        <p>广告位置对收益有重要影响：</p>
-        <ul>
-          <li>首屏广告通常表现更好</li>
-          <li>文章内容中的插文广告效果良好</li>
-          <li>侧边栏广告适合长期展示</li>
-          <li>避免在导航区域放置广告</li>
-        </ul>
-        
-        <h3>数据分析与调整</h3>
-        <p>通过AdSense报告优化广告表现：</p>
-        <ul>
-          <li>定期查看"广告表现报告"了解点击率和收益</li>
-          <li>使用"页面分析"找出高价值页面</li>
-          <li>测试不同广告格式和位置的效果</li>
-          <li>根据数据调整广告策略</li>
+          <li>强调限时优惠或稀缺性</li>
+          <li>提供成功案例或客户见证</li>
+          <li>降低决策门槛，如免费试用、无理由退款等</li>
         </ul>
       </div>
     </div>
 
-    <!-- 收益提现 -->
-    <div class="content-section">
-      <div class="section-header">
-        <i class="fas fa-money-bill-wave section-icon"></i>
-        <h2 class="section-title">收益提现</h2>
+    <!-- 实用技巧卡片 -->
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h4><i class="fas fa-lightbulb"></i> 内容发布时间</h4>
+        <p>根据目标用户的活跃时间发布内容，通常早上7-9点、中午12-14点、晚上19-22点是流量高峰期。</p>
       </div>
-      <div class="content-text">
-        <h3>收益门槛</h3>
-        <p>AdSense收益提现的基本要求：</p>
-        <ul>
-          <li>账户余额达到$100美元</li>
-          <li>完成地址验证（Pin码确认）</li>
-          <li>遵守所有AdSense政策</li>
-        </ul>
-        
-        <h3>收款方式</h3>
-        <p>Google AdSense支持多种收款方式：</p>
-        <ul>
-          <li><strong>电汇</strong>：直接转账到您的银行账户</li>
-          <li><strong>Paypal</strong>：目前支持中国大陆提现至Paypal</li>
-        </ul>
-        
-        <h3>提现流程</h3>
-        <p>设置收款方式并提现的步骤：</p>
-        <ul>
-          <li>登录AdSense账户</li>
-          <li>进入"付款" > "付款设置"</li>
-          <li>选择并设置收款方式</li>
-          <li>确认收款信息</li>
-          <li>当余额达到$100时自动提现</li>
-        </ul>
-        
+      <div class="tip-card">
+        <h4><i class="fas fa-chart-line"></i> 数据分析</h4>
+        <p>定期查看小红书数据后台，分析哪些内容受欢迎，不断优化内容策略。</p>
+      </div>
+      <div class="tip-card">
+        <h4><i class="fas fa-users"></i> 社群运营</h4>
+        <p>建立粉丝群，增强用户粘性，通过社群进行更深入的交流和推广。</p>
       </div>
     </div>
   </div>
@@ -730,9 +722,6 @@
     
     navItems.forEach(item => {
       item.addEventListener('click', (e) => {
-        // 阻止默认跳转行为以查看效果
-        // e.preventDefault();
-        
         // 移除所有激活状态
         navItems.forEach(i => i.classList.remove('nav-item-active'));
         
@@ -746,14 +735,14 @@
   <footer>
     <div class="footer">
       <p style="margin-bottom: 10px;">🙏感谢关注:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+               style="width: 30px; height: 30px; display:block;" /></a>
       </p>
       <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
     </div>
