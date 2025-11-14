@@ -260,93 +260,84 @@
   }
 
   /* 人工客服按钮样式 */
-  #canCustomerServerBtn, .can-customer-server-btn {
-    right: 20px !important;
-    top: 20px !important;
-    left: auto !important;
-    bottom: auto !important;
-    position: fixed !important;
-    z-index: 9997 !important;
-  }
+         /* 悬浮微信图标样式 */
+        .wechat-float {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: hsl(148, 45%, 88%); /* 微信绿色 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .wechat-float:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .wechat-icon {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wechaticon.png'); /* 用户提供的微信图标URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 弹出窗样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wechat-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .wechat-qr {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: block; /* 二维码图片，用户替换src */
+        }
+
+        .close-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff7875;
+        }
 </style>
 </head>
 <body>
-
-<!-- 人工客服脚本 -->
-<script>
-(function() {
-  _s = document.createElement('script');
-  _s.src = "https://kefu.aibochinese.com/customerServer.js";
-  _s.onload = function() {
-    var option = {
-      "authInit": true,
-      openUrl: 'https://kefu.aibochinese.com',
-      token: '7fecd3ce216cc26ebd63bf417c193b41',
-      kefuid: '',
-      isShowTip: true,
-      mobileIcon: '',
-      pcIcon: '',
-      windowStyle: 'center',
-    };
-    
-    var canCustomerServer = new initCustomerServer(option);
-    canCustomerServer.init();
-    
-    var checkInterval = setInterval(function() {
-      var btn = document.querySelector('#canCustomerServerBtn') || 
-                document.querySelector('.can-customer-server-btn') ||
-                document.querySelector('[class*="customer-service"]') ||
-                document.querySelector('[id*="customer"]');
-      
-      if (btn) {
-        clearInterval(checkInterval);
-        btn.style.position = 'fixed';
-        btn.style.right = '20px';
-        btn.style.top = '200px';
-        btn.style.left = 'auto';
-        btn.style.bottom = 'auto';
-        btn.style.zIndex = '9997';
-        makeDraggable(btn);
-      }
-    }, 300);
-  };
-  
-  document.head.appendChild(_s);
-  
-  function makeDraggable(element) {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    element.style.cursor = 'move';
-    
-    element.onmousedown = dragStart;
-    
-    function dragStart(e) {
-      e = e || window.event;
-      e.preventDefault();
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = dragEnd;
-      document.onmousemove = dragMove;
-    }
-    
-    function dragMove(e) {
-      e = e || window.event;
-      e.preventDefault();
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      element.style.top = (element.offsetTop - pos2) + "px";
-      element.style.left = (element.offsetLeft - pos1) + "px";
-    }
-    
-    function dragEnd() {
-      document.onmouseup = null;
-      document.onmousemove = null;
-    }
-  }
-})();
-</script>
-
 <!-- 标准导航菜单 -->
 <nav class="navbar">
     <div class="nav-container">
@@ -421,10 +412,9 @@
 <footer>
 <div class="footer">
         <p style="margin-bottom: 10px;">🙏感谢关注:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
@@ -495,5 +485,38 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
     <!-- 引用标准的script.js文件 -->
     <script src="../js/script.js"></script>
+        <!-- 悬浮微信客服图标 -->
+    <div class="wechat-float" onclick="toggleWechatModal()">
+        <div class="wechat-icon"></div>
+    </div>
+
+    <!-- 微信弹出窗 -->
+    <div id="wechatModal" class="wechat-modal" onclick="closeWechatModal(event)">
+        <div class="wechat-popup" onclick="event.stopPropagation()">
+            <h3>微信客服</h3>
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" alt="微信二维码" class="wechat-qr">
+            <p>扫描添加客服微信</p>
+            <button class="close-btn" onclick="closeWechatModal()">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleWechatModal() {
+            const modal = document.getElementById('wechatModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeWechatModal(event) {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
+
+        // 点击模态背景关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('wechatModal');
+            if (event.target === modal) {
+                closeWechatModal();
+            }
+        };
+    </script>
 </body>
 </html>
