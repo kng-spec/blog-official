@@ -314,102 +314,114 @@
   <section>
     <p style="text-align: center; font-weight: bold; margin: 16px 0;">————广告位招租————</p>
 
-    <!-- ✅ 两图并列（响应式）- 固定图片尺寸 300×50 -->
-    <style>
-      .two-up {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        max-width: 900px;
-        margin: 0 auto 22px auto;
-        padding: 8px 0;
-      }
-      .two-up .item {
-        flex: 0 0 auto;
-        box-sizing: border-box;
-      }
-      .two-up .item a {
-        display: block;
-        text-decoration: none;
-      }
-      .two-up .item img {
-        width: 300px;
-        height: 50px;
-        display: block;
-        border-radius: 6px;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-        object-fit: cover;
-      }
-      @media (max-width: 660px) {
-        .two-up {
-          flex-direction: column;
-          align-items: center;
-        }
-        .two-up .item {
-          width: 100%;
-          max-width: 300px;
-        }
-      }
-    </style>
+  <style>
+    /* ✅ 三图并列(电脑端) / 响应式 - 固定图片尺寸 300×50 */
+    .three-up {
+      display: grid;
+      grid-template-columns: repeat(3, 300px);
+      gap: 16px;
+      justify-content: center;
+      max-width: 1000px;
+      margin: 0 auto 22px auto;
+      padding: 8px 0;
+    }
 
-    <!-- 第二组 -->
-    <div class="two-up">
-      <div class="item">
-        <a href="payment/SafePal.html" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/SafePal%20ads-1.png" alt="SafePal" loading="lazy">
-        </a>
-      </div>
-      <div class="item">
-        <a href="payment/roogoo.html" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/oogoo%20ads%202.png" alt="Roogoo Mastercard" loading="lazy">
-        </a>
-      </div>
+    .three-up .item {
+      box-sizing: border-box;
+    }
+
+    .three-up .item a {
+      display: block;
+      text-decoration: none;
+    }
+
+    .three-up .item img {
+      width: 300px;
+      height: 50px;
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      object-fit: cover;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .three-up .item img:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* 平板设备：两列 */
+    @media (max-width: 980px) {
+      .three-up {
+        grid-template-columns: repeat(2, 300px);
+      }
+    }
+
+    /* 手机设备：单列 */
+    @media (max-width: 660px) {
+      .three-up {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+    }
+  </style>
+
+  <!-- 第一组(原第二组) -->
+  <div class="three-up">
+    <div class="item">
+      <a href="payment/SafePal.html" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/SafePal%20ads-1.png" alt="SafePal" loading="lazy">
+      </a>
     </div>
-
-    <!-- 第三组 -->
-    <div class="two-up">
-      <div class="item">
-        <a href="tools/drive.html" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/aiboDrive%20ads-3.png" alt="商务网盘" loading="lazy">
-        </a>
-      </div>
-      <div class="item">
-        <a href="sitesbuild.html" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/Cloudflare%20Page%20ads-4.png" alt="永久免费建站" loading="lazy">
-        </a>
-      </div>
+    <div class="item">
+      <a href="payment/roogoo.html" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/oogoo%20ads%202.png" alt="Roogoo Mastercard" loading="lazy">
+      </a>
     </div>
-
-    <!-- 第四组 -->
-    <div class="two-up">
-      <div class="item">
-        <a href="https://blog.aibochinese.com/web3/binance" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/%E5%B8%81%E5%AE%89%20ads-5.png" alt="Binance" loading="lazy">
-        </a>
-      </div>
-      <div class="item">
-        <a href="payment/pay.html" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/AiboPay%20ads-6.png" alt="AiboPay" loading="lazy">
-        </a>
-      </div>
+    <div class="item">
+      <a href="tools/drive.html" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/aiboDrive%20ads-3.png" alt="商务网盘" loading="lazy">
+      </a>
     </div>
+  </div>
 
-    <!-- 第一组 -->
-    <div class="two-up">
-        <div class="item">
-        <a href="https://blog.aibochinese.com/web3/kvb" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/KVB%20ads-1.png" alt="KVB ads" loading="lazy">
-        </a>
-      </div>
-      <div class="item">
-        <a href="https://blog.aibochinese.com/buildsites/RackNerd-Host" target="_blank" rel="noopener">
-          <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%E5%9B%BE/RackNerd%20%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%83%E9%94%801.png" alt="RackNerd" loading="lazy">
-        </a>
-      </div>
+  <!-- 第二组(原第三、四组) -->
+  <div class="three-up">
+    <div class="item">
+      <a href="sitesbuild.html" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/Cloudflare%20Page%20ads-4.png" alt="永久免费建站" loading="lazy">
+      </a>
     </div>
+    <div class="item">
+      <a href="https://blog.aibochinese.com/web3/binance" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/%E5%B8%81%E5%AE%89%20ads-5.png" alt="Binance" loading="lazy">
+      </a>
+    </div>
+    <div class="item">
+      <a href="payment/pay.html" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/AiboPay%20ads-6.png" alt="AiboPay" loading="lazy">
+      </a>
+    </div>
+  </div>
 
+  <!-- 第三组(原第一组) -->
+  <div class="three-up">
+    <div class="item">
+      <a href="https://blog.aibochinese.com/web3/kvb" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/KVB%20ads-1.png" alt="KVB ads" loading="lazy">
+      </a>
+    </div>
+    <div class="item">
+      <a href="https://blog.aibochinese.com/buildsites/RackNerd-Host" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%E5%9B%BE/RackNerd%20%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%83%E9%94%801.png" alt="RackNerd" loading="lazy">
+      </a>
+    </div>
+    <div class="item">
+      <a href="https://dedicatedlines.top?ref=13" target="_blank" rel="noopener">
+        <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%E5%9B%BE/%E5%87%80%E8%BF%9E%E4%B8%93%E7%BA%BFads-1.png" alt="RackNerd" loading="lazy">
+      </a>
+    </div>
+  </div>
     <p style="text-align: center; margin: 16px 0;">📢欢迎来与我们洽谈合作!</p>
     <p style="text-align: center; margin: 8px 0; font-size: 0.9em; color: #666;">
       按推广效果付费(佣金)|指定文章或页面嵌入广告，按天数计费，商务热线：19179215243
