@@ -393,6 +393,20 @@
                 font-size: 1.4em;
             }
         }
+                button {
+            background-color: yellow; /* 黄色背景 */
+            color: black; /* 黑色文字 */
+            font-weight: bold; /* 粗体 */
+            font-size: 18px; /* 字体大小，可调整 */
+            padding: 15px 30px; /* 内边距，调整按钮大小 */
+            border: none;
+            border-radius: 5px; /* 圆角，可选 */
+            cursor: pointer;
+            text-align: center;
+        }
+        button:hover {
+            background-color: #ffd700; /* 鼠标悬停时稍深黄色，可选 */
+        }
     </style>
     <!-- 引入Font Awesome图标 -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -559,6 +573,7 @@
                         <li>效率更高，管理更便捷</li> 
                         <li>支持版本控制和回滚</li>
                     </ul>
+                     <button onclick="window.open('https://blog.aibochinese.com/buildsites/buildservice', '_blank')">人工协助</button>
                 </div>
             </div>
         </div>
