@@ -101,71 +101,82 @@
             .mobile-nav .nav-item.center:hover { background: #2563eb; }
         }
 
-        /* ==================== 全新 Pagefind 搜索样式（完美修复） ==================== */
-        .search-container {
-            position: relative;
-            margin-right: 20px;
-            z-index: 1001;
-            min-width: 200px;
-            display: flex;
-            align-items: center;
-        }
-        #pagefind-search .pagefind-ui__search-input {
-            padding: 10px 16px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
-            width: 100%;
-            transition: border-color 0.3s ease;
-            background: white;
-            color: #333;
-            box-sizing: border-box;
-            outline: none;
-        }
+/* ==================== 全新 Pagefind 搜索样式（搜索框水平居中版） ==================== */
+.search-container {
+    position: relative;
+    /* 删除 margin-right，改为自动左右 margin 实现居中 */
+    margin: 0 auto;           /* 关键：水平居中 */
+    z-index: 1001;
+    min-width: 200px;
+    max-width: 380px;         /* 建议加上最大宽度，和下拉结果保持一致 */
+    width: 100%;
+    display: flex;
+    justify-content: center;  /* 内部元素水平居中 */
+    align-items: center;
+}
 
-        #pagefind-search .pagefind-ui__search-input:focus {
-            border-color: #4a6fa5;
-            box-shadow: none;
-            width: 260px;
-        }
+/* 输入框：去掉宽度 100% + focus 扩展的左右晃动问题 */
+#pagefind-search .pagefind-ui__search-input {
+    padding: 10px 16px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    /* 固定宽度，或者使用 min-width + max-width 防止晃动 */
+    width: 300px;                     /* 固定一个舒适的宽度 */
+    max-width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    color: #333;
+    box-sizing: border-box;
+    outline: none;
+}
 
-        #pagefind-search .pagefind-ui__result {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-        }
+#pagefind-search .pagefind-ui__search-input:focus {
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
+    /* focus 时不再改变宽度，避免整个搜索框左右晃动 */
+}
 
-        #pagefind-search .pagefind-ui__result:last-child {
-            border-bottom: none;
-        }
-        #pagefind-search .pagefind-ui__results {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 380px;
-            max-height: 70vh;
-            overflow-y: auto;
-            margin-top: 8px;
-            z-index: 1000;
-            padding: 8px 0;
-        }
-        #pagefind-search .pagefind-ui__result {
-            padding: 12px 16px;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.2s;
-        }
-        #pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
-        #pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
-        #pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
-        #pagefind-search .pagefind-ui__result-link { color: #3B82F6; text-decoration: none; }
-        #pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
-        #pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
-        .pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
-        #pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
+/* 下拉结果：从右对齐改为居中对齐 */
+#pagefind-search .pagefind-ui__results {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    position: absolute;
+    top: 100%;
+    left: 50%;                        /* 关键：左边 50% */
+    transform: translateX(-50%);      /* 关键：向左偏移自身宽度的一半 → 完全居中 */
+    right: auto;                      /* 取消原来的 right: 0 */
+    width: 380px;
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-top: 8px;
+    z-index: 1000;
+    padding: 8px 0;
+}
 
+/* 其余样式保持不变 */
+#pagefind-search .pagefind-ui__result {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+#pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
+#pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
+#pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
+#pagefind-search .pagefind-ui__result-link { 
+    color: #3B82F6; 
+    text-decoration: none; 
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+#pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
+#pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
+.pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
+#pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
         /* 四大功能板块、文章网格、三图广告等原有样式全部保留（略微精简但功能完整） */
         .features { margin: 40px 0; }
         .features .blocks-container {
@@ -258,11 +269,6 @@
                 <li class="nav-item"><a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a></li>
             </ul>
 
-            <!-- 修复后的搜索框 -->
-            <div class="search-container">
-                <div id="pagefind-search"></div>
-            </div>
-
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -275,6 +281,10 @@
         <section class="features">
             <div class="container">
                 <h2 class="section-title">我们的核心服务</h2>
+                            <!-- 修复后的搜索框 -->
+            <div class="search-container">
+                <div id="pagefind-search"></div>
+            </div>
                 <div class="blocks-container">
                     <div class="block block1"><h3><a href="https://blog.aibochinese.com/Rescous/free%20rs" target="_blank">免费资源</a></h3></div>
                     <div class="block block2"><h3><a href="https://blog.aibochinese.com/SMC/sm%20maketing" target="_blank">自媒体营销</a></h3></div>
@@ -393,6 +403,112 @@
         });
     </script>
 
+    
+    <!-- 终极链接修复解决方案 -->
+    <script>
+        // 终极链接修复解决方案
+        (function() {
+            'use strict';
+            
+            console.log('启动终极链接修复方案...');
+            
+            // 立即拦截所有链接点击事件
+            document.addEventListener('click', function(event) {
+                let target = event.target;
+                
+                // 找到最近的链接元素
+                while (target && target.tagName !== 'A') {
+                    target = target.parentElement;
+                }
+                
+                if (target && target.tagName === 'A') {
+                    const href = target.getAttribute('href');
+                    
+                    // 检查是否是相对HTML链接且缺少post前缀
+                    if (href && href.endsWith('.html') && 
+                        !href.startsWith('/') && 
+                        !href.startsWith('http') && 
+                        !href.includes('post/')) {
+                        
+                        const newHref = '/post/' + href;
+                        console.log('即时修复链接:', href, '->', newHref);
+                        
+                        // 阻止默认行为
+                        event.preventDefault();
+                        
+                        // 修复链接
+                        target.setAttribute('href', newHref);
+                        
+                        // 立即跳转到修复后的链接
+                        window.location.href = newHref;
+                    }
+                }
+            }, true); // 使用捕获阶段
+            
+            // 监听所有动态生成的链接
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) {
+                            // 处理新添加的元素
+                            processElement(node);
+                        }
+                    });
+                });
+            });
+            
+            function processElement(element) {
+                // 如果是链接元素，直接处理
+                if (element.tagName === 'A') {
+                    fixLink(element);
+                }
+                
+                // 如果包含子元素，递归处理
+                if (element.querySelectorAll) {
+                    const links = element.querySelectorAll('a[href*=".html"]');
+                    links.forEach(fixLink);
+                }
+            }
+            
+            function fixLink(link) {
+                const href = link.getAttribute('href');
+                if (href && href.endsWith('.html') && 
+                    !href.startsWith('/') && 
+                    !href.startsWith('http') && 
+                    !href.includes('post/')) {
+                    
+                    const newHref = '/post/' + href;
+                    console.log('修复动态链接:', href, '->', newHref);
+                    link.setAttribute('href', newHref);
+                }
+            }
+            
+            // 开始监听DOM变化
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
+            // 立即处理现有页面中的所有链接
+            function fixExistingLinks() {
+                const links = document.querySelectorAll('a[href*=".html"]');
+                links.forEach(fixLink);
+                console.log(`已处理 ${links.length} 个现有链接`);
+            }
+            
+            // 页面加载完成后修复现有链接
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', fixExistingLinks);
+            } else {
+                fixExistingLinks();
+            }
+            
+            // 定期检查和修复（备用机制）
+            setInterval(fixExistingLinks, 1000);
+            
+            console.log('终极链接修复方案已激活');
+        })();
+    </script>
     <!-- Pagefind 搜索（已完美修复） -->
     <script src="/_pagefind/pagefind-ui.js"></script>
     <script>
