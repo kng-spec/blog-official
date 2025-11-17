@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>右侧悬浮在线客服 - 爱博·客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section h2::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .download-btn:hover {
+            background: #c0392b;
+        }
+        
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .tip-box strong {
+            color: #2980b9;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        pre {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        pre::before {
+            content: "CODE";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7em;
+            color: #5c6370;
+            font-weight: bold;
+        }
+        
+        code {
+            font-family: "Consolas", "Monaco", "Courier New", monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .tag {
+            color: #e06c75;
+        }
+        
+        .attr {
+            color: #d19a66;
+        }
+        
+        .string {
+            color: #98c379;
+        }
+        
+        .ai-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .ai-section h2 {
+            color: white;
+            border-bottom-color: white;
+        }
+        
+        .ai-section h2::before {
+            content: "🤖";
+        }
+        
+        .ai-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ai-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+footer {
+    background: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9em;
+    width: 80%;  /* 或固定宽度，如 600px */
+    margin: 0 auto;  /* 上下 margin 为 0，左右自动居中 */
+}
+        
+        /* 导航栏样式 */
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #ffcc2f;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* 悬浮微信图标样式 */
+        .wechat-float {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: hsl(148, 45%, 88%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .wechat-float:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .wechat-icon {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wechaticon.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 弹出窗样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wechat-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .wechat-qr {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .close-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff7875;
+        }
+        
+        /* FAQ 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                padding-top: 70px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section h2 {
+                font-size: 1.4em;
+            }
+            
+            pre {
+                padding: 15px;
+                font-size: 0.85em;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+                padding: 20px 0;
+                z-index: 999;
+                gap: 0.5rem;
+            }
+
+            .nav-menu li {
+                padding: 10px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+        
+        /* 移动端底部导航 */
+        .mobile-nav {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 50;
+            }
+            
+            .nav-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 12px 0;
+            }
+            
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-decoration: none;
+                color: #6b7280;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-item.active {
+                color: #3B82F6;
+                transform: scale(1.1);
+            }
+            
+            .nav-item .icon {
+                font-size: 20px;
+                margin-bottom: 4px;
+            }
+            
+            .nav-item .text {
+                font-size: 12px;
+            }
+            
+            .nav-item.center {
+                background: #3B82F6;
+                color: white;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: -24px;
+            }
+            
+            .nav-item.center .icon {
+                font-size: 20px;
+                margin-bottom: 0;
+            }
+            
+            .nav-item.center .text {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 标准导航菜单 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h2><a href="https://blog.aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/%E5%88%86%E4%BA%AB%E7%BB%8F%E9%AA%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E7%BA%BF%E4%B8%8A%E8%87%B4%E5%AF%8C320x50.png" alt="网站Logo"></a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-link">免费资源</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/earn%20online" class="nav-link">项目推荐</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <header>
+            <p>_</p>
+            <p>_</p>
+            <h1>右侧悬浮在线客服</h1>
+            <p>在现代网站设计中，提供便捷的客户服务通道是提升用户体验的重要方式。右侧悬浮在线客服组件可以让访客随时联系到网站客服，解决问题或获取帮助。本文将提供国内网站和海外网站适用的悬浮客服源码，并详细说明如何将这些代码应用到您的网站中。</p>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2>一、国内网站源码</h2>
+                
+                <p>对于面向国内用户的网站，我们推荐使用基于微信的悬浮客服组件。</p>
+                
+                <div class="download-section">
+                    <p>点击按钮下载完整的国内客服源码文件（HTML格式，直接复制到您的网站中使用）。</p>
+                    <a href="https://drive.aibochinese.com/s/X8qiK" download="domestic-customer-service.html" class="download-btn">下载国内客服源码</a>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong>使用说明：</strong></p>
+                    <ul>
+                        <li>将微信二维码图片URL替换为您的实际微信二维码图片地址</li>
+                        <li>样式和脚本分开嵌入</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>二、海外网站源码</h2>
+                
+                <p>对于面向海外用户的网站，我们推荐使用基于WhatsApp、Facebook Messenger和Telegarm等国际常用通讯工具的悬浮客服组件：</p>
+                
+                <div class="download-section">
+                    <p>点击按钮下载完整的海外客服源码文件（HTML格式，直接复制到您的网站中使用）。</p>
+                    <a href="https://drive.aibochinese.com/s/7deSR" download="international-customer-service.html" class="download-btn">下载海外客服源码</a>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong>使用说明：</strong></p>
+                    <ul>
+                        <li>Whatsapp Business账号才有短链，升级下账户类型；Telegram和Mesengar的个人账号即可</li>
+                        <li>样式和脚本分开嵌入</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>三、源码放置方法</h2>
+                
+                <p>将悬浮客服组件添加到您的网站中非常简单，只需按照以下步骤操作：</p>
+                
+                <h3>1. 基本放置方法</h3>
+                
+                <p>无论您使用哪种网站类型（静态HTML、WordPress、React等），都可以通过以下基本步骤添加悬浮客服组件：</p>
+                
+                <ol>
+                    <li>样式部分嵌入style之间</li>
+                    <li>脚本部分放在body之间</li>
+                </ol>
+                <video controls width="300" height="180">
+  <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B411%E6%9C%88/%E5%85%8D%E8%B4%B9%E5%BB%BA%E7%AB%99-%E7%BB%99%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AE%E5%8F%B3%E4%BE%A7%E6%82%AC%E6%B5%AE%E5%AE%A2%E6%9C%8D/%E5%85%8D%E8%B4%B9%E5%BB%BA%E7%AB%99-%E7%BB%99%E7%BD%91%E7%AB%99%E9%85%8D%E7%BD%AE%E5%8F%B3%E4%BE%A7%E6%82%AC%E6%B5%AE%E5%AE%A2%E6%9C%8D.mp4" type="video/mp4">
+</video>
+                <h3>2. 常见问题解答</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>问题</th>
+                            <th>解答</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>悬浮客服组件不显示怎么办？</td>
+                            <td>检查z-index值是否足够高，确保没有被其他元素遮挡；检查CSS是否正确加载；使用浏览器开发者工具查看是否有错误。</td>
+                        </tr>
+                        <tr>
+                            <td>在移动设备上显示异常怎么办？</td>
+                            <td>确保CSS中包含响应式设计代码，特别是媒体查询部分；调整小屏幕设备上的按钮大小和间距。</td>
+                        </tr>
+                        <tr>
+                            <td>如何添加更多的联系方式？</td>
+                            <td>可以参照现有按钮的结构，复制并修改样式和链接；确保使用不同的CSS类名以避免冲突。</td>
+                        </tr>
+                        <tr>
+                            <td>如何修改弹窗的样式和内容？</td>
+                            <td>编辑<code>.wechat-modal</code>和<code>.wechat-popup</code>相关的CSS样式；修改弹窗内的HTML内容可以自定义显示信息。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="footer">
+                <p style="margin-bottom: 10px;">🙏感谢关注:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+                 style="width: 30px; height: 30px; display:block;" /></a>
+                </p>
+                <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- 悬浮微信客服图标 -->
+    <div class="wechat-float" onclick="toggleWechatModal()">
+        <div class="wechat-icon"></div>
+    </div>
+
+    <!-- 微信弹出窗 -->
+    <div id="wechatModal" class="wechat-modal" onclick="closeWechatModal(event)">
+        <div class="wechat-popup" onclick="event.stopPropagation()">
+            <h3>微信客服</h3>
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" alt="微信二维码" class="wechat-qr">
+            <p>扫描添加客服微信</p>
+            <button class="close-btn" onclick="closeWechatModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 移动端底部导航按钮 - 仅在移动端显示 -->
+    <div class="mobile-nav">
+        <div class="nav-container">
+            <!-- 首页按钮 -->
+            <a href="https://blog.aibochinese.com/" class="nav-item active">
+                <i class="fa fa-home icon"></i>
+                <span class="text">首页</span>
+            </a>
+            
+            <!-- 资源按钮 -->
+            <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-item">
+                <i class="fa fa-cloud-download icon"></i>
+                <span class="text">资源</span>
+            </a>
+
+            <!-- 最新 - 突出显示 -->
+            <a href="https://blog.aibochinese.com/newest" class="nav-item center">
+                <i class="fa fa-refresh icon"></i>
+                <span class="text">最新</span>
+            </a>
+
+            <!-- 建站按钮 -->
+            <a href="https://blog.aibochinese.com/sitesbuild" class="nav-item">
+                <i class="fa fa-code icon"></i>
+                <span class="text">建站</span>
+            </a>
+
+            <!-- 淘金按钮 -->
+            <a href="https://blog.aibochinese.com/earn%20online" class="nav-item">
+                <i class="fa fa-usd icon"></i>
+                <span class="text">淘金</span>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // 汉堡菜单交互
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // 点击导航链接后关闭菜单（移动端）
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+        
+        // 窗口大小改变时重置菜单状态
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+        
+        // 页面滚动时关闭移动端菜单
+        window.addEventListener('scroll', () => {
+            if (hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+        
+        // 悬浮客服交互函数
+        function toggleWechatModal() {
+            var modal = document.getElementById('wechatModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+        
+        function closeWechatModal(event) {
+            var modal = document.getElementById('wechatModal');
+            modal.style.display = 'none';
+        }
+        
+        // 页面滚动时调整悬浮客服的位置
+        function adjustServiceFloat() {
+            var serviceFloat = document.querySelector('.service-float');
+            if (serviceFloat && window.innerWidth > 768) {
+                var screenWidth = window.innerWidth;
+                var rightPosition = (screenWidth - 1200) / 2 + 20;
+                serviceFloat.style.right = Math.max(20, rightPosition) + 'px';
+                serviceFloat.style.top = '50%';
+                serviceFloat.style.transform = 'translateY(-50%)';
+            } else if (serviceFloat) {
+                serviceFloat.style.right = '8px';
+            }
+        }
+        
+        // 页面加载和窗口大小改变时调整悬浮客服位置
+        window.addEventListener('load', adjustServiceFloat);
+        window.addEventListener('resize', adjustServiceFloat);
+        
+        // 移动端底部导航交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.mobile-nav .nav-item:not(.center)');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

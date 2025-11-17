@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+             <style>
+/* 人工客服按钮样式 */
+        /* 悬浮微信图标样式 */
+        .wechat-float {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: hsl(148, 45%, 88%); /* 微信绿色 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .wechat-float:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .wechat-icon {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wechaticon.png'); /* 用户提供的微信图标URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 弹出窗样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wechat-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .wechat-qr {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: block; /* 二维码图片，用户替换src */
+        }
+
+        .close-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff7875;
+        }
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare R2 资源导航</title>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            padding-top: 90px;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+            position: relative;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            list-style: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #ffcc2f;
+        }
+        
+        /* 汉堡菜单样式 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+
+        .hamburger .line {
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.15);
+                padding: 20px 0;
+                z-index: 999;
+                gap: 0;
+            }
+
+            .nav-menu li {
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #f38020 0%, #f5af19 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "☁️";
+            position: absolute;
+            font-size: 15em;
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 50px 30px;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .resource-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .resource-card:hover::before {
+            opacity: 1;
+        }
+        
+        .resource-card.card-green {
+            background: linear-gradient(135deg, #20bf55 0%, #01baef 100%);
+        }
+        
+        .resource-card.card-orange {
+            background: linear-gradient(135deg, #f38020 0%, #f5af19 100%);
+        }
+        
+        .resource-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resource-card h3::before {
+            content: "🔗";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .resource-card p {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resource-card a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resource-card a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .promo-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .promo-content {
+            color: white;
+        }
+        
+        .promo-content h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .promo-content p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+        
+        .promo-content a {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .promo-content a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .promo-image {
+            text-align: center;
+        }
+        
+        .promo-image img {
+            max-width: 200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .promo-image img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+        
+        .promo-image figcaption {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: white;
+        }
+        
+        .video-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .video-section h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-section h2::before {
+            content: "📺";
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-placeholder video {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        .footer img {
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+        
+        /* 移动端底部导航样式 */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            height: 60px;
+        }
+        
+        .mobile-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 12px;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .mobile-nav-item.active {
+            color: #3498db;
+        }
+        
+        .mobile-nav-item.active .icon {
+            color: #3498db;
+        }
+        
+        .icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: #999;
+        }
+        
+        .label {
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                padding-top: 70px;
+                padding-bottom: 80px;
+            }
+            
+            .mobile-nav {
+                display: flex;
+            }
+            
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .promo-section {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+                text-align: center;
+            }
+            
+            .promo-content h2 {
+                font-size: 1.6em;
+            }
+            
+            .promo-image img {
+                max-width: 150px;
+            }
+            
+            .video-section {
+                padding: 30px 20px;
+            }
+
+            .video-placeholder video {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 标准导航菜单 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="https://blog.aibochinese.com/" target="_blank">
+                    <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/%E5%88%86%E4%BA%AB%E7%BB%8F%E9%AA%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E7%BA%BF%E4%B8%8A%E8%87%B4%E5%AF%8C320x50.png" alt="网站Logo">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-link">免费资源</a></li>
+                <li><a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a></li>
+                <li><a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a></li>
+                <li><a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a></li>
+                <li><a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a></li>
+                <li><a href="https://blog.aibochinese.com/earn%20online" class="nav-link">项目推荐</a></li>
+                <li><a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a></li>
+                <li><a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a></li>
+            </ul>
+            <button class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Cloudflare R2 资源导航</h1>
+            <p>一站式获取 Cloudflare 相关资源与工具</p>
+        </header>
+        
+        <div class="content">
+                       <!-- 视频播放列表 -->
+            <div class="video-section">
+                <h2>Cloudflare R2 使用经验</h2>
+                <div class="video-placeholder">
+                    <video controls>
+                        <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E4%BD%BF%E7%94%A8Cloudflare%20R2%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%EF%BC%8C%E5%B8%AE%E6%82%A8%E8%8A%82%E7%9C%81%E4%B8%80%E5%A4%A7%E7%AC%94%E8%B4%B9%E7%94%A8/%E5%A6%82%E4%BD%95%E7%94%B3%E8%AF%B7%E4%BD%BF%E7%94%A8Cloudflare%20R2%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%EF%BC%8C%E5%B8%AE%E6%82%A8%E8%8A%82%E7%9C%81%E4%B8%80%E5%A4%A7%E7%AC%94%E8%B4%B9%E7%94%A8.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <!-- 资源卡片 -->
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Cloudflare 官网</h3>
+                    <p>全球领先的网络性能和安全公司，提供CDN、DNS、DDoS防护等服务</p>
+                    <a href="https://www.cloudflare.com/" target="_blank">访问官网 →</a>
+                </div>
+                
+                <div class="resource-card card-green">
+                    <h3>虚拟信用卡申请</h3>
+                    <p>0开卡费申请Visa/万事达卡，支持Cloudflare等海外服务付款</p>
+                    <a href="https://blog.aibochinese.com/payment/apply%20V-cards" target="_blank">查看渠道 →</a>
+                </div>
+                
+                <div class="resource-card card-orange">
+                    <h3>免费海外网络流量</h3>
+                    <p>稳定可靠的海外网络访问解决方案，助力开发与测试</p>
+                    <a href="https://dedicatedlines.top/" target="_blank">立即使用 →</a>
+                </div>
+            </div>
+            
+            <!-- 推广区域 -->
+            <div class="promo-section">
+                <div class="promo-content">
+                    <h2>🚀 Serverless 网站搭建</h2>
+                    <p>使用 Cloudflare 技术栈，快速搭建无服务器网站</p>
+                    <a href="https://blog.aibochinese.com/sitesbuild" target="_blank">了解详情 →</a>
+                </div>
+
+<div class="two-up">
+  <a href="https://blog.aibochinese.com/sitesbuild" target="_blank" rel="noopener" class="item">
+    <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B9%BF%E5%91%8A%E8%81%94%E7%9B%9F/Cloudflare%20Page%20ads-4.png" alt="永久免费建站" loading="lazy">
+  </a>
+  <style>
+    .two-up .item img {
+      width: 300px;
+      height: 50px;
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      object-fit: cover;
+    }
+  </style>
+</div>
+            </div>
+        </div>
+        
+<footer>
+<div class="footer">
+        <p style="margin-bottom: 10px;">🙏感谢关注:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>
+        </p>
+        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+    <p>_</p>
+    </div>
+    </footer>
+    </div>
+    
+    <!-- 移动端底部导航按钮 -->
+    <div class="mobile-nav">
+        <a href="https://blog.aibochinese.com/" class="mobile-nav-item active">
+            <i class="fa fa-home icon"></i>
+            <span class="label">首页</span>
+        </a>
+        <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="mobile-nav-item">
+            <i class="fa fa-cloud-download icon"></i>
+            <span class="label">资源</span>
+        </a>
+        <a href="https://blog.aibochinese.com/latest" class="mobile-nav-item">
+            <i class="fa fa-refresh icon"></i>
+            <span class="label">最新</span>
+        </a>
+        <a href="https://blog.aibochinese.com/sitesbuild" class="mobile-nav-item">
+            <i class="fa fa-code icon"></i>
+            <span class="label">建站</span>
+        </a>
+        <a href="https://blog.aibochinese.com/earn%20online" class="mobile-nav-item">
+            <i class="fa fa-usd icon"></i>
+            <span class="label">淘金</span>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // 移动端底部导航交互
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+            
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    mobileNavItems.forEach(navItem => {
+                        navItem.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+   <!-- 悬浮微信客服图标 -->
+    <div class="wechat-float" onclick="toggleWechatModal()">
+        <div class="wechat-icon"></div>
+    </div>
+
+    <!-- 微信弹出窗 -->
+    <div id="wechatModal" class="wechat-modal" onclick="closeWechatModal(event)">
+        <div class="wechat-popup" onclick="event.stopPropagation()">
+            <h3>微信客服</h3>
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" alt="微信二维码" class="wechat-qr">
+            <p>扫描添加客服微信</p>
+            <button class="close-btn" onclick="closeWechatModal()">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleWechatModal() {
+            const modal = document.getElementById('wechatModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeWechatModal(event) {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
+
+        // 点击模态背景关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('wechatModal');
+            if (event.target === modal) {
+                closeWechatModal();
+            }
+        };
+    </script>
+</body>
+</html>

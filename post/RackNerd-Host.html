@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+         <style>
+/* 人工客服按钮样式 */
+        /* 悬浮微信图标样式 */
+        .wechat-float {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: hsl(148, 45%, 88%); /* 微信绿色 */
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .wechat-float:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .wechat-icon {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wechaticon.png'); /* 用户提供的微信图标URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 弹出窗样式 */
+        .wechat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wechat-popup {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .wechat-qr {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 10px;
+            display: block; /* 二维码图片，用户替换src */
+        }
+
+        .close-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff7875;
+        }
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RackNerd 促销活动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+            color: #fff;
+            padding: 20px;
+        }
+.navbar {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;  /* 使用 left 和 right 代替 width: 100% */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 20px;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;  /* 添加 padding: 0 以移除默认内边距 */
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #ffcc2f;
+}
+
+        /* 汉堡菜单样式 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001; /* 确保在最上层 */
+        }
+
+        .line {
+            width: 30px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 70px; /* 移动端调整 */
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px; /* 调整到与导航栏底部对齐 */
+                flex-direction: column;
+                background: linear-gradient(135deg, #3498db, #2980b9); /* 与导航栏颜色一致 */
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease-in-out;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+                padding: 20px 0;
+                z-index: 999;
+                gap: 0.5rem; /* 减小间距 */
+            }
+
+            .nav-menu li {
+                padding: 10px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .line:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .line:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .line:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.8rem 15px;
+            }
+        }
+
+        .header {
+            background: #2c3e50;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2px;
+        }
+
+        .header h1 {
+            font-size: 16px;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-icon {
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        .intro {
+            background: #f8f9fa;
+            color: #333;
+            padding: 15px 20px;
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            background: linear-gradient(90deg, #004d6b 0%, #006b8f 100%);
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .reveal-btn {
+            color: #4dd0e1;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .products-container {
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 0 0 8px 8px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #2d4059;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(77, 208, 225, 0.3);
+        }
+
+        .product-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4dd0e1;
+        }
+
+        .product-specs {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .product-specs li {
+            font-size: 13px;
+            color: #b0b0c8;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .product-specs li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4dd0e1;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 5px;
+        }
+
+        .product-id {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .aff-btn {
+            background: #0d7ea3;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .aff-btn:hover {
+            background: #0a5f7d;
+        }
+
+        .footer {
+            background: #2c3e50;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .promo-banner {
+            background: linear-gradient(90deg, #00b4db 0%, #0083b0 100%);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .promo-code {
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .products-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- 引入Font Awesome图标库 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 标准导航菜单 -->
+<!-- 标准导航菜单 -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h2><a href="https://blog.aibochinese.com/" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/%E5%88%86%E4%BA%AB%E7%BB%8F%E9%AA%8C%EF%BC%8C%E8%BD%BB%E6%9D%BE%E7%BA%BF%E4%B8%8A%E8%87%B4%E5%AF%8C320x50.png" alt="网站Logo"></a></h2>
+        </div>
+        <ul class="nav-menu">
+
+             <li class="nav-item">
+                <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-link">免费资源</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/education/tutor%20guide" class="nav-link">汉语教学</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/sitesbuild" class="nav-link">建站</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/payment/pay" class="nav-link">跨境收付</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/SMC/sm%20maketing" class="nav-link">自媒体营销</a>
+            </li>
+             <li class="nav-item">
+                <a href="https://blog.aibochinese.com/earn%20online" class="nav-link">项目推荐</a>
+            </li>
+             <li class="nav-item">
+                <a href="https://blog.aibochinese.com/tools/drive" class="nav-link">商务网盘</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://blog.aibochinese.com/client" class="nav-link">客户端</a>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+    </div>
+</nav>
+    <div class="header">
+        <h1>
+            <div class="logo">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/RackNerd100x50.png" alt="RackNerd Logo">
+            </div>
+            RackNerd 的最新促销活动
+        </h1>
+    </div>
+
+    <div class="intro">
+        公告📢：1.以下优惠仅该渠道专享，请保留网址！2.点击购物车，按步骤操作，在支付的前一步会有填写账号和密码的表单，方能成功注册账户；3.先不要支付，回到本站，点击客服图标，咨询服务器购买建议！
+    </div>
+
+    <div class="promo-banner">
+        <span>使用促销代码在所有专用服务器上享受 15% 优惠价:</span>
+        <span class="promo-code">150FFDEDI</span>
+    </div>
+
+    <!-- VPS Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">VPS（虚拟云服务器）</h2>
+        </div>
+        <div class="products-container">
+            <div class="product-card">
+                <div class="product-title">1 GB RAM KVM VPS</div>
+                <ul class="product-specs">
+                    <li>1 个 vCPU 内核</li>
+                    <li>1 GB 内存</li>
+                    <li>20 GB 固态硬盘</li>
+                    <li>2 TB 带宽</li>
+                </ul>
+                <div class="price">价格: $ 10.96/年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=917" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">2 GB RAM KVM VPS</div>
+                <ul class="product-specs">
+                    <li>2 个 vCPU 内核</li>
+                    <li>2 GB 内存</li>
+                    <li>30 GB 固态硬盘</li>
+                    <li>3.5 TB 带宽</li>
+                </ul>
+                <div class="price">价格:  $ 17.66 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=918" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">3.5 GB RAM KVM VPS</div>
+                <ul class="product-specs">
+                    <li>3 个 vCPU 内核</li>
+                    <li>3 GB 内存</li>
+                    <li>60 GB 固态硬盘</li>
+                    <li>5 TB 带宽</li>
+                </ul>
+                <div class="price">价格: $ 29.99 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=919" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">5 GB RAM KVM VPS</div>
+                <ul class="product-specs">
+                    <li>4 个 vCPU 内核</li>
+                    <li>4 GB 内存</li>
+                    <li>80 GB 固态硬盘</li>
+                    <li>8 TB 带宽</li>
+                </ul>
+                <div class="price">价格: $ 39.99 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=920" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shared Hosting Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">网站托管-共享主机</h2>
+        </div>
+        <div class="products-container">
+            <div class="product-card">
+                <div class="product-title">35 GB 共享主机</div>
+                <ul class="product-specs">
+                    <li>35 GB SSD 存储</li>
+                    <li>4 TB 传输</li>
+                    <li>托管 4 个域</li>
+                </ul>
+                <div class="price">价格:  $ 13.77 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=884" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">75 GB 共享主机</div>
+                <ul class="product-specs">
+                    <li>75 GB SSD 存储</li>
+                    <li>8 TB 传输</li>
+                    <li>托管 12 个域</li>
+                </ul>
+                <div class="price">价格: $  22.93 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=885" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">130 GB 共享主机</div>
+                <ul class="product-specs">
+                    <li>130 GB SSD 存储</li>
+                    <li>25 TB 传输</li>
+                    <li>无限域</li>
+                </ul>
+                <div class="price">价格:  $ 51.89 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=886" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reseller Hosting Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">采购cPanel-经销商</h2>
+        </div>
+        <div class="products-container">
+            <div class="product-card">
+                <div class="product-title">60 GB 经销商托管</div>
+                <ul class="product-specs">
+                    <li>60 GB SSD 存储</li>
+                    <li>2 TB 传输</li>
+                    <li>4 个 cPanel 账户</li>
+                </ul>
+                <div class="price">价格: $ 31.88 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=887" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">100 GB 经销商托管</div>
+                <ul class="product-specs">
+                    <li>100 GB SSD 存储</li>
+                    <li>4 TB 传输</li>
+                    <li>8 个 cPanel 账户</li>
+                </ul>
+                <div class="price">价格: $ 57.99 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=888" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-title">160 GB 经销商托管</div>
+                <ul class="product-specs">
+                    <li>160 GB SSD 存储</li>
+                    <li>8 TB 传输</li>
+                    <li>15 个 cPanel 账户</li>
+                </ul>
+                <div class="price">价格: $ 86.88 /年</div>
+                <a href="https://my.racknerd.com/aff.php?aff=15852&pid=889" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+            </div>
+        </div>
+    </div>
+
+<!-- Dedicated Servers Section -->
+<div class="section">
+    <div class="section-header">
+        <h2 class="section-title">专用服务器优惠</h2>
+    </div>
+    <div class="products-container">
+        <div class="product-card">
+            <div class="product-title">英特尔至强 E3-1240 V3</div>
+            <ul class="product-specs">
+                <li>Intel Xeon E3-1240 V3 (4核/8线程)</li>
+                <li>32 GB 内存</li>
+                <li>1 TB SSD + 3 TB HDD</li>
+                <li>不限流量 1Gbps</li>
+                <li>/28 IPv4 - 13 个IP</li>
+                <li>纽约数据中心</li>
+            </ul>
+            <div class="price">价格: $64.95/月</div>
+            <a href="https://my.racknerd.com/aff.php?aff=15852&pid=908" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+        </div>
+
+        <div class="product-card">
+            <div class="product-title">AMD 锐龙 7600</div>
+            <ul class="product-specs">
+                <li>AMD Ryzen 7600 (6核/12线程)</li>
+                <li>64 GB 内存</li>
+                <li>1 TB NVMe</li>
+                <li>不限流量 1Gbps</li>
+                <li>/30 IPv4 - 1 个IP</li>
+                <li>犹他州数据中心</li>
+            </ul>
+            <div class="price">价格: $109.95/月</div>
+            <a href="https://my.racknerd.com/aff.php?aff=15852&pid=909" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+        </div>
+
+        <div class="product-card">
+            <div class="product-title">双路至强 E5-2683 V4</div>
+            <ul class="product-specs">
+                <li>双路 Xeon E5-2683 V4 (32核/64线程)</li>
+                <li>256 GB 内存</li>
+                <li>2x 2 TB SSD</li>
+                <li>不限流量 1Gbps</li>
+                <li>/27 IPv4 - 29 个IP</li>
+                <li>纽约数据中心</li>
+            </ul>
+            <div class="price">价格: $209/月</div>
+            <a href="https://my.racknerd.com/aff.php?aff=15852&pid=910" target="_blank"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/shopping%20cart8-30.png" alt="购物车图标"></a>
+        </div>
+    </div>
+</div>
+
+<footer>
+<div class="footer">
+        <p style="margin-bottom: 10px;">🙏感谢关注:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
+         style="width: 30px; height: 30px; display:block;" /></a>
+        </p>
+        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+    <p>_</p>
+    </div>
+    </footer>
+    <!-- 汉堡菜单交互功能 -->
+    <script>
+        // 移动端菜单切换
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+
+                // 点击导航链接后关闭菜单
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+
+    <!-- 移动端底部导航 -->
+    <div class="mobile-nav">
+        <a href="https://blog.aibochinese.com/" class="nav-item active">
+            <i class="fa fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="nav-item">
+            <i class="fa fa-folder-open"></i>
+            <span>资源</span>
+        </a>
+        <a href="https://blog.aibochinese.com/newest" class="nav-item highlight">
+            <i class="fa fa-star"></i>
+            <span>最新</span>
+        </a>
+        <a href="https://blog.aibochinese.com/sitesbuild" class="nav-item">
+            <i class="fa fa-globe"></i>
+            <span>建站</span>
+        </a>
+        <a href="https://blog.aibochinese.com/earn%20online" class="nav-item">
+            <i class="fa fa-dollar"></i>
+            <span>淘金</span>
+        </a>
+    </div>
+
+    <!-- 移动端底部导航样式 -->
+    <style>
+        @media (max-width: 768px) {
+            .mobile-nav {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                height: 60px;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                z-index: 1000;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+            }
+
+            .nav-item {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 8px 0;
+                color: white;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                font-size: 12px;
+            }
+
+            .nav-item i {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+
+            .nav-item:hover, .nav-item.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                transform: scale(1.1);
+            }
+
+            .nav-item.highlight {
+                background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                margin-top: -20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                position: relative;
+            }
+
+            .nav-item.highlight i, .nav-item.highlight span {
+                color: #e74c3c;
+                font-weight: bold;
+            }
+
+            .nav-item.highlight:hover {
+                transform: scale(1.1) translateY(-3px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+    </style>
+
+    <!-- 移动端导航交互功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.mobile-nav .nav-item');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // 移除所有项的激活状态
+                    navItems.forEach(navItem => {
+                        if (!navItem.classList.contains('highlight')) {
+                            navItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // 如果点击的不是"最新"按钮，则添加激活状态
+                    if (!this.classList.contains('highlight')) {
+                        this.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+   <!-- 悬浮微信客服图标 -->
+    <div class="wechat-float" onclick="toggleWechatModal()">
+        <div class="wechat-icon"></div>
+    </div>
+
+    <!-- 微信弹出窗 -->
+    <div id="wechatModal" class="wechat-modal" onclick="closeWechatModal(event)">
+        <div class="wechat-popup" onclick="event.stopPropagation()">
+            <h3>微信客服</h3>
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" alt="微信二维码" class="wechat-qr">
+            <p>扫描添加客服微信</p>
+            <button class="close-btn" onclick="closeWechatModal()">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleWechatModal() {
+            const modal = document.getElementById('wechatModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeWechatModal(event) {
+            document.getElementById('wechatModal').style.display = 'none';
+        }
+
+        // 点击模态背景关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('wechatModal');
+            if (event.target === modal) {
+                closeWechatModal();
+            }
+        };
+    </script>
+</body>
+</html>
