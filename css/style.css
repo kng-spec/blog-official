@@ -60,6 +60,11 @@ body {
     font-weight: bold;
 }
 
+.logo img {
+    height: 50px;
+    width: auto; /* 长度灵活，根据图片比例自动调整 */
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
