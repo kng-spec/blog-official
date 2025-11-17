@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
              <style>
-/* 人工客服按钮样式 */
+
        /* 悬浮微信图标样式 */
         .wechat-float {
             position: fixed;
@@ -353,52 +353,62 @@
             font-size: 1rem;
         }
 
-        @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background-color: #3498db;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
-                padding: 2rem 0;
-            }
+     /* 响应式设计 - 汉堡菜单 */
+    @media (max-width: 1024px) {
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 60px;
+        flex-direction: column;
+        background: #645ae7fa;
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+        padding: 20px 0;
+        z-index: 999;
+        gap: 0.5rem;
+      }
 
-            .nav-menu.active {
-                left: 0;
-            }
+      .nav-menu li {
+        padding: 10px 0;
+      }
 
-            .nav-item {
-                margin: 1rem 0;
-            }
+      .nav-menu.active {
+        left: 0;
+      }
 
-            .hamburger {
-                display: flex;
-            }
+      .hamburger {
+        display: flex;
+      }
 
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
 
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
 
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
-            
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
+
+      .nav-container {
+        padding: 0 20px;
+        height: 60px;
+      }
+
+      .main-content {
+        padding: 30px 20px 50px;
+      }
+    }
         /* ==================== 全新 Pagefind 搜索样式（搜索框水平居中版） ==================== */
 .search-container {
     position: relative;
