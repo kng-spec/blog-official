@@ -155,10 +155,12 @@
             padding: 20px;
         }
         
-        .header-image {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.header-image {
+    display: block;          /* 关键：让 img 变成块级 */
+    margin: 0 auto 30px;     /* 水平居中 + 下边距 */
+    max-width: 100%;         /* 建议加上，响应式友好 */
+    height: auto;            /* 保持比例 */
+}
         
         .header-image img {
             max-width: 900px;
@@ -252,6 +254,25 @@
         
         a:hover {
             text-decoration: underline;
+        }
+        
+        /* Footer 样式 */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer p {
+            margin: 10px 0;
         }
         
         mark {
@@ -371,7 +392,7 @@
     <div class="container">
         <!-- 头部图片 -->
         <div class="header-image">
-            <img src="https://cf.aiboculture.com/2025/10/20251010230305774.png" alt="VCC虚拟卡">
+            <img src="https://cf.aiboculture.com/2025/10/20251010230305774.png" alt="header" class="header-image">
         </div>
         
         <!-- 主要内容区域 -->
