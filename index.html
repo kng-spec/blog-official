@@ -184,16 +184,16 @@
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     position: absolute;
-    top: 100%;
+    top: calc(100% + 8px);            /* 确保与搜索框有间距 */
     left: 50%;                        /* 关键：左边 50% */
     transform: translateX(-50%);      /* 关键：向左偏移自身宽度的一半 → 完全居中 */
     right: auto;                      /* 取消原来的 right: 0 */
     width: 380px;
-    max-height: 70vh;
+    max-height: 50vh;                 /* 限制最大高度为视口高度的50%，避免被导航栏遮盖 */
     overflow-y: auto;
-    margin-top: 8px;
     z-index: 1000;
     padding: 8px 0;
+    margin-top: 0;
 }
 
 /* 其余样式保持不变 */
@@ -454,7 +454,6 @@
             }
         });
     </script>
-   </script>
    <!-- 悬浮图标容器 -->
     <div class="float-icons-container">
         <!-- 悬浮微信客服图标 -->
@@ -660,28 +659,6 @@
             console.log('终极链接修复方案已激活');
         })();
     </script>
-    <!-- Pagefind 搜索（已完美修复） -->
-    <script src="/post/pagefind/pagefind-ui.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            console.log("Initializing Pagefind search...");
-            try {
-                new PagefindUI({
-                    element: "#pagefind-search",
-                    showImages: false,
-                    showSubResults: true,
-                    resetStyles: false,
-                    translations: {
-                        placeholder: "搜索资源、教程、工具..."
-                    }
-                });
-                console.log("Pagefind search initialized successfully");
-            } catch (error) {
-                console.error("Pagefind search initialization failed:", error);
-            }
-        });
-    </script>
-        </script>
  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
