@@ -388,7 +388,6 @@
             background-position: center;
         }
 
-        /* 弹出窗样式 */
         /* 悬浮图标容器 */
         .float-icons-container {
             position: fixed;
@@ -571,7 +570,6 @@
   </style>
 </head>
 <body>
-  <!-- 导航栏 -->
   <!-- 标准导航菜单 -->
   <nav class="navbar">
     <div class="nav-container">
@@ -826,79 +824,7 @@
     </div>
   </div>
 
-  <!-- 客服脚本 -->
   <script>
-  (function() {
-    _s = document.createElement('script');
-    _s.src = "https://kefu.aibochinese.com/customerServer.js";
-    _s.onload = function() {
-      var option = {
-        "authInit": true,
-        openUrl: 'https://kefu.aibochinese.com',
-        token: '7fecd3ce216cc26ebd63bf417c193b41',
-        kefuid: '',
-        isShowTip: true,
-        mobileIcon: '',
-        pcIcon: '',
-        windowStyle: 'center',
-      };
-      
-      var canCustomerServer = new initCustomerServer(option);
-      canCustomerServer.init();
-      
-      var checkInterval = setInterval(function() {
-        var btn = document.querySelector('#canCustomerServerBtn') || 
-                  document.querySelector('.can-customer-server-btn') ||
-                  document.querySelector('[class*="customer-service"]') ||
-                  document.querySelector('[id*="customer"]');
-        
-        if (btn) {
-          clearInterval(checkInterval);
-          btn.style.position = 'fixed';
-          btn.style.right = '20px';
-          btn.style.top = '200px';
-          btn.style.left = 'auto';
-          btn.style.bottom = 'auto';
-          btn.style.zIndex = '9997';
-          makeDraggable(btn);
-        }
-      }, 300);
-    };
-    
-    document.head.appendChild(_s);
-    
-    function makeDraggable(element) {
-      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      element.style.cursor = 'move';
-      
-      element.onmousedown = dragStart;
-      
-      function dragStart(e) {
-        e = e || window.event;
-        e.preventDefault();
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = dragEnd;
-        document.onmousemove = dragMove;
-      }
-      
-      function dragMove(e) {
-        e = e || window.event;
-        e.preventDefault();
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        element.style.top = (element.offsetTop - pos2) + "px";
-        element.style.left = (element.offsetLeft - pos1) + "px";
-      }
-      
-      function dragEnd() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-      }
-    }
-  })();
 
   // 移动端菜单切换
   document.addEventListener('DOMContentLoaded', function() {
