@@ -189,7 +189,7 @@
     transform: translateX(-50%);      /* 关键：向左偏移自身宽度的一半 → 完全居中 */
     right: auto;                      /* 取消原来的 right: 0 */
     width: 380px;
-    max-height: 50vh;                 /* 限制最大高度为视口高度的50%，避免被导航栏遮盖 */
+    max-height: 70vh;                 /* 限制最大高度为视口高度的70%，提供更多搜索结果可见空间 */
     overflow-y: auto;
     z-index: 1000;
     padding: 8px 0;
@@ -355,10 +355,6 @@
         <section class="features">
             <div class="container">
                 <h2 class="section-title">我们的核心服务</h2>
-                            <!-- 修复后的搜索框 -->
-            <div class="search-container">
-                <div id="pagefind-search"></div>
-            </div>
                 <div class="blocks-container">
                     <div class="block block1"><h3><a href="https://blog.aibochinese.com/Rescous/free%20rs" target="_blank">免费资源</a></h3></div>
                     <div class="block block2"><h3><a href="https://blog.aibochinese.com/SMC/sm%20maketing" target="_blank">自媒体营销</a></h3></div>
@@ -532,7 +528,7 @@
                     showSubResults: true,
                     resetStyles: false,
                     translations: {
-                        placeholder: "资源、教程、工具..."
+                        placeholder: "🔍资源、教程、工具..."
                     }
                 });
                 
@@ -543,7 +539,7 @@
                     showSubResults: true,
                     resetStyles: false,
                     translations: {
-                        placeholder: "资源、教程、工具..."
+                        placeholder: "🔍资源、教程、工具..."
                     }
                 });
                 
