@@ -28,7 +28,6 @@
             background-position: center;
         }
 
-        /* 弹出窗样式 */
         /* 悬浮图标容器 */
         .float-icons-container {
             position: fixed;
@@ -248,6 +247,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
+            padding-top: 60px;
         }
 
         .aibopay-root {
@@ -264,110 +264,52 @@
             padding: 0 15px;
         }
 
-        /* 头部导航 */
-        .aibopay-header {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: var(--white);
-            padding: 1rem 0;
-            box-shadow: var(--box-shadow);
-            position: sticky;
+        /* 标准导航菜单样式 */
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;  /* 使用 left 和 right 代替 width: 100% */
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        .aibopay-header-content {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            padding: 0.8rem 20px;
         }
 
-        .aibopay-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .aibopay-logo-icon img {
+        .logo img {
             height: 40px;
             width: auto;
+            display: block;
         }
 
-        .aibopay-logo a {
-            color: var(--white);
-            text-decoration: none;
-        }
-
-        .aibopay-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .aibopay-nav {
+        .nav-menu {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;  /* 添加 padding: 0 以移除默认内边距 */
         }
 
-        .aibopay-nav a {
-            color: var(--white);
+        .nav-link {
+            color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .aibopay-nav a:hover,
-        .aibopay-nav a.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .aibopay-nav-buttons {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .aibopay-lang-switch {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .aibopay-lang-switch:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .aibopay-btn {
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+            transition: all 0.3s;
+            font-size: 0.95rem;
             font-weight: 500;
         }
 
-        .aibopay-btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 1px solid var(--white);
-        }
-
-        .aibopay-btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary-color);
+        .nav-link:hover {
+            color: #ffcc2f;
         }
 
         /* 英雄区 */
@@ -471,72 +413,66 @@
             padding: 2rem 0;
             margin-top: auto;
         }
+        
+        /* 修复footer内容居中 */
+        .footer {
+            background: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
 
         /* 汉堡菜单样式 */
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin-left: 15px;
+            z-index: 1001;
         }
 
         .bar {
             width: 25px;
             height: 3px;
+            background-color: white;
             margin: 3px 0;
             transition: 0.3s;
-            background-color: white;
+            border-radius: 2px;
         }
 
-        /* 响应式设计 */
-        @media (max-width: 968px) {
-            .aibopay-menu-toggle {
-                display: block;
-            }
-
-            .aibopay-nav {
+        /* 响应式汉堡菜单 */
+        @media (max-width: 768px) {
+            .nav-menu {
                 position: fixed;
-                top: 70px;
                 left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--secondary-color);
+                top: 70px;
                 flex-direction: column;
-                align-items: center;
-                padding: 2rem;
-                transition: var(--transition);
-                overflow-y: auto;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                z-index: 1001;
             }
 
-            .aibopay-nav.active {
+            .nav-menu.active {
                 left: 0;
             }
 
-            .aibopay-nav a {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 1rem;
+            .nav-item {
+                margin: 0.5rem 0;
             }
 
-            .aibopay-nav-buttons {
-                width: 100%;
-                justify-content: center;
-                margin-top: 1rem;
-            }
-
-            .aibopay-hero h1 {
-                font-size: 2rem;
-            }
-
-            .aibopay-hero p {
-                font-size: 1rem;
-            }
-
-            /* 汉堡菜单在移动端的显示 */
             .hamburger {
                 display: flex;
             }
 
-            /* 汉堡菜单动画效果 */
             .hamburger.active .bar:nth-child(2) {
                 opacity: 0;
             }
@@ -547,6 +483,14 @@
 
             .hamburger.active .bar:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .aibopay-hero h1 {
+                font-size: 2rem;
+            }
+
+            .aibopay-hero p {
+                font-size: 1rem;
             }
         }
 
@@ -730,6 +674,24 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     </style>
+    <!-- 自定义工具类 -->
+    <style>
+        .nav-shadow {
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item-active {
+            color: #3B82F6;
+            transform: scale(1.1);
+        }
+        
+        /* 自定义颜色变量 */
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #10B981;
+            --accent-color: #F59E0B;
+        }
+    </style>
 </head>
 <body>
     <div class="aibopay-root">
@@ -776,7 +738,6 @@
 
         <section class="aibopay-hero">
             <div class="aibopay-container">
-                <p>_</p>
                 <h1 data-i18n="hero.title">AiboPay - 专业的数字收付款解决方案</h1>
                 <p data-i18n="hero.subtitle">为全球商户或个人，提供安全、便捷、高效的支付服务。支持多种支付方式，助力您的业务快速增长。</p>
             </div>
@@ -852,14 +813,15 @@
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
          style="width: 30px; height: 30px; display:block;" /></a>
         </p>
-        <p style="font-size: 15px; color: hsl(0, 0%, 100%);">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+        <p style="font-size: 14px; color: hsl(0, 18%, 97%);">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
     <p>_</p>
+        <p>_</p>
     </div>
     </footer>
 
     <!-- 移动端底部按钮 -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg md:hidden border-t border-gray-200 z-50">
-      <div class="flex justify-around items-center py-2">
+    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
+      <div class="flex justify-around items-center py-3">
         <!-- 首页按钮 -->
         <a href="https://blog.aibochinese.com/" class="flex flex-col items-center nav-item-active transition-all duration-300">
           <i class="fa fa-home text-xl mb-1"></i>
@@ -867,13 +829,13 @@
         </a>
 
         <!-- 资源按钮 -->
-        <a href="https://blog.aibochinese.com/Resources/free%20rs" class="flex flex-col items-center transition-all duration-300">
+        <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="flex flex-col items-center transition-all duration-300">
           <i class="fa fa-cloud-download text-xl mb-1"></i>
           <span class="text-xs">资源</span>
         </a>
 
         <!-- 最新按钮 - 突出显示 -->
-        <a href="https://blog.aibochinese.com/newest" class="flex flex-col items-center transition-all duration-300">
+        <a href="#" class="flex flex-col items-center">
           <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-blue-700 transition-all duration-300">
             <i class="fa fa-refresh text-xl"></i>
           </div>
@@ -1043,10 +1005,30 @@
             });
         });
 
+        // 汉堡菜单交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+
     </script>
     <!-- 引用标准的script.js文件 -->
     <script src="../js/script.js"></script>
-        </script>
    <!-- 悬浮图标容器 -->
     <div class="float-icons-container">
         <!-- 悬浮微信客服图标 -->
@@ -1146,7 +1128,6 @@
             }
         });
     </script>
-                // 课程列表
        <script>
         const videos = [
             {
