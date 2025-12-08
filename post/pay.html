@@ -28,7 +28,6 @@
             background-position: center;
         }
 
-        /* 弹出窗样式 */
         /* 悬浮图标容器 */
         .float-icons-container {
             position: fixed;
@@ -248,6 +247,7 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
+            padding-top: 60px;
         }
 
         .aibopay-root {
@@ -264,110 +264,52 @@
             padding: 0 15px;
         }
 
-        /* 头部导航 */
-        .aibopay-header {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: var(--white);
-            padding: 1rem 0;
-            box-shadow: var(--box-shadow);
-            position: sticky;
+        /* 标准导航菜单样式 */
+        .navbar {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 0;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;  /* 使用 left 和 right 代替 width: 100% */
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        .aibopay-header-content {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            padding: 0.8rem 20px;
         }
 
-        .aibopay-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .aibopay-logo-icon img {
+        .logo img {
             height: 40px;
             width: auto;
+            display: block;
         }
 
-        .aibopay-logo a {
-            color: var(--white);
-            text-decoration: none;
-        }
-
-        .aibopay-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .aibopay-nav {
+        .nav-menu {
             display: flex;
-            align-items: center;
-            gap: 1rem;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;  /* 添加 padding: 0 以移除默认内边距 */
         }
 
-        .aibopay-nav a {
-            color: var(--white);
+        .nav-link {
+            color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .aibopay-nav a:hover,
-        .aibopay-nav a.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .aibopay-nav-buttons {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .aibopay-lang-switch {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .aibopay-lang-switch:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .aibopay-btn {
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+            transition: all 0.3s;
+            font-size: 0.95rem;
             font-weight: 500;
         }
 
-        .aibopay-btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 1px solid var(--white);
-        }
-
-        .aibopay-btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary-color);
+        .nav-link:hover {
+            color: #ffcc2f;
         }
 
         /* 英雄区 */
@@ -471,72 +413,66 @@
             padding: 2rem 0;
             margin-top: auto;
         }
+        
+        /* 修复footer内容居中 */
+        .footer {
+            background: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
 
         /* 汉堡菜单样式 */
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin-left: 15px;
+            z-index: 1001;
         }
 
         .bar {
             width: 25px;
             height: 3px;
+            background-color: white;
             margin: 3px 0;
             transition: 0.3s;
-            background-color: white;
+            border-radius: 2px;
         }
 
-        /* 响应式设计 */
-        @media (max-width: 968px) {
-            .aibopay-menu-toggle {
-                display: block;
-            }
-
-            .aibopay-nav {
+        /* 响应式汉堡菜单 */
+        @media (max-width: 768px) {
+            .nav-menu {
                 position: fixed;
-                top: 70px;
                 left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--secondary-color);
+                top: 70px;
                 flex-direction: column;
-                align-items: center;
-                padding: 2rem;
-                transition: var(--transition);
-                overflow-y: auto;
+                background: linear-gradient(135deg, #3498db, #2980b9);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                z-index: 1001;
             }
 
-            .aibopay-nav.active {
+            .nav-menu.active {
                 left: 0;
             }
 
-            .aibopay-nav a {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 1rem;
+            .nav-item {
+                margin: 0.5rem 0;
             }
 
-            .aibopay-nav-buttons {
-                width: 100%;
-                justify-content: center;
-                margin-top: 1rem;
-            }
-
-            .aibopay-hero h1 {
-                font-size: 2rem;
-            }
-
-            .aibopay-hero p {
-                font-size: 1rem;
-            }
-
-            /* 汉堡菜单在移动端的显示 */
             .hamburger {
                 display: flex;
             }
 
-            /* 汉堡菜单动画效果 */
             .hamburger.active .bar:nth-child(2) {
                 opacity: 0;
             }
@@ -547,6 +483,14 @@
 
             .hamburger.active .bar:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .aibopay-hero h1 {
+                font-size: 2rem;
+            }
+
+            .aibopay-hero p {
+                font-size: 1rem;
             }
         }
 
@@ -570,6 +514,182 @@
             .aibopay-card {
                 padding: 1.5rem;
             }
+        }
+            /* 课程列表 */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border: 3px solid #2196F3;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 80vh;
+        }
+               .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-title {
+            color: #2196F3;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .video-player {
+            width: 100%;
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-section {
+            width: 30%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .playlist-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .playlist-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb {
+            background: #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb:hover {
+            background: #1976D2;
+        }
+
+        .playlist-header {
+            color: #2196F3;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+
+        .video-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #e3f2fd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-item:hover {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateX(5px);
+        }
+
+        .video-item.active {
+            background-color: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .video-item-title {
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .video-item-duration {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .video-item.active .video-item-duration {
+            color: #e3f2fd;
+        }
+
+        .chapter-title {
+            color: #2196F3;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            padding: 8px 10px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .video-player {
+            width: 100%;
+            flex: 1;
+            max-height: calc(100% - 60px);
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .document-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            align-self: center;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .document-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+    <!-- 自定义工具类 -->
+    <style>
+        .nav-shadow {
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item-active {
+            color: #3B82F6;
+            transform: scale(1.1);
+        }
+        
+        /* 自定义颜色变量 */
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #10B981;
+            --accent-color: #F59E0B;
         }
     </style>
 </head>
@@ -618,7 +738,6 @@
 
         <section class="aibopay-hero">
             <div class="aibopay-container">
-                <p>_</p>
                 <h1 data-i18n="hero.title">AiboPay - 专业的数字收付款解决方案</h1>
                 <p data-i18n="hero.subtitle">为全球商户或个人，提供安全、便捷、高效的支付服务。支持多种支付方式，助力您的业务快速增长。</p>
             </div>
@@ -635,7 +754,7 @@
                         <p data-i18n="vcc.desc">提供电子Visa|MasterCard开卡渠道，即开即用，畅享海外消费或订阅。</p>
                         <ul>
                             <li data-i18n="vcc.feature1">免开卡费|0年费：<a href="apply V-cards.html" style="color:red" target="_blank" rel="noopener noreferrer">开卡渠道</a></li>
-                            <li data-i18n="vcc.feature2">代充美元|USDT或提现兑换￥：<a href="Proxy Recharge.html" style="color:red" target="_blank" rel="noopener noreferrer">说明</a></li>
+                            <li data-i18n="vcc.feature2">代充或提现「限用卡相关场景」：<a href="Proxy Recharge.html" style="color:red" target="_blank" rel="noopener noreferrer">说明</a></li>
                             <li data-i18n="vcc.feature3">支持各类国际订阅服务</li>
                             <li data-i18n="vcc.feature4">灵活充值，按需使用</li>
                         </ul>
@@ -657,14 +776,31 @@
                         <h3 data-i18n="custom.title">共享收付款渠道</h3>
                         <p data-i18n="custom.desc">无需开发，为您创建个性化的支付链接或收款账号，轻松灵活收款</p>
                         <ul>
-                            <li data-i18n="custom.feature1">无需技术背景，发给客户直接收款</li>
-                            <li data-i18n="custom.feature2">个性化产品链接🔗系统和服务来自国际支付巨头"Stripe"</li>
+                            <li data-i18n="custom.feature1">协助Paypal提现，避免$35损失</li>
+                            <li data-i18n="custom.feature2">创建个性化产品链接🔗系统和服务来自国际支付巨头"Stripe"</li>
                             <li data-i18n="custom.feature3">共享本站点其它的<a href="https://aibochinese.com/payments/" style="color:red" target="_blank" rel="noopener noreferrer">收付款渠道</a>：Paypal,Wise，近20个本地银行账户（欧盟、越南、美国、泰国等）</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
+            <div class="container">
+        <div class="video-section">
+            <div class="video-title" id="currentTitle">多场景收付款解决方案讲解</div>
+            <div class="video-player-container">
+                <video class="video-player" id="videoPlayer" controls>
+                    <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B411%E6%9C%88/Roogoo%20U%E5%8D%A1%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C%20%E5%85%8D%E8%B4%B9%E5%BC%80%E5%8D%A1%EF%BC%8C%E6%B6%88%E8%B4%B90%E7%A3%A8%E6%8D%9F/Roogoo%20U%E5%8D%A1%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C%20%E5%85%8D%E8%B4%B9%E5%BC%80%E5%8D%A1%EF%BC%8C%E6%B6%88%E8%B4%B90%E7%A3%A8%E6%8D%9F.mp4" type="video/mp4">
+                </video>
+                <button class="document-button">查看相应文档说明</button>
+            </div>
+        </div>
+
+        <div class="playlist-section">
+            <div class="playlist-header">视频列表</div>
+            <div id="playlist"></div>
+        </div>
+    </div>
+
 <footer>
 <div class="footer">
         <p style="margin-bottom: 10px;">🙏感谢关注:<a href="https://www.youtube.com/@blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/youtube%20logo%2030.png" 
@@ -677,14 +813,15 @@
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
          style="width: 30px; height: 30px; display:block;" /></a>
         </p>
-        <p style="font-size: 15px; color: hsl(0, 0%, 100%);">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
+        <p style="font-size: 14px; color: hsl(0, 18%, 97%);">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
     <p>_</p>
+        <p>_</p>
     </div>
     </footer>
 
     <!-- 移动端底部按钮 -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg md:hidden border-t border-gray-200 z-50">
-      <div class="flex justify-around items-center py-2">
+    <div class="fixed bottom-0 left-0 right-0 bg-white nav-shadow z-50 md:hidden">
+      <div class="flex justify-around items-center py-3">
         <!-- 首页按钮 -->
         <a href="https://blog.aibochinese.com/" class="flex flex-col items-center nav-item-active transition-all duration-300">
           <i class="fa fa-home text-xl mb-1"></i>
@@ -692,13 +829,13 @@
         </a>
 
         <!-- 资源按钮 -->
-        <a href="https://blog.aibochinese.com/Resources/free%20rs" class="flex flex-col items-center transition-all duration-300">
+        <a href="https://blog.aibochinese.com/Rescous/free%20rs" class="flex flex-col items-center transition-all duration-300">
           <i class="fa fa-cloud-download text-xl mb-1"></i>
           <span class="text-xs">资源</span>
         </a>
 
         <!-- 最新按钮 - 突出显示 -->
-        <a href="https://blog.aibochinese.com/newest" class="flex flex-col items-center transition-all duration-300">
+        <a href="#" class="flex flex-col items-center">
           <div class="bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 shadow-lg hover:bg-blue-700 transition-all duration-300">
             <i class="fa fa-refresh text-xl"></i>
           </div>
@@ -868,10 +1005,30 @@
             });
         });
 
+        // 汉堡菜单交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+
     </script>
     <!-- 引用标准的script.js文件 -->
     <script src="../js/script.js"></script>
-        </script>
    <!-- 悬浮图标容器 -->
     <div class="float-icons-container">
         <!-- 悬浮微信客服图标 -->
@@ -968,6 +1125,116 @@
                 console.log("Pagefind search initialized successfully");
             } catch (error) {
                 console.error("Pagefind search initialization failed:", error);
+            }
+        });
+    </script>
+       <script>
+        const videos = [
+            {
+                chapter: "国际Visa|万事达卡",
+                title: "1.Roogoo U卡真实使用体验 免费开卡，消费0磨损",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B411%E6%9C%88/Roogoo%20U%E5%8D%A1%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C%20%E5%85%8D%E8%B4%B9%E5%BC%80%E5%8D%A1%EF%BC%8C%E6%B6%88%E8%B4%B90%E7%A3%A8%E6%8D%9F/Roogoo%20U%E5%8D%A1%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C%20%E5%85%8D%E8%B4%B9%E5%BC%80%E5%8D%A1%EF%BC%8C%E6%B6%88%E8%B4%B90%E7%A3%A8%E6%8D%9F.mp4",
+                duration: "10:34",
+                document: "https://blog.aibochinese.com/payment/roogoo"
+            },
+            {
+                chapter: "国际Visa|万事达卡",
+                title: "2.2026年 0磨损境外收款美元或USDT回国教程",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/2026%E5%B9%B4%200%E7%A3%A8%E6%8D%9F%E5%A2%83%E5%A4%96%E6%94%B6%E6%AC%BE%E7%BE%8E%E5%85%83%E6%88%96USDT%E5%9B%9E%E5%9B%BD%E6%95%99%E7%A8%8B/2026%E5%B9%B4%200%E7%A3%A8%E6%8D%9F%E5%A2%83%E5%A4%96%E6%94%B6%E6%AC%BE%E7%BE%8E%E5%85%83%E6%88%96USDT%E5%9B%9E%E5%9B%BD%E6%95%99%E7%A8%8B.mp4",
+                duration: "10:20",
+                document: "https://blog.aibochinese.com/payment/pay"
+            },
+           {
+                chapter: "国际Visa|万事达卡",
+                title: "3.代充美元USDT,以及兑换回RMB【CTC服务】",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E4%BB%A3%E5%85%85%E7%BE%8E%E5%85%83USDT%2C%E4%BB%A5%E5%8F%8A%E5%85%91%E6%8D%A2%E5%9B%9ERMB%E3%80%90CTC%E6%9C%8D%E5%8A%A1%E3%80%91/%E4%BB%A3%E5%85%85%E7%BE%8E%E5%85%83USDT%2C%E4%BB%A5%E5%8F%8A%E5%85%91%E6%8D%A2%E5%9B%9ERMB%E3%80%90CTC%E6%9C%8D%E5%8A%A1%E3%80%91.mp4",
+                duration: "4:13",
+                document: "https://blog.aibochinese.com/payment/Proxy%20Recharge"
+            },
+            {
+                chapter: "加密货币收付",
+                title: "1.省钱有招：USDT链上转账怎么选择网络？",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F.mp4",
+                duration: "4:15",
+                document: "https://blog.aibochinese.com/web3/binance"
+            },
+            {
+                chapter: "加密货币收付",
+                title: "2.购买USDT|加密货币转账|充值Visa或万事达卡教程",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E6%89%8B%E6%8A%8A%E6%89%8B%E7%BB%99%E6%82%A8%E6%BC%94%E7%A4%BA%EF%BC%9A%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1%E5%85%85%E5%80%BCUSDT.mp4",
+                duration: "13:15",
+                document: "hhttps://blog.aibochinese.com/payment/self%20recharge"
+            },
+            {
+                chapter: "Paypal渠道讲解",
+                title: "1.国区Paypal提现，如何规避$35的扣除，利用Krak",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E5%9B%BD%E5%8C%BAPaypal%E6%8F%90%E7%8E%B0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E9%81%BF%2435%E7%9A%84%E6%89%A3%E9%99%A4%EF%BC%8C%E5%88%A9%E7%94%A8Krak/%E5%9B%BD%E5%8C%BAPaypal%E6%8F%90%E7%8E%B0%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%84%E9%81%BF%2435%E7%9A%84%E6%89%A3%E9%99%A4%EF%BC%8C%E5%88%A9%E7%94%A8Krak.mp4",
+                duration: "13:15",
+                document: "hhttps://blog.aibochinese.com/payment/pay"
+            }
+
+        ];
+
+        const playlist = document.getElementById('playlist');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const currentTitle = document.getElementById('currentTitle');
+        let currentVideoDocument = ''; // 存储当前视频的文档链接
+
+        // 按章节分组视频
+        const videosByChapter = videos.reduce((acc, video) => {
+            if (!acc[video.chapter]) {
+                acc[video.chapter] = [];
+            }
+            acc[video.chapter].push(video);
+            return acc;
+        }, {});
+
+        // 设置初始视频的文档链接（默认第一个视频）
+        if (videos.length > 0) {
+            currentVideoDocument = videos[0].document;
+        }
+
+        // 渲染视频列表
+        Object.entries(videosByChapter).forEach(([chapter, chapterVideos]) => {
+            // 创建章节标题
+            const chapterTitle = document.createElement('div');
+            chapterTitle.className = 'chapter-title';
+            chapterTitle.textContent = chapter;
+            playlist.appendChild(chapterTitle);
+
+            // 创建该章节下的视频项
+            chapterVideos.forEach((video, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-item';
+                item.innerHTML = `
+                    <div class="video-item-title">${video.title}</div>
+                    <div class="video-item-duration">时长: ${video.duration}</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.video-item').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    item.classList.add('active');
+                    
+                    videoPlayer.src = video.url;
+                    currentTitle.textContent = video.title;
+                    currentVideoDocument = video.document; // 更新当前视频的文档链接
+                    videoPlayer.play();
+                });
+                
+                playlist.appendChild(item);
+            });
+        });
+
+        // 添加查看文档按钮点击事件
+        const documentButton = document.querySelector('.document-button');
+        documentButton.addEventListener('click', () => {
+            if (currentVideoDocument) {
+                // 使用新窗口打开文档链接
+                window.open(currentVideoDocument, '_blank');
+            } else {
+                alert('当前视频暂无相关文档');
             }
         });
     </script>
