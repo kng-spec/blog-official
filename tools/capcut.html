@@ -480,6 +480,164 @@
             padding-bottom: 80px; /* 为固定底部导航留出空间 */
         }
     }
+                /* 课程列表 */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border: 3px solid #2196F3;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 80vh;
+        }
+               .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-title {
+            color: #2196F3;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .video-player {
+            width: 100%;
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-section {
+            width: 30%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .playlist-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .playlist-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb {
+            background: #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb:hover {
+            background: #1976D2;
+        }
+
+        .playlist-header {
+            color: #2196F3;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+
+        .video-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #e3f2fd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-item:hover {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateX(5px);
+        }
+
+        .video-item.active {
+            background-color: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .video-item-title {
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .video-item-duration {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .video-item.active .video-item-duration {
+            color: #e3f2fd;
+        }
+
+        .chapter-title {
+            color: #2196F3;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            padding: 8px 10px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .video-player {
+            width: 100%;
+            flex: 1;
+            max-height: calc(100% - 60px);
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .document-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            align-self: center;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .document-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -544,25 +702,29 @@
                 <p>剪映全套教程：
                 <a href="https://www.alipan.com/s/mPjFeQ8LLQL" target="_blank"><strong>手机版</strong></a> ·
                 <a href="https://www.alipan.com/s/UikLAn5Rwdg" target="_blank"><strong>电脑版</strong></a></p>
-                <p> 
-                    <video controls width="300" height="180">
-                        <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E3%80%90%E6%9C%80%E6%96%B0%E6%B5%8B%E8%AF%95%E3%80%91%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E5%89%AA%E6%98%A09.0.0%E5%86%85%E6%B5%8B%E7%89%88%E4%BC%9A%E5%91%98%E5%8A%9F%E8%83%BD%EF%BC%8C%E9%9D%9E%E7%A0%B4%E8%A7%A3100%25%E5%90%88%E6%B3%95.mp4" type="video/mp4">
-                    </video>
-                </p>
+                 <p>⚠️使用剪映的<strong>新建复合片段（全选素材）→预合成</strong>功能，避开<strong>导出</strong>环节，合法非破解；如无法打开，导入轨道再导出。</p>
+        <p><strong>导出8K视频无需会员</strong>，将复合片段再导入后选择8K导出。</p>
+        <p>建议复合片段目录设为快速访问。</p>
             </div>
         </div>
     </div>
     
-    <div class="section">
-        <p>⚠️使用剪映的<strong>新建复合片段（全选素材）→预合成</strong>功能，避开<strong>导出</strong>环节，合法非破解；如无法打开，导入轨道再导出。</p>
+    <div class="container">
+        <div class="video-section">
+            <div class="video-title" id="currentTitle">永久免费使用剪映功能</div>
+            <div class="video-player-container">
+                <video class="video-player" id="videoPlayer" controls>
+                    <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E3%80%90%E6%9C%80%E6%96%B0%E6%B5%8B%E8%AF%95%E3%80%91%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E5%89%AA%E6%98%A09.0.0%E5%86%85%E6%B5%8B%E7%89%88%E4%BC%9A%E5%91%98%E5%8A%9F%E8%83%BD%EF%BC%8C%E9%9D%9E%E7%A0%B4%E8%A7%A3100%25%E5%90%88%E6%B3%95.mp4" type="video/mp4">
+                </video>
+                <button class="document-button">查看相应文档说明</button>
+            </div>
+        </div>
 
-        <p><strong>导出8K视频无需会员</strong>，将复合片段再导入后选择8K导出。</p>
-        <p>建议复合片段目录设为快速访问。</p>
-        <video controls width="300" height=180">
-            <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%89%AA%E6%98%A0%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%2B%E5%85%A8%E5%A5%97free%E6%95%99%E7%A8%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA/%E5%89%AA%E6%98%A0%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%2B%E5%85%A8%E5%A5%97free%E6%95%99%E7%A8%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA.mp4" type="video/mp4">
-        </video>
+        <div class="playlist-section">
+            <div class="playlist-header">视频列表</div>
+            <div id="playlist"></div>
+        </div>
     </div>
-
     <div class="section">
         <div class="columns">
             <div class="col">
@@ -822,6 +984,95 @@
                 console.log("Pagefind search initialized successfully");
             } catch (error) {
                 console.error("Pagefind search initialization failed:", error);
+            }
+        });
+    </script>
+        <script>
+        const videos = [
+            {
+                chapter: "免费使用方法",
+                title: "1.如何免费剪映会员功能|永久",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E3%80%90%E6%9C%80%E6%96%B0%E6%B5%8B%E8%AF%95%E3%80%91%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E5%89%AA%E6%98%A09.0.0%E5%86%85%E6%B5%8B%E7%89%88%E4%BC%9A%E5%91%98%E5%8A%9F%E8%83%BD%EF%BC%8C%E9%9D%9E%E7%A0%B4%E8%A7%A3100%25%E5%90%88%E6%B3%95.mp4",
+                duration: "6:34",
+                document: "https://blog.aibochinese.com/tools/capcut"
+            },
+            {
+                chapter: "常用功能演示",
+                title: "1、美颜|变速|声音处理",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%89%AA%E6%98%A0%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%2B%E5%85%A8%E5%A5%97free%E6%95%99%E7%A8%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA/%E5%89%AA%E6%98%A0%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95%2B%E5%85%A8%E5%A5%97free%E6%95%99%E7%A8%8B%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA.mp4",
+                duration: "5:20",
+                document: "https://blog.aibochinese.com/tools/capcut"
+            },
+           {
+                chapter: "进阶教程",
+                title: "1.########",
+                url: "#",
+                duration: "4:13",
+                document: "https://blog.aibochinese.com/tools/capcut"
+            }
+
+        ];
+
+        const playlist = document.getElementById('playlist');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const currentTitle = document.getElementById('currentTitle');
+        let currentVideoDocument = ''; // 存储当前视频的文档链接
+
+        // 按章节分组视频
+        const videosByChapter = videos.reduce((acc, video) => {
+            if (!acc[video.chapter]) {
+                acc[video.chapter] = [];
+            }
+            acc[video.chapter].push(video);
+            return acc;
+        }, {});
+
+        // 设置初始视频的文档链接（默认第一个视频）
+        if (videos.length > 0) {
+            currentVideoDocument = videos[0].document;
+        }
+
+        // 渲染视频列表
+        Object.entries(videosByChapter).forEach(([chapter, chapterVideos]) => {
+            // 创建章节标题
+            const chapterTitle = document.createElement('div');
+            chapterTitle.className = 'chapter-title';
+            chapterTitle.textContent = chapter;
+            playlist.appendChild(chapterTitle);
+
+            // 创建该章节下的视频项
+            chapterVideos.forEach((video, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-item';
+                item.innerHTML = `
+                    <div class="video-item-title">${video.title}</div>
+                    <div class="video-item-duration">时长: ${video.duration}</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.video-item').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    item.classList.add('active');
+                    
+                    videoPlayer.src = video.url;
+                    currentTitle.textContent = video.title;
+                    currentVideoDocument = video.document; // 更新当前视频的文档链接
+                    videoPlayer.play();
+                });
+                
+                playlist.appendChild(item);
+            });
+        });
+
+        // 添加查看文档按钮点击事件
+        const documentButton = document.querySelector('.document-button');
+        documentButton.addEventListener('click', () => {
+            if (currentVideoDocument) {
+                // 使用新窗口打开文档链接
+                window.open(currentVideoDocument, '_blank');
+            } else {
+                alert('当前视频暂无相关文档');
             }
         });
     </script>
