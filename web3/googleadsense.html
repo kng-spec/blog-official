@@ -159,11 +159,21 @@
       transition: 0.3s;
     }
 
-    /*<!-- 主要内容区 -->
+    /* 主要内容区 - 两栏布局 */
     .main-content {
       max-width: 1400px;
       margin: 0 auto;
       padding: 40px 30px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    
+    /* 页面标题和视频容器保持单列 */
+    .page-header,
+    .container {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
     }
 
     /* 页脚样式 */
@@ -346,6 +356,8 @@
 
       .main-content {
         padding: 30px 20px 50px;
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
 
       .page-title {
