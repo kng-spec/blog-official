@@ -647,10 +647,8 @@
         .features .block2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .features .block3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
         .features .block4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-        @media (max-width: 768px) {
-            .features .blocks-container { gap: 15px; padding: 20px; }
-            .features .block { width: 140px; height: 140px; font-size: 16px; }
-        }
+        @media (max-width: 768px) { .features .blocks-container { gap: 15px; padding: 20px; } }
+        @media (max-width: 768px) { .features .block { width: 140px; height: 140px; font-size: 16px; } }
 
         .article-grid {
             display: grid;
@@ -716,6 +714,26 @@
             color: #3498db;
             text-align: center;
             margin-bottom: 2rem;
+        }
+        
+        /* 两栏布局样式 */
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .two-column-layout .column {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 响应式设计：移动端单列布局 */
+        @media (max-width: 768px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
         }
         
         .kitesim-section {
@@ -837,31 +855,47 @@
         <h1 class="kitesim-title">Kitesim境外手机号，长期保号及使用指南</h1>
         <p class="kitesim-subtitle">APP内操作即可，无需实名 不需要eSIM手机或SIM卡，简易且实惠</p>
         
-        <div class="kitesim-section">
-            <p>数字游民、跨境人、做外贸等场景必备保号神器；</p>
-            <p>接收验证码，注册和稳定使用Facebook、Google、Telegram、Whatsapp等海外自媒体，Claude AI、ChatGTP等AI服务，国际版微信、Stripe账号、国际版Paypal、Binance等业务场景需要</p>
+        <div class="two-column-layout">
+            <!-- 左侧：嵌入的Kitesim页面 -->
+            <div class="column">
+                <iframe src="https://h5.kitesim.co/#/pages/login/register?invite=BAFZKR" 
+                width="100%" 
+                height="600px" 
+                frameborder="0" 
+                title="Kitesim invite">
+                </iframe>
+            </div>
+            
+            <!-- 右侧：介绍和使用指南 -->
+            <div class="column">
+                <div class="kitesim-section">
+                    <p>数字游民、跨境人、做外贸等场景必备保号神器；</p>
+                    <p>接收验证码，注册和稳定使用Facebook、Google、Telegram、Whatsapp等海外自媒体，Claude AI、ChatGTP等AI服务，国际版微信、Stripe账号、国际版Paypal、Binance等业务场景需要</p>
+                </div>
+                
+                <div class="kitesim-section">
+                    <h2>使用指南</h2>
+                    <div class="guide-steps">
+                        <div class="guide-step">
+                            <h3>受邀注册享优惠</h3>
+                            <p>注册链接：<a href="https://h5.kitesim.co/#/pages/login/register?invite=BAFZKR&language=zh" target="_blank">点击</a></p>
+                            <p>APP安装：<a href="https://h5.kitesim.co/#/pages/login/registerWelcome" target="_blank">下载</a></p>
+                        </div>
+                        
+                        <div class="guide-step">
+                            <h3>如何购买和收验证码</h3>
+                            <p>详细步骤将在此处展示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
+        <!-- 视频解说部分 -->
         <div class="kitesim-section">
             <h2>视频解说</h2>
             <div class="video-container">
                 <p>视频内容将在此处展示</p>
-            </div>
-        </div>
-        
-        <div class="kitesim-section">
-            <h2>使用指南</h2>
-            <div class="guide-steps">
-                <div class="guide-step">
-                    <h3>受邀注册享优惠</h3>
-                    <p>注册链接：<a href="https://h5.kitesim.co/#/pages/login/register?invite=BAFZKR" target="_blank">https://h5.kitesim.co/#/pages/login/register?invite=BAFZKR</a></p>
-                    <p>APP安装：<a href="https://h5.kitesim.co/#/pages/login/registerWelcome" target="_blank">https://h5.kitesim.co/#/pages/login/registerWelcome</a></p>
-                </div>
-                
-                <div class="guide-step">
-                    <h3>如何购买和收验证码</h3>
-                    <p>详细步骤将在此处展示</p>
-                </div>
             </div>
         </div>
     </main>
