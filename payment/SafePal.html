@@ -483,6 +483,192 @@ body {
                 transform: translateY(-8px) rotate(-45deg);
             }
         }
+                /* 页脚样式 */
+        footer {
+            background: linear-gradient(135deg, hsl(210, 87%, 57%), #34495e);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ffcc2f;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #f38020;
+        }
+
+        .footer img {
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+           /* 课程列表 */
+        .video-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border: 3px solid #2196F3;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 80vh;
+        }
+               .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-title {
+            color: #2196F3;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .video-player {
+            width: 100%;
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-section {
+            width: 30%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .playlist-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .playlist-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb {
+            background: #2196F3;
+            border-radius: 4px;
+        }
+
+        .playlist-section::-webkit-scrollbar-thumb:hover {
+            background: #1976D2;
+        }
+
+        .playlist-header {
+            color: #2196F3;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-bottom: 2px solid #2196F3;
+            padding-bottom: 10px;
+        }
+
+        .video-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #e3f2fd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-item:hover {
+            background-color: #e3f2fd;
+            border-color: #2196F3;
+            transform: translateX(5px);
+        }
+
+        .video-item.active {
+            background-color: #2196F3;
+            color: white;
+            border-color: #2196F3;
+        }
+
+        .video-item-title {
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .video-item-duration {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .video-item.active .video-item-duration {
+            color: #e3f2fd;
+        }
+
+        .chapter-title {
+            color: #2196F3;
+            font-size: 15px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            padding: 8px 10px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            border-radius: 4px;
+        }
+
+        .video-section {
+            width: 70%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid #2196F3;
+        }
+
+        .video-player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .video-player {
+            width: 100%;
+            flex: 1;
+            max-height: calc(100% - 60px);
+            background-color: #000;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+            object-fit: contain;
+        }
+
+        .document-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            align-self: center;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .document-button:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
     </style>
     <!-- Tailwind CSS 框架 -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -490,7 +676,7 @@ body {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- 标准导航菜单 -->
+
 <!-- 标准导航菜单 -->
 <nav class="navbar">
     <div class="nav-container">
@@ -602,14 +788,22 @@ body {
             <p>如果仅仅是使用数字货币钱包+万事达卡消费，推荐操作更简单的 <strong><a href="roogoo.html" target="_blank">Roogoo尊享卡</a></strong></p>
             <p>或者，找我代充或提现，仅需1美金/笔手续费，<strong><a href="Proxy Recharge.html" target="_blank">查看详情</a></strong></p>
         </div>
+    </div>
+       <!-- 视频解说部分 -->
+    <div class="video-container">
+        <div class="video-section">
+            <div class="video-title" id="currentTitle">SafePal使用教程</div>
+            <div class="video-player-container">
+                <video class="video-player" id="videoPlayer" controls>
+                    <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/SafePal%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9AFiat24%E7%91%9E%E5%A3%AB%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%2B%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1%2B%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E9%92%B1%E5%8C%85/SafePal%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9AFiat24%E7%91%9E%E5%A3%AB%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%2B%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1%2B%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E9%92%B1%E5%8C%85.mp4" type="video/mp4">
+                </video>
+                <button class="document-button">查看相应文档说明</button>
+            </div>
+        </div>
 
-        <div class="info-box">
-            <h3>📺 相关视频说明</h3>
-            <p><video controls width="640" height="360">
-  <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/SafePal%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9AFiat24%E7%91%9E%E5%A3%AB%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%2B%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1%2B%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E9%92%B1%E5%8C%85/SafePal%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9AFiat24%E7%91%9E%E5%A3%AB%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%2B%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1%2B%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E9%92%B1%E5%8C%85.mp4" type="video/mp4">
-</video></p> <p><video controls width="640" height="360">
-  <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96SafePal%20X1%E7%A1%AC%E9%92%B1%E5%8C%85%E8%AE%BE%E5%A4%87%20%E3%80%90KOL%E6%B8%A0%E9%81%93%E4%B8%93%E5%B1%9E%E3%80%91/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96SafePal%20X1%E7%A1%AC%E9%92%B1%E5%8C%85%E8%AE%BE%E5%A4%87%20%E3%80%90KOL%E6%B8%A0%E9%81%93%E4%B8%93%E5%B1%9E%E3%80%91.mp4" type="video/mp4">
-</video></p>
+        <div class="playlist-section">
+            <div class="playlist-header">视频列表</div>
+            <div id="playlist"></div>
         </div>
     </div>
 <footer>
@@ -618,14 +812,12 @@ body {
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://x.com/i/communities/1988635370549096727" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%E6%B1%89%E8%AF%AD%E5%AE%A2%E6%88%B7%E7%AB%AF/icons8-x-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://www.facebook.com/blog.aibochinese" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/facebook%20log0%2030.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://wa.me/message/QXYAFEGTDWIBE1" style="color:white; display:inline-block; vertical-align:middle;" target="_blank" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/whatsapp-48.png" 
-         style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E5%BE%AE%E4%BF%A1-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://space.bilibili.com/1014631395?spm_id_from=333.1387.0.0" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/icons8-%E8%83%86%E6%B1%81-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://github.com/blogaibochinese" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/icons8-github-30.png" 
          style="width: 30px; height: 30px; display:block;" /></a>  <a href="https://xhslink.com/m/5it26wH34Zd" style="color:white; display:inline-block; vertical-align:middle;" rel="noopener noreferrer"><img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/rednote.png" 
          style="width: 30px; height: 30px; display:block;" /></a>
         </p>
-        <p style="font-size: 12px; color: #888;">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
-    <p>_</p>
+        <p style="font-size: 13px; color: hsl(0, 100%, 99%);">© 2025 <a href="https://blog.aibochinese.com/" style="color:red " target="_blank" rel="noopener noreferrer">爱博·客</a> - 所有权利保留</p>
     <p>_</p>
     </div>
     </footer>
@@ -824,5 +1016,87 @@ body {
 </script>  
  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
      crossorigin="anonymous"></script>  
+      <script>
+        const videos = [
+            {
+                chapter: "开通和基础功能",
+                title: "1.开通加密钱包+Fiat24银行账户+联名万事达卡",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/SafePal%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9AFiat24%E7%91%9E%E5%A3%AB%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%2B%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1%2B%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E9%92%B1%E5%8C%85/SafePal%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9AFiat24%E7%91%9E%E5%A3%AB%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7%2B%E4%B8%87%E4%BA%8B%E8%BE%BE%E5%8D%A1%2B%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E9%92%B1%E5%8C%85.mp4",
+                duration: "4:34",
+                document: "https://blog.aibochinese.com/payment/SafePal"
+            },
+           {
+                chapter: "SafePay X1冷钱包",
+                title: "1.免费领取和使用教程",
+                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96SafePal%20X1%E7%A1%AC%E9%92%B1%E5%8C%85%E8%AE%BE%E5%A4%87%20%E3%80%90KOL%E6%B8%A0%E9%81%93%E4%B8%93%E5%B1%9E%E3%80%91/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96SafePal%20X1%E7%A1%AC%E9%92%B1%E5%8C%85%E8%AE%BE%E5%A4%87%20%E3%80%90KOL%E6%B8%A0%E9%81%93%E4%B8%93%E5%B1%9E%E3%80%91.mp4",
+                duration: "4:13",
+                document: "https://blog.aibochinese.com/payment/SafePal"
+            }
+
+        ];
+
+        const playlist = document.getElementById('playlist');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const currentTitle = document.getElementById('currentTitle');
+        let currentVideoDocument = ''; // 存储当前视频的文档链接
+
+        // 按章节分组视频
+        const videosByChapter = videos.reduce((acc, video) => {
+            if (!acc[video.chapter]) {
+                acc[video.chapter] = [];
+            }
+            acc[video.chapter].push(video);
+            return acc;
+        }, {});
+
+        // 设置初始视频的文档链接（默认第一个视频）
+        if (videos.length > 0) {
+            currentVideoDocument = videos[0].document;
+        }
+
+        // 渲染视频列表
+        Object.entries(videosByChapter).forEach(([chapter, chapterVideos]) => {
+            // 创建章节标题
+            const chapterTitle = document.createElement('div');
+            chapterTitle.className = 'chapter-title';
+            chapterTitle.textContent = chapter;
+            playlist.appendChild(chapterTitle);
+
+            // 创建该章节下的视频项
+            chapterVideos.forEach((video, index) => {
+                const item = document.createElement('div');
+                item.className = 'video-item';
+                item.innerHTML = `
+                    <div class="video-item-title">${video.title}</div>
+                    <div class="video-item-duration">时长: ${video.duration}</div>
+                `;
+                
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.video-item').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    item.classList.add('active');
+                    
+                    videoPlayer.src = video.url;
+                    currentTitle.textContent = video.title;
+                    currentVideoDocument = video.document; // 更新当前视频的文档链接
+                    videoPlayer.play();
+                });
+                
+                playlist.appendChild(item);
+            });
+        });
+
+        // 添加查看文档按钮点击事件
+        const documentButton = document.querySelector('.document-button');
+        documentButton.addEventListener('click', () => {
+            if (currentVideoDocument) {
+                // 使用新窗口打开文档链接
+                window.open(currentVideoDocument, '_blank');
+            } else {
+                alert('当前视频暂无相关文档');
+            }
+        });
+    </script>
 </body>
 </html>
