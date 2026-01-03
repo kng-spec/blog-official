@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>大陆个人如何注册英国区Stripe账号？</title>
-    <meta name="description" content="详细指南：大陆个人如何注册英国区Stripe账号，支持中国大陆身份，无需验证居住地址和手机号。">
+    <title>Wise账户开设、入金激活和跨境收付款的应用</title>
+    <meta name="description" content="详细介绍Wise账户开设、入金激活和跨境收付款的应用经验">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../post/pagefind/pagefind-ui.css">
+    <link rel="stylesheet" href="/post/pagefind/pagefind-ui.css">
 
     <style>
 
@@ -638,85 +638,155 @@
             }
         }
     
-        /* 主要内容区域样式 */
-        .main-content {
-            max-width: 1000px;
+    /* 四大功能板块、文章网格、三图广告等原有样式全部保留（略微精简但功能完整） */
+        .features { margin: 80px 0 40px; /* 增加顶部margin，避免被固定导航栏遮挡 */ }
+        .features .blocks-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 40px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 100px 20px 50px;
-            line-height: 1.8;
-            font-size: 16px;
-            color: #333;
         }
-        
-        /* 标题样式 */
-        .main-content h1 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
+        .features .block {
+            width: 300px;
+            height: 200px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: white;
+            font-weight: bolder;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .features .block:hover { transform: translateY(-5px); }
+        .features .block a { color: white; text-decoration: none; }
+        .features .block1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .features .block2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .features .block3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .features .block4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        @media (max-width: 768px) { .features .blocks-container { gap: 15px; padding: 20px; } .features .block { width: 140px; height: 140px; font-size: 16px; } }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .article-item {
             text-align: center;
-            line-height: 1.3;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .article-item:hover { background-color: #f9f9f9; }
+        .article-link { text-decoration: none; color: #333; font-size: 16px; font-weight: bold; display: block; }
+        .article-link:hover { color: #007bff; }
+        @media (max-width: 768px) { .article-grid { grid-template-columns: 1fr; } }
+
+        .three-up {
+            display: grid;
+            grid-template-columns: repeat(3, 300px);
+            gap: 16px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto 22px auto;
+            padding: 8px 0;
+        }
+        .three-up .item img {
+            width: 300px;
+            height: 50px;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            object-fit: cover;
+            transition: all 0.2s;
+        }
+        .three-up .item img:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        @media (max-width: 980px) { .three-up { grid-template-columns: repeat(2, 300px); } }
+        @media (max-width: 660px) { .three-up { grid-template-columns: 1fr; max-width: 300px; } } 
+
+        /* Wise页面自定义样式 */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 20px;
         }
         
-        .main-content h2 {
-            font-size: 2rem;
-            color: #34495e;
-            margin: 40px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
         }
         
-        /* 段落样式 */
-        .main-content p {
+        h2 {
+            color: #444;
+            margin-top: 30px;
             margin-bottom: 20px;
-            text-align: justify;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
         
         /* 链接按钮样式 */
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            margin: 10px 0;
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-            text-decoration: none;
+            padding: 10px 20px;
             border-radius: 25px;
-            font-weight: 600;
+            text-decoration: none;
+            font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 5px 0;
         }
         
         .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-            color: white;
         }
         
-        /* 列表样式 */
-        .main-content ul {
-            margin-bottom: 20px;
-            padding-left: 25px;
-        }
-        
-        .main-content li {
-            margin-bottom: 10px;
-        }
-        
-        /* 强调文本样式 */
-        .highlight {
-            background-color: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        
-        /* 卡片样式 */
-        .card {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
+        /* 图片网格样式 - 一行两张 */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             margin: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-item {
+            text-align: center;
+        }
+        
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 响应式图片网格 */
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -749,60 +819,59 @@
         </div>
     </nav>
 
-    <!-- 主要内容 -->
     <main class="main-content">
-        <h1>大陆个人如何注册英国区Stripe账号？</h1>
+        <h1>Wise账户开设、入金激活和跨境收付款的应用</h1>
         
-        <h2>为什么选英国区账号？</h2>
-        <p>英国区Stripe账号对于中国大陆个人用户来说具有明显优势：</p>
-        <ul>
-            <li>支持中国大陆身份-护照</li>
-            <li>不需要验证居住地址和手机号</li>
-            <li>开通流程相对简单</li>
-            <li>支持多种付款方式</li>
-        </ul>
+        <h2>账户开设</h2>
+        <p>优惠渠道：<a href="https://wise.com/invite/ahpc/vecjew9" class="btn" target="_blank">点击</a>【前600美金手续费全免】</p>
+        <p>按指引，用中国大陆身份证或护照认证，没有特别需要注意的地方</p>
+        <p>注意：查看账户，如果有显示账户号码，即可正常使用；否则需要入金激活</p>
         
-        <h2>注册步骤</h2>
-        <p>请按照以下步骤注册英国区Stripe账号：</p>
+        <h2>1、入金激活（需预存20英镑）：</h2>
+        <p>开通Roogoo-万事达借记卡（美国）：<a href="https://blog.aibochinese.com/payment/roogoo" class="btn" target="_blank">免费开通，0管理费</a></p>
+        <p>国内发行的信用卡不支持</p>
+        <p>选择充值美元（20英镑=27美元）建议充值30美元，以覆盖手续费</p>
         
-        <div class="card">
-            <h3>1. 访问申请网站</h3>
-            <p>首先，访问Stripe官方注册页面：</p>
-            <a href="https://dashboard.stripe.com/register" class="btn" target="_blank">前往Stripe注册页面</a>
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wise/jihuo01.png" alt="入金激活步骤1" style="max-width: 100%; height: auto;">
+            </div>
         </div>
         
-        <div class="card">
-            <h3>2. 选择国家</h3>
-            <p>在注册页面，选择国家为<strong>英国</strong>。</p>
+        <h2>2、审核-补充资料</h2>
+        
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wise/jihuo02.png" alt="审核-补充资料步骤2" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="image-item">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wise/jihuo03.png" alt="审核-补充资料步骤3" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="image-item">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wise/jihuo04.png" alt="审核-补充资料步骤4" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="image-item">
+                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/wise/jihuo05.png" alt="审核-补充资料步骤5" style="max-width: 100%; height: auto;">
+            </div>
         </div>
         
-        <div class="card">
-            <h3>3. 获取英国地址和手机号</h3>
-            <p>您可以使用以下工具生成英国地址和手机号：</p>
-            <a href="https://www.meiguodizhi.com/uk-address" class="btn" target="_blank">英国地址和手机号生成器</a>
-        </div>
+        <h2>3、激活成功后-开设各币种的境外个人银行账户</h2>
+        <p>本土转账零手续费</p>
         
-        <div class="card">
-            <h3>4. 完成注册流程</h3>
-            <p>按照页面指引填写信息，完成注册。没有特别需要注意的地方，按照提示操作即可。</p>
-        </div>
+        <h2>跨境收付款的应用经验</h2>
+        <p>a.开通英国区stripe账号：<a href="https://blog.aibochinese.com/payment/stripe-guide" class="btn" target="_blank">教程</a></p>
+        <p>进行全球收款，绑定wise英镑账户，stripe-wise零手续费</p>
         
-        <h2>开通后设置</h2>
+        <p>b.Wise提现人民币至支付宝，手续费二三十：<a href="https://blog.aibochinese.com/payment/wise-alipay" class="btn" target="_blank">教程</a></p>
         
-        <h3>添加付款方式</h3>
-        <p>在付款设置那里，添加全球各地的付款方式，部分需要一两天审核。</p>
+        <p>c.开通ifast Global Bank账户，支持中国大陆身份证，如实填写资料；用wise英镑账户转入ifast账户激活，不限金额，零手续费；通过ifast-Ezwallet,可以向多国支付当地法币，0手续费；</p>
         
-        <h3>添加提现账号</h3>
-        <p>添加提现账号为<strong>wise英镑账户</strong>，提现0手续费。</p>
+        <p>d.用wise的银行账单证明英国居住地址，开通Krak（资产组合钱包）英国区账户（会配置英国银行账户），实现Paypal提现至Krak,省35美金的国际汇款手续费，<a href="https://blog.aibochinese.com/payment/global-payments-guide" class="btn" target="_blank">教程</a></p>
         
-        <div class="card">
-            <h3>注意事项</h3>
-            <ul>
-                <li>注册不难，养号要重视，初期不要大额收款，尤其容易引起争议的款项；可以自己用信用卡，支付宝小额付款、提现，一是测试，二来养号；</li>
-                <li>没有护照，到当地的移民管理局，办理张护照，120元成本;</li>
-                <li>wise使用教程：<a href="https://blog.aibochinese.com/payment/wise" class="btn" target="_blank">查看</a></li>
-            </ul>
-        </div>
+        <h2>最终可实现的效果：</h2>
+        <p>跨境收款：<a href="https://www.aibochinese.com/payments" class="btn" target="_blank">示例页面</a></p>
+        <p>人民币汇出-到账为当地法币：<a href="https://blog.aibochinese.com/payment/RMB-Outbound" class="btn" target="_blank">支持的国家</a></p>
+        <p>（注意：人民币汇出需要USDT中转（币安开户：<a href="https://accounts.bmwweb.ac/register?ref=569491541" class="btn" target="_blank">点击</a>），路径：币安-Krak的usdt-Krak的英国银行账户-ifast-wise</p>
     </main>
 
     <!-- 页脚（完整保留） -->
@@ -909,8 +978,7 @@
     <div id="wechatModal" class="wechat-modal" onclick="closeWechatModal(event)">
         <div class="wechat-popup" onclick="event.stopPropagation()">
             <h3>微信客服</h3>
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%B7%BB%E5%8A%A0%E5%BE%AE%E4%BF%A1.png" alt="微信二维码" class="wechat-qr">
-            <p>扫描添加客服微信</p>
+            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/AIBOBLOG%20WECHAT.png" alt="微信二维码" class="wechat-qr">
             <button class="close-btn" onclick="closeWechatModal()">关闭</button>
         </div>
     </div>
@@ -949,7 +1017,7 @@
         };
     </script>
        <!-- Pagefind 搜索（已完美修复） -->
-    <script src="../post/pagefind/pagefind-ui.js"></script>
+    <script src="/post/pagefind/pagefind-ui.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             console.log("Initializing Pagefind search...");
@@ -998,7 +1066,7 @@
                         !href.startsWith('/') && 
                         !href.startsWith('http') && 
                         !href.includes('post/')) {
-                        
+                    
                         const newHref = '/post/' + href;
                         console.log('即时修复链接:', href, '->', newHref);
                         
@@ -1081,13 +1149,13 @@
  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",           // 或 WebPage、Article、FAQPage、Product等
-  "name": "大陆个人如何注册英国区Stripe账号？",
-  "keywords": "Stripe,英国区Stripe,Stripe注册,中国大陆,个人注册",
-  "description": "详细指南：大陆个人如何注册英国区Stripe账号，支持中国大陆身份，无需验证居住地址和手机号。",
-  "url": "https://blog.aibochinese.com/payment/stripe-guide.html",
-  "datePublished": "2025-12-19",
-  "dateModified": "2025-12-19",
+  "@type": "WebPage",           // 或 WebPage、Article、FAQPage、Product等
+  "name": "Wise账户开设、入金激活和跨境收付款的应用",
+  "keywords": "Wise,账户开设,入金激活,跨境收付款",
+  "description": "详细介绍Wise账户开设、入金激活和跨境收付款的应用经验",
+  "url": "https://blog.aibochinese.com/payment/wise.html",
+  "datePublished": "2026-01-03",
+  "dateModified": "2026-01-03",
   "author": {"@type": "Person", "name": "AbelZou"},
   "publisher": {
     "@type": "Organization",
