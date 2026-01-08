@@ -1007,7 +1007,8 @@
             
             <div style="text-align: center; margin: 30px 0;">
                 <p style="font-size: 1.2rem; font-weight: bold;">查看<a href="https://drive.aibochinese.com/s/L4mh4" style="color:red" target="_blank" rel="noopener noreferrer">白皮书</a>、<a href="https://drive.aibochinese.com/s/4dVfb" style="color:red" target="_blank" rel="noopener noreferrer">监管牌照链接</a> | 注册时填入邀请码 AIBOBlog：</p>
-                <a href="https://pinkwallet.com/#/signup?code=AIBOBlog" class="btn" target="_blank">开通账户</a>
+                <a href="https://pinkwallet.com/agent/signup/?code=AIBOBlog" class="btn" target="_blank">开通账户</a>
+                <button style="display: inline-block; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; transition: all 0.3s ease; margin: 20px 10px; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); border: none; cursor: pointer;" onclick="toggleTelegramModal()">加入爱博·客社群</button>
             </div>
                    <!-- 视频解说部分 -->
     <div class="video-container">
@@ -1178,6 +1179,22 @@
         </div>
     </div>
 
+    <!-- Telegram社群弹出窗 -->
+    <div id="telegramModal" class="wechat-modal" onclick="closeTelegramModal(event)">
+        <div class="wechat-popup" onclick="event.stopPropagation()">
+            <h3>加入爱博·客社群</h3>
+            <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/aiboblogcode.jpg" alt="Telegram社群二维码" class="wechat-qr">
+            <div style="margin: 15px 0;">
+                <label for="telegramLink" style="display: block; margin-bottom: 8px; font-weight: bold;">群邀请链接：</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="text" id="telegramLink" value="https://t.me/+STvA7UuYb2JjNDZl" readonly style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+                    <button class="close-btn" onclick="copyTelegramLink()" style="background-color: #3498db; margin-top: 0;">复制</button>
+                </div>
+            </div>
+            <button class="close-btn" onclick="closeTelegramModal()">关闭</button>
+        </div>
+    </div>
+
     <script>
         // 搜索弹窗控制函数
         function toggleSearchModal() {
@@ -1199,15 +1216,47 @@
             document.getElementById('wechatModal').style.display = 'none';
         }
 
+        // Telegram弹窗控制函数
+        function toggleTelegramModal() {
+            const modal = document.getElementById('telegramModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function closeTelegramModal(event) {
+            document.getElementById('telegramModal').style.display = 'none';
+        }
+
+        // 复制Telegram链接功能
+        function copyTelegramLink() {
+            const linkInput = document.getElementById('telegramLink');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            // 显示复制成功提示
+            const copyBtn = event.target;
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '已复制!';
+            copyBtn.style.backgroundColor = '#27ae60';
+            
+            // 恢复按钮状态
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = '#3498db';
+            }, 1500);
+        }
+
         // 点击模态背景关闭
         window.onclick = function(event) {
             const searchModal = document.getElementById('searchModal');
             const wechatModal = document.getElementById('wechatModal');
+            const telegramModal = document.getElementById('telegramModal');
             
             if (event.target === searchModal) {
                 closeSearchModal();
             } else if (event.target === wechatModal) {
                 closeWechatModal();
+            } else if (event.target === telegramModal) {
+                closeTelegramModal();
             }
         };
     </script>
