@@ -604,6 +604,175 @@
             }
         }
 
+        /* 合作案例样式 */
+        .cases-container {
+            position: relative;
+            margin: 30px 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fff9c4, #fff59d);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        }
+        
+        .cases-slider {
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* 隐藏滚动条 */
+        .cases-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .cases-slider {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .cases-track {
+            display: flex;
+            gap: 20px;
+            padding: 10px 0;
+            width: fit-content;
+        }
+        
+        .case-card {
+            flex: 0 0 calc(25% - 15px);
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid #ffc107;
+        }
+        
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+            border-color: #ff9800;
+        }
+        
+        .case-category {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .case-link {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .case-logo-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid #ffe082;
+        }
+        
+        .case-logo {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .case-card:hover .case-logo {
+            transform: scale(1.1);
+        }
+        
+        .case-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+        
+        .case-card:hover .case-name {
+            color: #ff9800;
+        }
+        
+        /* 左右切换按钮 */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 193, 7, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slider-btn:hover {
+            background: rgba(255, 152, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev-btn {
+            left: 10px;
+        }
+        
+        .next-btn {
+            right: 10px;
+        }
+        
+        /* 电脑端样式 */
+        @media (min-width: 769px) {
+            .case-card {
+                flex: 0 0 calc(25% - 15px);
+            }
+        }
+        
+        /* 移动端样式 */
+        @media (max-width: 768px) {
+            .case-card {
+                flex: 0 0 calc(50% - 10px);
+            }
+            
+            .cases-container {
+                padding: 15px;
+            }
+            
+            .cases-track {
+                gap: 15px;
+            }
+            
+            .case-logo-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .case-name {
+                font-size: 16px;
+            }
+        }
+        
         @media (max-width: 768px) {
             body {
                 padding-top: 70px;
@@ -731,7 +900,7 @@
   </nav>
     <div class="container">
         <h1>网站定制和维护</h1>
-        <h2>一次低劳务费，网站永久维护</h2>
+        <h2>一次性低劳务费，网站永久有效并维护，无需每年花钱续费服务器！</h2>
         <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%E5%9B%BE/IT%20department.png" 
          style="max-width: 100%; height: auto;" />
         <p style="text-align: center; font-size: 18px; margin: 30px 0;">
@@ -750,10 +919,70 @@
         
         <h3>您需要准备：</h3>
         <ul class="requirements">
-            <li>准备Cloudflare账号</li>
-            <li>免开卡费免年费申请一张万事达卡激活Cloudflare R2对象存储和Pages</li>
-            <li>在Cloudflare可低价购买一个域名或其他</li>
+            <li>找一个同业对标网站给我们参考</li>
+            <li>把要建的网站所需的内容尽可能地收集起来</li>
+            <li>自行或委托我们购买一个域名，10-100元不等</li>
         </ul>
+        
+        <!-- 合作案例部分 -->
+        <h3 style="color: #ffc107; margin-top: 40px;">合作案例</h3>
+        <div class="cases-container">
+            <div class="cases-slider">
+                <div class="cases-track">
+                    <!-- 卡片一 -->
+                    <div class="case-card">
+                        <div class="case-category">电商|独立站</div>
+                        <a href="https://30yearcraftbag.com" target="_blank" class="case-link">
+                            <div class="case-logo-container">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/30yearcraftbag/logo.png" alt="30yearcraftbag Logo" class="case-logo">
+                            </div>
+                            <h4 class="case-name">30yearcraftbag</h4>
+                        </a>
+                    </div>
+                    
+                    <!-- 卡片二 -->
+                    <div class="case-card">
+                        <div class="case-category">博客</div>
+                        <a href="https://blog.aibochinese.com" target="_blank" class="case-link">
+                            <div class="case-logo-container">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/aibo-blog-logo.png" alt="爱博·客 Logo" class="case-logo">
+                            </div>
+                            <h4 class="case-name">爱博·客</h4>
+                        </a>
+                    </div>
+                    
+                    <!-- 卡片三 -->
+                    <div class="case-card">
+                        <div class="case-category">教育|课程</div>
+                        <a href="https://aibochinese.com" target="_blank" class="case-link">
+                            <div class="case-logo-container">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/1-on-1%20logo.png" alt="Aibo Chinese Logo" class="case-logo">
+                            </div>
+                            <h4 class="case-name">Aibo Chinese</h4>
+                        </a>
+                    </div>
+                    
+                    <!-- 卡片四 -->
+                    <div class="case-card">
+                        <div class="case-category">企业官网</div>
+                        <a href="https://cma.aibomart.com" target="_blank" class="case-link">
+                            <div class="case-logo-container">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/HCMFBMA/LogoHCMDBMA.png" alt="HCMFBMA Logo" class="case-logo">
+                            </div>
+                            <h4 class="case-name">HCMFBMA</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 左右切换按钮 -->
+            <button class="slider-btn prev-btn" onclick="scrollCases(-1)">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next-btn" onclick="scrollCases(1)">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
         
         <div style="text-align: center; margin-top: 40px;">
             <p>联系我们开始您的网站之旅！</p>
@@ -913,6 +1142,14 @@
                 closeWechatModal();
             }
         };
+        
+        // 合作案例滑块功能
+        function scrollCases(direction) {
+            const slider = document.querySelector('.cases-slider');
+            const cardWidth = document.querySelector('.case-card').offsetWidth + 20; // 卡片宽度 + 间距
+            const scrollAmount = direction * cardWidth * (window.innerWidth <= 768 ? 2 : 1); // 移动端每次滚动2张，桌面端每次滚动1张
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
     </script>
        <!-- Pagefind 搜索（已完美修复） -->
     <script src="/post/pagefind/pagefind-ui.js"></script>
