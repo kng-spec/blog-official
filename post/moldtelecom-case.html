@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>摩尔多瓦eSIM卡申请流程详解 - 爱博·客</title>
-    <meta name="description" content="摩尔多瓦eSIM卡申请流程详解-免实名，操作简单；无月租，16元开通，免费收短信，0.8RMB/年长期保号">
-    <link rel="stylesheet" href="css/style.css">
+    <title>摩尔多瓦esim成功案例 - 爱博·客</title>
+    <meta name="description" content="分享朋友们申请摩尔多瓦esim的成功案例，帮助您了解如何申请和使用摩尔多瓦esim">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/post/pagefind/pagefind-ui.css">
 
     <style>
-
-             /* 悬浮微信图标样式 */
+        /* 悬浮微信图标样式 */
         .wechat-float {
             width: 60px;
             height: 60px;
@@ -311,79 +310,6 @@
             transition: 0.3s;
         }
 
-        /* ==================== 全新 Pagefind 搜索样式（搜索框水平居中版） ==================== */
-.search-container {
-    position: relative;
-    /* 删除 margin-right，改为自动左右 margin 实现居中 */
-    margin: 0 auto;           /* 关键：水平居中 */
-    z-index: 1001;
-    min-width: 200px;
-    max-width: 380px;         /* 建议加上最大宽度，和下拉结果保持一致 */
-    width: 100%;
-    display: flex;
-    justify-content: center;  /* 内部元素水平居中 */
-    align-items: center;
-}
-
-/* 输入框：去掉宽度 100% + focus 扩展的左右晃动问题 */
-#pagefind-search .pagefind-ui__search-input {
-    padding: 10px 16px;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    font-size: 16px;
-    /* 固定宽度，或者使用 min-width + max-width 防止晃动 */
-    width: 300px;                     /* 固定一个舒适的宽度 */
-    max-width: 100%;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background: white;
-    color: #333;
-    box-sizing: border-box;
-    outline: none;
-}
-
-#pagefind-search .pagefind-ui__search-input:focus {
-    border-color: #4a6fa5;
-    box-shadow: 0 0 0 4px rgba(74, 111, 165, 0.2);
-    /* focus 时不再改变宽度，避免整个搜索框左右晃动 */
-}
-
-/* 下拉结果：从右对齐改为居中对齐 */
-#pagefind-search .pagefind-ui__results {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    position: absolute;
-    top: calc(100% + 8px);            /* 确保与搜索框有间距 */
-    left: 50%;                        /* 关键：左边 50% */
-    transform: translateX(-50%);      /* 关键：向左偏移自身宽度的一半 → 完全居中 */
-    right: auto;                      /* 取消原来的 right: 0 */
-    width: 380px;
-    max-height: 70vh;                 /* 限制最大高度为视口高度的70%，提供更多搜索结果可见空间 */
-    overflow-y: auto;
-    z-index: 1000;
-    padding: 8px 0;
-    margin-top: 0;
-}
-
-/* 其余样式保持不变 */
-        #pagefind-search .pagefind-ui__result { padding: 12px 16px; border-bottom: 1px solid #eee; transition: background-color 0.2s; }
-        #pagefind-search .pagefind-ui__result:last-child { border-bottom: none; }
-        #pagefind-search .pagefind-ui__result:hover { background-color: #f8f9ff; }
-        #pagefind-search .pagefind-ui__result-title { font-size: 15px; font-weight: 600; color: #1f2937; margin-bottom: 4px; }
-        #pagefind-search .pagefind-ui__result-link { 
-            color: #3B82F6; 
-            text-decoration: none; 
-            display: inline-block;
-            width: 100%;
-            position: relative;
-            z-index: 10;
-        }
-        #pagefind-search .pagefind-ui__result-link:hover { text-decoration: underline; }
-        #pagefind-search .pagefind-ui__result-excerpt { font-size: 13.5px; color: #666; line-height: 1.5; margin-top: 4px; }
-        .pagefind-ui__result-excerpt mark { background: #dbeafe; color: #1e40af; padding: 1px 3px; border-radius: 3px; }
-        #pagefind-search .pagefind-ui__message { padding: 20px; text-align: center; color: #666; font-size: 14px; }
-        
         /* 弹窗搜索结果样式优化 */
         #pagefind-search-popup .pagefind-ui__search-input {
             padding: 10px 16px;
@@ -463,6 +389,7 @@
             color: #666;
             font-size: 14px;
         }
+
         /* 页脚样式 */
         footer {
             background: linear-gradient(135deg, hsl(210, 87%, 57%), #34495e);
@@ -637,327 +564,178 @@
                 margin-top: 2px;
             }
         }
-    
-/* 四大功能板块、文章网格、三图广告等原有样式全部保留（略微精简但功能完整） */
-        .features { margin: 80px 0 40px; /* 增加顶部margin，避免被固定导航栏遮挡 */ }
-        .features .blocks-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            padding: 40px;
-            max-width: 680px;
-            margin: 0 auto;
-        }
-        .features .block {
-            width: 300px;
-            height: 200px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 36px;
-            color: white;
-            font-weight: bolder;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .features .block:hover { transform: translateY(-5px); }
-        .features .block a { color: white; text-decoration: none; }
-        @media (max-width: 768px) { .features .blocks-container { gap: 15px; padding: 20px; } .features .block { width: 140px; height: 140px; font-size: 16px; } }
 
-        .article-grid {
+        /* 案例卡片样式 */
+        .case-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .case-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .case-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            gap: 30px;
+            margin-bottom: 40px;
         }
-        .article-item {
-            text-align: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-        .article-item:hover { background-color: #f9f9f9; }
-        .article-link { text-decoration: none; color: #333; font-size: 16px; font-weight: bold; display: block; }
-        .article-link:hover { color: #007bff; }
-        @media (max-width: 768px) { .article-grid { grid-template-columns: 1fr; } }
 
-        .three-up {
-            display: grid;
-            grid-template-columns: repeat(3, 300px);
-            gap: 16px;
-            justify-content: center;
-            max-width: 1000px;
-            margin: 0 auto 22px auto;
-            padding: 8px 0;
+        @media (max-width: 1024px) {
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        .three-up .item img {
-            width: 300px;
-            height: 50px;
-            border-radius: 6px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-            object-fit: cover;
-            transition: all 0.2s;
+
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        .three-up .item img:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+        .case-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        @media (max-width: 980px) { .three-up { grid-template-columns: repeat(2, 300px); } }
-        @media (max-width: 660px) { .three-up { grid-template-columns: 1fr; max-width: 300px; } } 
-    
-    /* 文章内容样式 */
-    .content-container {
-        max-width: 1000px;
-        margin: 80px auto 40px;
-        padding: 20px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-    }
-    
-    .content-container h1 {
-        color: #333;
-        font-size: 2rem;
-        margin-bottom: 20px;
-        text-align: center;
-        line-height: 1.3;
-    }
-    
-    .content-container h2 {
-        color: #444;
-        font-size: 1.5rem;
-        margin: 30px 0 15px;
-        border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
-    }
-    
-    .content-container h3 {
-        color: #555;
-        font-size: 1.2rem;
-        margin: 25px 0 15px;
-    }
-    
-    .content-container p {
-        color: #666;
-        line-height: 1.8;
-        margin-bottom: 15px;
-        font-size: 1rem;
-    }
-    
-    .content-container ul, .content-container ol {
-        color: #666;
-        line-height: 1.8;
-        margin: 15px 0 15px 25px;
-    }
-    
-    .content-container li {
-        margin-bottom: 10px;
-    }
-    
-    .content-container img {
-        max-width: 100%;
-        height: auto;
-        margin: 20px 0;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    .content-container a {
-        color: #3498db;
-        text-decoration: none;
-    }
-    
-    .content-container a:hover {
-        text-decoration: underline;
-    }
-    
-    .highlight {
-        background-color: #f0f8ff;
-        padding: 15px;
-        border-left: 5px solid #3498db;
-        margin: 20px 0;
-        border-radius: 5px;
-    }
-    
-    @media (max-width: 768px) {
-        .content-container {
-            margin: 70px auto 40px;
-            padding: 15px;
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
-        
-        .content-container h1 {
+
+        .case-card h3 {
             font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
         }
-        
-        .content-container h2 {
-            font-size: 1.3rem;
-        }
-        
-        .content-container h3 {
-            font-size: 1.1rem;
-        }
-    }
-              /* 课程列表 */
-        .container {
-            display: flex;
-            max-width: 1400px;
+
+        /* 图片轮播容器 */
+        .image-slider {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
             margin: 0 auto;
-            background-color: white;
-            border: 3px solid #2196F3;
             border-radius: 8px;
             overflow: hidden;
-            height: 80vh;
-        }
-               .video-section {
-            width: 70%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 3px solid #2196F3;
+            background-color: #f5f5f5;
         }
 
-        .video-title {
-            color: #2196F3;
-            font-size: 15px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .video-player {
+        .slider-wrapper {
+            position: relative;
             width: 100%;
-            background-color: #000;
-            border: 2px solid #2196F3;
-            border-radius: 4px;
+            height: 400px;
         }
 
-        .playlist-section {
-            width: 30%;
-            padding: 20px;
-            overflow-y: auto;
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .playlist-section::-webkit-scrollbar {
-            width: 8px;
+        .slider-image.active {
+            opacity: 1;
         }
 
-        .playlist-section::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        /* 轮播控制按钮 */
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
         }
 
-        .playlist-section::-webkit-scrollbar-thumb {
-            background: #2196F3;
-            border-radius: 4px;
-        }
-
-        .playlist-section::-webkit-scrollbar-thumb:hover {
-            background: #1976D2;
-        }
-
-        .playlist-header {
-            color: #2196F3;
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            border-bottom: 2px solid #2196F3;
-            padding-bottom: 10px;
-        }
-
-        .video-item {
-            padding: 15px;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
-            border: 2px solid #e3f2fd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-item:hover {
-            background-color: #e3f2fd;
-            border-color: #2196F3;
-            transform: translateX(5px);
-        }
-
-        .video-item.active {
-            background-color: #2196F3;
+        .slider-btn {
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
-            border-color: #2196F3;
+            border: none;
+            font-size: 2rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .video-item-title {
-            font-size: 10px;
-            font-weight: 500;
-            margin-bottom: 5px;
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
-        .video-item-duration {
-            font-size: 12px;
+        /* 图片信息 */
+        .image-info {
+            text-align: center;
+            margin-top: 10px;
             color: #666;
+            font-size: 0.9rem;
         }
 
-        .video-item.active .video-item-duration {
-            color: #e3f2fd;
+        /* 放大查看按钮 */
+        .zoom-btn {
+            display: block;
+            margin: 15px auto 0;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .chapter-title {
-            color: #2196F3;
-            font-size: 15px;
-            font-weight: bold;
-            margin: 15px 0 10px 0;
-            padding: 8px 10px;
-            background-color: #e3f2fd;
-            border-left: 4px solid #2196F3;
-            border-radius: 4px;
+        .zoom-btn:hover {
+            background-color: #2980b9;
         }
 
-        .video-section {
-            width: 70%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 3px solid #2196F3;
-        }
-
-        .video-player-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
-        }
-
-        .video-player {
+        /* 放大查看模态框 */
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            flex: 1;
-            max-height: calc(100% - 60px);
-            background-color: #000;
-            border: 2px solid #2196F3;
-            border-radius: 4px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .zoom-modal.active {
+            display: flex;
+        }
+
+        .zoom-content {
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
         }
 
-        .document-button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #2196F3;
+        .close-zoom {
+            position: absolute;
+            top: 20px;
+            right: 30px;
             color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            font-size: 2rem;
             cursor: pointer;
-            align-self: center;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-            flex-shrink: 0;
+            transition: color 0.3s ease;
         }
 
-        .document-button:hover {
-            background-color: #1976D2;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .close-zoom:hover {
+            color: #ccc;
         }
     </style>
 </head>
@@ -990,83 +768,29 @@
         </div>
     </nav>
 
-    <main>
-        <div class="content-container">
-            <h1>摩尔多瓦eSIM卡申请流程详解</h1>
-            
-            <p>摩尔多瓦eSIM卡申请流程详解-免实名，操作简单；无月租，16元开通，免费收短信，0.8RMB/年长期保号</p>
-            
-            <h2>eSIM申请入口</h2>
-            <p><a href="https://my.moldtelecom.md/my-moldtelecom/esim-registration?showDescription=true" target="_blank">https://my.moldtelecom.md/my-moldtelecom/esim-registration?showDescription=true</a></p>
-            
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/moldtelecom%203.png" alt="eSIM申请入口" style="max-width: 100%; height: auto;" />
-            
-            <h2>优势</h2>
-            <p>操作最简单，不需要实名；保号费用极低；国内有信号，联系官网客服，开通数据漫游功能</p>
-            
-            <h2>重要步骤-重点提醒</h2>
-            
-            <h3>一、用邮箱注册即可</h3>
-            
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/moldtelecom%201-1.png" alt="注册步骤1" style="max-width: 100%; height: auto;" />
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/moldtelecom%201-2.png" alt="注册步骤2" style="max-width: 100%; height: auto;" />
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/moldtelecom%201-3.png" alt="注册步骤3" style="max-width: 100%; height: auto;" />
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/moldtelecom%201-4.png" alt="注册步骤4" style="max-width: 100%; height: auto;" />
-            
-            <h3>二、没有信用卡，开通美国虚拟万事达卡</h3>
-            <p>零开卡费0年费通道：<a href="https://blog.aibochinese.com/payment/roogoo" target="_blank">https://blog.aibochinese.com/payment/roogoo</a></p>
-            
-            <h3>三、查收邮件，查看eSIM配置二维码</h3>
-            
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/moldtelecom%201-5.png" alt="查收邮件" style="max-width: 100%; height: auto;" />
-            
-            <h3>四、eSIM写入方式</h3>
-            <p>如果您是支持eSIM的手机，扫码写入；</p>
-            <p>如果是一般性的手机，购买一张eSIM写入卡即可，查看说明：<a href="https://blog.aibochinese.com/tools/esim-card" target="_blank">https://blog.aibochinese.com/tools/esim-card</a></p>
-            
-            <h3>五、管理手机号和保号</h3>
-            
-            <h4>联系官网客服</h4>
-            <p>选择人工客服接待，发送信息：</p>
-            <div class="highlight">
-                <p>Am nevoie să-mi activați funcția de roaming la distanță. Numărul meu eSIM este 【替换您的开通的手机号】, iar adresa mea de e-mail este 【替换您的邮箱】. Folosesc acest serviciu în China. Vă mulțumesc foarte mult.</p>
-            <p>上述操作是为了开通数据漫游功能；另外设置手机-移动网络-点击对应的卡槽-选择运营商-手动-中国移动；操作之后，等入网</p>
-            <p><strong>注意：</strong>部分朋友反馈没有信号，本人使用正常，不清楚原由【<a href="https://blog.aibochinese.com/post/moldtelecom-case" target="_blank">案例</a>】</p>    
-        </div>
-            
-            <h4>充值按钮</h4>
-            <p><a href="https://achitari.moldtelecom.md/Pay" target="_blank">https://achitari.moldtelecom.md/Pay</a></p>
-            <p><strong>温馨提示：</strong> 整个过程都是可以代办的，后期也可以代充，eSIM信息发送至自己的邮箱，本人不经手</p>
-            
-            <h4>登录账户</h4>
-            <p><a href="https://my.moldtelecom.md/my-moldtelecom/login" target="_blank">https://my.moldtelecom.md/my-moldtelecom/login</a></p>
-            
-            <p>建议在Google play或apple store下载 “my moldtelecom";收验证码登录</p>
-            
-            <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251222204535_126_19.jpg" alt="my moldtelecom" style="max-width: 30%; height: auto;" />
-             <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/moldtelecom/xinhaozhengming.jpg" alt="my moldtelecom" style="max-width: 30%; height: auto;" />           
-            <h2>其它方案</h2>
-            <p>如果您愿意花点费用，想操作简单点，直接能在app查收短信，并长期保号，请查看下面的文章</p>
-            <p>如何长期保有一个境外手机号，APP内操作即可，无需实名 不需要eSIM手机或SIM卡：<a href="https://blog.aibochinese.com/tools/kitesim" target="_blank">https://blog.aibochinese.com/tools/kitesim</a></p>
-        </div>
-                <!-- 视频解说部分 -->
-    <div class="container">
-        <div class="video-section">
-            <div class="video-title" id="currentTitle">视频讲解</div>
-            <div class="video-player-container">
-                <video class="video-player" id="videoPlayer" controls>
-                    <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%A2%83%E5%A4%96%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81%EF%BC%9A%E6%97%A0%E9%9C%80%E5%AE%9E%E5%90%8D%EF%BC%8Capp%E4%B8%8A%E6%9F%A5%E6%94%B6%E7%9F%AD%E4%BF%A1%EF%BC%8C%E6%97%A0%E9%9C%80esim%E6%89%8B%E6%9C%BA%E6%88%96%E5%AE%9E%E4%BD%93%E5%8D%A1%EF%BC%8C%E5%8F%AF%E9%95%BF%E6%9C%9F%E4%BF%9D%E5%8F%B7/%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%A2%83%E5%A4%96%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81%EF%BC%9A%E6%97%A0%E9%9C%80%E5%AE%9E%E5%90%8D%EF%BC%8Capp%E4%B8%8A%E6%9F%A5%E6%94%B6%E7%9F%AD%E4%BF%A1%EF%BC%8C%E6%97%A0%E9%9C%80esim%E6%89%8B%E6%9C%BA%E6%88%96%E5%AE%9E%E4%BD%93%E5%8D%A1%EF%BC%8C%E5%8F%AF%E9%95%BF%E6%9C%9F%E4%BF%9D%E5%8F%B7.mp4" type="video/mp4">
-                </video>
-                <button class="document-button">查看相应文档说明</button>
+    <!-- 案例内容 -->
+    <div class="case-container">
+        <h1 class="case-title">朋友们申请摩尔多瓦esim的成功案例</h1>
+        
+        <div class="case-grid">
+            <!-- 案例一 -->
+            <div class="case-card">
+                <h3>案例一</h3>
+                <div class="image-slider">
+                    <div class="slider-wrapper">
+                        <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%91%A9%E5%B0%94%E5%A4%9A%E7%93%A6/moldtelecom/moldtelecom01.png" alt="案例一图片1" class="slider-image active">
+                        <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E6%91%A9%E5%B0%94%E5%A4%9A%E7%93%A6/moldtelecom/moldtelecom02.png" alt="案例一图片2" class="slider-image">
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn prev" onclick="changeSlide(this, -1)"><</button>
+                        <button class="slider-btn next" onclick="changeSlide(this, 1)">></button>
+                    </div>
+                    <div class="image-info">图片 1 / 2</div>
+                    <button class="zoom-btn" onclick="openZoom(this)">放大查看</button>
+                </div>
             </div>
         </div>
-
-        <div class="playlist-section">
-            <div class="playlist-header">视频列表</div>
-            <div id="playlist"></div>
-        </div>
     </div>
-    </main>
 
     <!-- 页脚（完整保留） -->
     <footer>
@@ -1173,9 +897,14 @@
         <div class="wechat-popup" onclick="event.stopPropagation()">
             <h3>微信客服</h3>
             <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/AIBOBLOG%20WECHAT.png" alt="微信二维码" class="wechat-qr">
-            <p>扫描添加客服微信</p>
             <button class="close-btn" onclick="closeWechatModal()">关闭</button>
         </div>
+    </div>
+
+    <!-- 放大查看模态框 -->
+    <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <span class="close-zoom">&times;</span>
+        <img src="" alt="放大图片" class="zoom-content">
     </div>
 
     <script>
@@ -1203,11 +932,14 @@
         window.onclick = function(event) {
             const searchModal = document.getElementById('searchModal');
             const wechatModal = document.getElementById('wechatModal');
+            const zoomModal = document.getElementById('zoomModal');
             
             if (event.target === searchModal) {
                 closeSearchModal();
             } else if (event.target === wechatModal) {
                 closeWechatModal();
+            } else if (event.target === zoomModal) {
+                closeZoom();
             }
         };
     </script>
@@ -1341,149 +1073,76 @@
             console.log('终极链接修复方案已激活');
         })();
     </script>
- <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",           // 或 WebPage、Article、FAQPage、Product等
-  "name": "摩尔多瓦eSIM卡申请流程详解 - 爱博·客",
-  "keywords": "摩尔多瓦,eSIM,申请流程,免实名,保号",
-  "description": "摩尔多瓦eSIM卡申请流程详解-免实名，操作简单；无月租，16元开通，免费收短信，0.8RMB/年长期保号",
-  "url": "https://blog.aibochinese.com/tools/moldtelecom.html",
-  "datePublished": "2025-12-22",
-  "dateModified": "2025-12-22",
-  "author": {"@type": "Person", "name": "AbelZou"},
-  "publisher": {
-    "@type": "Organization",
-    "name": "爱博·客",
-    "logo": {"@type": "ImageObject", "url": "https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png"}
-  }
-}
-</script>   
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
-     crossorigin="anonymous"></script>
-             <script>
-        const videos = [
-            {
-                chapter: "境外手机号码的获取和使用",
-                title: "1.Kitesim的使用指南",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%A2%83%E5%A4%96%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81%EF%BC%9A%E6%97%A0%E9%9C%80%E5%AE%9E%E5%90%8D%EF%BC%8Capp%E4%B8%8A%E6%9F%A5%E6%94%B6%E7%9F%AD%E4%BF%A1%EF%BC%8C%E6%97%A0%E9%9C%80esim%E6%89%8B%E6%9C%BA%E6%88%96%E5%AE%9E%E4%BD%93%E5%8D%A1%EF%BC%8C%E5%8F%AF%E9%95%BF%E6%9C%9F%E4%BF%9D%E5%8F%B7/%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E5%A2%83%E5%A4%96%E6%89%8B%E6%9C%BA%E5%8F%B7%E7%A0%81%EF%BC%9A%E6%97%A0%E9%9C%80%E5%AE%9E%E5%90%8D%EF%BC%8Capp%E4%B8%8A%E6%9F%A5%E6%94%B6%E7%9F%AD%E4%BF%A1%EF%BC%8C%E6%97%A0%E9%9C%80esim%E6%89%8B%E6%9C%BA%E6%88%96%E5%AE%9E%E4%BD%93%E5%8D%A1%EF%BC%8C%E5%8F%AF%E9%95%BF%E6%9C%9F%E4%BF%9D%E5%8F%B7.mp4",
-                duration: "4:34",
-                document: "https://blog.aibochinese.com/tools/kitesim"
-            },
-            {
-                chapter: "eSIM写入卡-非eSIM手机亦可",
-                title: "1.普通安卓手机如何升级使用esim",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E6%99%AE%E9%80%9A%E6%89%8B%E6%9C%BA%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%94%AF%E6%8C%81eSIM%EF%BC%8C%E5%90%8C%E6%97%B6%E9%80%82%E9%85%8D%E5%AE%89%E5%8D%93%E5%92%8C%E8%8B%B9%E6%9E%9C%EF%BC%8C%E5%B9%B6%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%BE%97eSIM%E5%8F%B7/%E6%99%AE%E9%80%9A%E6%89%8B%E6%9C%BA%E5%A6%82%E4%BD%95%E5%8D%87%E7%BA%A7%E6%94%AF%E6%8C%81eSIM%EF%BC%8C%E5%90%8C%E6%97%B6%E9%80%82%E9%85%8D%E5%AE%89%E5%8D%93%E5%92%8C%E8%8B%B9%E6%9E%9C%EF%BC%8C%E5%B9%B6%E5%85%8D%E8%B4%B9%E8%8E%B7%E5%BE%97eSIM%E5%8F%B7.mp4",
-                duration: "8:20",
-                document: "https://blog.aibochinese.com/tools/esim-card"
-            },
-             {
-                chapter: "eSIM写入卡-非eSIM手机亦可",
-                title: "2.非eSIM苹果手机，如何使用eSIM?",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E9%9D%9EeSIM%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8eSIM/%E9%9D%9EeSIM%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8eSIM.mp4",
-                duration: "8:20",
-                document: "https://blog.aibochinese.com/tools/iphone-esim"
-            },
-            {
-                chapter: "推荐开通的eSIM卡",
-                title: "1.开通Moldtelecom的eSIM,免实名，申请流程简单，0.8元/年保号",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9A%E5%BE%B7%E5%9B%BDeSIM%E6%89%8B%E6%9C%BA%E5%8F%B7%EF%BC%8C0%E6%9C%88%E7%A7%9F%EF%BC%8C%E4%BF%9D%E5%8F%B7%E9%A6%96%E9%80%89/%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9A%E5%BE%B7%E5%9B%BDeSIM%E6%89%8B%E6%9C%BA%E5%8F%B7%EF%BC%8C0%E6%9C%88%E7%A7%9F%EF%BC%8C%E4%BF%9D%E5%8F%B7%E9%A6%96%E9%80%89.mp4",
-                duration: "10:48",
-                document: "https://blog.aibochinese.com/tools/moldtelecom"
-            },
-            {
-                chapter: "推荐开通的eSIM卡",
-                title: "2.免费开通德国eSIM手机号，0月租，保号首选",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9A%E5%BE%B7%E5%9B%BDeSIM%E6%89%8B%E6%9C%BA%E5%8F%B7%EF%BC%8C0%E6%9C%88%E7%A7%9F%EF%BC%8C%E4%BF%9D%E5%8F%B7%E9%A6%96%E9%80%89/%E5%85%8D%E8%B4%B9%E5%BC%80%E9%80%9A%E5%BE%B7%E5%9B%BDeSIM%E6%89%8B%E6%9C%BA%E5%8F%B7%EF%BC%8C0%E6%9C%88%E7%A7%9F%EF%BC%8C%E4%BF%9D%E5%8F%B7%E9%A6%96%E9%80%89.mp4",
-                duration: "9:28",
-                document: "https://blog.aibochinese.com/tools/vodafoneesim-0cost"
-            },
-             {
-                chapter: "推荐开通的eSIM卡",
-                title: "3.免费开纯流量eSIM-支持全球漫游",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96eSIM%E6%B5%81%E9%87%8F%E5%8D%A1%EF%BC%8C%E5%85%8D%E5%AE%9E%E5%90%8D%EF%BC%8C%E5%85%A8%E7%90%83%E6%BC%AB%E6%B8%B8/%E5%85%8D%E8%B4%B9%E9%A2%86%E5%8F%96eSIM%E6%B5%81%E9%87%8F%E5%8D%A1%EF%BC%8C%E5%85%8D%E5%AE%9E%E5%90%8D%EF%BC%8C%E5%85%A8%E7%90%83%E6%BC%AB%E6%B8%B8.mp4",
-                duration: "8:28",
-                document: "https://blog.aibochinese.com/tools/global-data-esim"
-            },
-           {
-                chapter: "副业-线上eSIM营业厅",
-                title: "1.限时零门槛加盟-开通1级权益",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/2026%E5%B9%B4%E6%9C%802026%E5%B9%B4%E6%9C%80%E5%85%B7%E6%BD%9C%E5%8A%9B%E7%9A%84%E5%89%AF%E4%B8%9A%EF%BC%9A%E5%81%9A%E4%B8%80%E5%AE%B6%E7%BA%BF%E4%B8%8AeSIM%E8%90%A5%E4%B8%9A%E5%8E%85/2026%E5%B9%B4%E6%9C%80%E5%85%B7%E6%BD%9C%E5%8A%9B%E7%9A%84%E5%89%AF%E4%B8%9A%EF%BC%9A%E5%81%9A%E4%B8%80%E5%AE%B6%E7%BA%BF%E4%B8%8AeSIM%E8%90%A5%E4%B8%9A%E5%8E%85.mp4",
-                duration: "4:13",
-                document: "https://blog.aibochinese.com/web3/online-esim-service-hall"
-            },
-           {
-                chapter: "使用注意事项",
-                title: "境外eSIM,有的只能到目的地才能用，不要随意买",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E6%B3%A8%E6%84%8FeSIM%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%A2%83%E5%A4%96esim%E5%9C%A8%E4%B8%AD%E5%9B%BD%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%9C%89%E7%94%A8%E5%B1%9E%E4%BA%8E%E6%97%85%E6%B8%B8%EF%BC%8C%E5%86%99%E5%85%A5%E5%8D%A1%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%8C%E4%B8%8D%E8%A6%81%E9%9A%8F%E6%84%8F%E5%88%A0%E9%99%A4%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%BF%A1%E5%8F%B7%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/%E6%B3%A8%E6%84%8FeSIM%E4%BD%BF%E7%94%A8%EF%BC%8C%E5%A2%83%E5%A4%96esim%E5%9C%A8%E4%B8%AD%E5%9B%BD%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%9C%89%E7%94%A8%E5%B1%9E%E4%BA%8E%E6%97%85%E6%B8%B8%EF%BC%8C%E5%86%99%E5%85%A5%E5%8D%A1%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%8C%E4%B8%8D%E8%A6%81%E9%9A%8F%E6%84%8F%E5%88%A0%E9%99%A4%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%BF%A1%E5%8F%B7%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F.mp4",
-                duration: "6:13",
-                document: "https://blog.aibochinese.com/tools/esim-card"
+
+    <!-- 图片轮播和放大功能 -->
+    <script>
+        // 切换图片
+        function changeSlide(button, direction) {
+            const slider = button.closest('.image-slider');
+            const images = slider.querySelectorAll('.slider-image');
+            const imageInfo = slider.querySelector('.image-info');
+            let currentIndex = 0;
+            
+            // 找到当前激活的图片
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    currentIndex = index;
+                }
+            });
+            
+            // 计算新索引
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0) {
+                newIndex = images.length - 1;
+            } else if (newIndex >= images.length) {
+                newIndex = 0;
             }
-
-        ];
-
-        const playlist = document.getElementById('playlist');
-        const videoPlayer = document.getElementById('videoPlayer');
-        const currentTitle = document.getElementById('currentTitle');
-        let currentVideoDocument = ''; // 存储当前视频的文档链接
-
-        // 按章节分组视频
-        const videosByChapter = videos.reduce((acc, video) => {
-            if (!acc[video.chapter]) {
-                acc[video.chapter] = [];
-            }
-            acc[video.chapter].push(video);
-            return acc;
-        }, {});
-
-        // 设置初始视频的文档链接（默认第一个视频）
-        if (videos.length > 0) {
-            currentVideoDocument = videos[0].document;
+            
+            // 更新图片显示
+            images[currentIndex].classList.remove('active');
+            images[newIndex].classList.add('active');
+            
+            // 更新图片信息
+            imageInfo.textContent = `图片 ${newIndex + 1} / ${images.length}`;
         }
 
-        // 渲染视频列表
-        Object.entries(videosByChapter).forEach(([chapter, chapterVideos]) => {
-            // 创建章节标题
-            const chapterTitle = document.createElement('div');
-            chapterTitle.className = 'chapter-title';
-            chapterTitle.textContent = chapter;
-            playlist.appendChild(chapterTitle);
+        // 打开放大查看
+        function openZoom(button) {
+            const slider = button.closest('.image-slider');
+            const activeImage = slider.querySelector('.slider-image.active');
+            const zoomModal = document.getElementById('zoomModal');
+            const zoomContent = zoomModal.querySelector('.zoom-content');
+            
+            zoomContent.src = activeImage.src;
+            zoomModal.classList.add('active');
+        }
 
-            // 创建该章节下的视频项
-            chapterVideos.forEach((video, index) => {
-                const item = document.createElement('div');
-                item.className = 'video-item';
-                item.innerHTML = `
-                    <div class="video-item-title">${video.title}</div>
-                    <div class="video-item-duration">时长: ${video.duration}</div>
-                `;
-                
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.video-item').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                    item.classList.add('active');
-                    
-                    videoPlayer.src = video.url;
-                    currentTitle.textContent = video.title;
-                    currentVideoDocument = video.document; // 更新当前视频的文档链接
-                    videoPlayer.play();
-                });
-                
-                playlist.appendChild(item);
-            });
-        });
-
-        // 添加查看文档按钮点击事件
-        const documentButton = document.querySelector('.document-button');
-        documentButton.addEventListener('click', () => {
-            if (currentVideoDocument) {
-                // 使用新窗口打开文档链接
-                window.open(currentVideoDocument, '_blank');
-            } else {
-                alert('当前视频暂无相关文档');
-            }
-        });
+        // 关闭放大查看
+        function closeZoom() {
+            const zoomModal = document.getElementById('zoomModal');
+            zoomModal.classList.remove('active');
+        }
     </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "name": "朋友们申请摩尔多瓦esim的成功案例",
+        "keywords": "摩尔多瓦,esim,moldtelecom",
+        "description": "分享朋友们申请摩尔多瓦esim的成功案例，帮助您了解如何申请和使用摩尔多瓦esim",
+        "url": "https://blog.aibochinese.com/post/moldtelecom-case.html",
+        "datePublished": "2026-01-17",
+        "dateModified": "2026-01-17",
+        "author": {"@type": "Person", "name": "AbelZou"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "爱博·客",
+            "logo": {"@type": "ImageObject", "url": "https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png"}
+        }
+    }
+    </script>   
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
+         crossorigin="anonymous"></script>
 </body>
 </html>
