@@ -1109,7 +1109,8 @@
 
         // 移动端底部导航交互效果
         document.addEventListener('DOMContentLoaded', () => {
-            const navItems = document.querySelectorAll('.fixed.bottom-0 a:not(:nth-child(3))');
+            const navContainer = document.querySelector('.fixed.bottom-0 .flex');
+            const navItems = navContainer.querySelectorAll('a');
 
             navItems.forEach(item => {
                 item.addEventListener('click', (e) => {
