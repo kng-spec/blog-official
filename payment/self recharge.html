@@ -1034,7 +1034,7 @@
         <div class="video-section">
             <div class="video-title" id="currentTitle">📺 充值教程视频</div>
             <div class="video-player-container">
-                <video class="video-player" id="videoPlayer" controls>
+                <video class="video-player" id="videoPlayer" controls playsinline muted preload="metadata" controlslist="nodownload">
                     <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E6%89%8B%E6%8A%8A%E6%89%8B%E7%BB%99%E6%82%A8%E6%BC%94%E7%A4%BA%EF%BC%9A%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1%E5%85%85%E5%80%BCUSDT.mp4" type="video/mp4" />
                 </video>
                 <button class="document-button">查看相应文档说明</button>
@@ -1294,10 +1294,33 @@
                     });
                     item.classList.add('active');
                     
+                    // 重置视频播放器状态
+                    videoPlayer.pause();
+                    videoPlayer.currentTime = 0;
+                    
+                    // 更新视频源和标题
                     videoPlayer.src = video.url;
                     currentTitle.textContent = video.title;
                     currentVideoDocument = video.document; // 更新当前视频的文档链接
-                    videoPlayer.play();
+                    
+                    // 处理视频加载和播放
+                    videoPlayer.load();
+                    
+                    // 尝试播放视频，处理可能的错误
+                    try {
+                        // 移动端自动播放策略
+                        const playPromise = videoPlayer.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                // 播放成功
+                            }).catch(error => {
+                                console.log('自动播放被阻止，等待用户交互:', error);
+                                // 不做任何操作，让用户点击播放按钮
+                            });
+                        }
+                    } catch (error) {
+                        console.error('播放视频时出错:', error);
+                    }
                 });
                 
                 playlist.appendChild(item);
