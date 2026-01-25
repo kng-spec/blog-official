@@ -725,6 +725,13 @@
                 flex-direction: column;
             }
             
+            /* 视频容器垂直堆叠布局 */
+            .video-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 600px;
+            }
+            
             /* 视频区域和播放列表都占满宽度 */
             .video-section,
             .playlist-section {
@@ -734,13 +741,13 @@
             
             /* 播放列表调整 */
             .playlist-section {
-                border-top: 2px solid #f0f0f0;
-                max-height: 500px;
+                border-top: 2px solid #2196F3;
+                max-height: 300px;
             }
             
             /* 视频播放器最小高度调整 */
             .video-player {
-                min-height: 300px;
+                min-height: 400px;
             }
             
             /* 调整body padding */
@@ -750,9 +757,14 @@
         }
 
         @media (max-width: 480px) {
-            /* 更小屏幕的视频高度 */
+            /* 更小屏幕的视频高度 - 增加以适应竖版视频 */
             .video-player {
-                min-height: 250px;
+                min-height: 400px;
+            }
+            
+            /* 调整视频容器高度 */
+            .video-container {
+                min-height: 700px;
             }
             
             /* 调整高亮框 */
@@ -796,7 +808,7 @@
             vertical-align: middle;
         }
             /* 课程列表 */
-        .vedio-container {
+        .video-container {
             display: flex;
             max-width: 1400px;
             margin: 0 auto;
@@ -1030,7 +1042,7 @@
             </div>
         </div>
     </div>
-       <div class="vedio-container">
+       <div class="video-container">
         <div class="video-section">
             <div class="video-title" id="currentTitle">📺 充值教程视频</div>
             <div class="video-player-container">
