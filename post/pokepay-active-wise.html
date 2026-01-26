@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokePay介绍：激活Wise账户、支持3DS、可申请实体卡（刷卡|ATM取现）</title>
-    <meta name="description" content="PokePay介绍：激活Wise账户、支持3DS、可申请实体卡（刷卡|ATM取现）">
+    <title>Pokepay的Visa卡入金激活Wise案例 - 爱博·客</title>
+    <meta name="description" content="分享Pokepay的Visa卡入金激活Wise案例，帮助您了解如何使用Pokepay激活Wise">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/post/pagefind/pagefind-ui.css">
+
     <style>
         /* 悬浮微信图标样式 */
         .wechat-float {
@@ -165,7 +168,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0rem 20px;
+            padding: 0.8rem 20px;
         }
 
         .logo img {
@@ -386,6 +389,7 @@
             color: #666;
             font-size: 14px;
         }
+
         /* 页脚样式 */
         footer {
             background: linear-gradient(135deg, hsl(210, 87%, 57%), #34495e);
@@ -561,327 +565,177 @@
             }
         }
 
-        /* 以黄色色调为主的排版样式 */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff8e1;
-        }
-
-        .main-content {
+        /* 案例卡片样式 */
+        .case-container {
             max-width: 1200px;
-            margin: 80px auto 0;
-            padding: 20px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
         }
 
-        /* 两栏布局样式 */
-        .two-column-layout {
-            display: flex;
+        .case-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-bottom: 40px;
         }
 
-        .left-column {
-            flex: 1;
+        @media (max-width: 1024px) {
+            .case-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .right-column {
-            flex: 1;
-            min-width: 300px;
+        @media (max-width: 768px) {
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* 视频容器样式 */
-        .video-container {
-            background-color: #f9f9f9;
+        .case-card {
+            border: 1px solid #ddd;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .video-container h3 {
-            color: #f57c00;
-            margin-bottom: 15px;
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .case-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
             text-align: center;
         }
 
-        .video-container video {
+        /* 图片轮播容器 */
+        .image-slider {
+            position: relative;
             width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .two-column-layout {
-                flex-direction: column;
-            }
-
-            .right-column {
-                margin-top: 20px;
-            }
-        }
-
-        h1 {
-            color: #f57c00;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #ff9800;
-            font-size: 1.8rem;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ffeb3b;
-            padding-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        a.btn {
-            background-color: #ffc107;
-            color: #333;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        a.btn:hover {
-            background-color: #ff9800;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .small-text {
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        strong {
-            color: #f57c00;
-        }
-
-        mark {
-            background-color: #ffeb3b;
-            color: #333;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-
-        /* 图片样式 */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        /* 两张图片并列一行，各占30%宽度 */
-        .image-row {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-            justify-content: center;
-        }
-
-        .image-row img {
-            width: 30%;
-            max-width: 30%;
-        }
-
-        /* 按钮样式 */
-        button {
-            background-color: #ffc107;
-            color: #333;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
-        }
-
-        button:hover {
-            background-color: #ff9800;
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
-        }
-               /* 课程列表 */
-        .video-container {
-            display: flex;
-            max-width: 1400px;
+            max-width: 500px;
             margin: 0 auto;
-            background-color: white;
-            border: 3px solid #2196F3;
             border-radius: 8px;
             overflow: hidden;
-            height: 80vh;
-        }
-               .video-section {
-            width: 70%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 3px solid #2196F3;
+            background-color: #f5f5f5;
         }
 
-        .video-title {
-            color: #2196F3;
-            font-size: 15px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .video-player {
+        .slider-wrapper {
+            position: relative;
             width: 100%;
-            background-color: #000;
-            border: 2px solid #2196F3;
-            border-radius: 4px;
+            height: 400px;
         }
 
-        .playlist-section {
-            width: 30%;
-            padding: 20px;
-            overflow-y: auto;
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .playlist-section::-webkit-scrollbar {
-            width: 8px;
+        .slider-image.active {
+            opacity: 1;
         }
 
-        .playlist-section::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        /* 轮播控制按钮 */
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
         }
 
-        .playlist-section::-webkit-scrollbar-thumb {
-            background: #2196F3;
-            border-radius: 4px;
-        }
-
-        .playlist-section::-webkit-scrollbar-thumb:hover {
-            background: #1976D2;
-        }
-
-        .playlist-header {
-            color: #2196F3;
-            font-size: 18px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            border-bottom: 2px solid #2196F3;
-            padding-bottom: 10px;
-        }
-
-        .video-item {
-            padding: 15px;
-            margin-bottom: 10px;
-            background-color: #f8f9fa;
-            border: 2px solid #e3f2fd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-item:hover {
-            background-color: #e3f2fd;
-            border-color: #2196F3;
-            transform: translateX(5px);
-        }
-
-        .video-item.active {
-            background-color: #2196F3;
+        .slider-btn {
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
-            border-color: #2196F3;
+            border: none;
+            font-size: 2rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .video-item-title {
-            font-size: 10px;
-            font-weight: 500;
-            margin-bottom: 5px;
+        .slider-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
-        .video-item-duration {
-            font-size: 12px;
+        /* 图片信息 */
+        .image-info {
+            text-align: center;
+            margin-top: 10px;
             color: #666;
+            font-size: 0.9rem;
         }
 
-        .video-item.active .video-item-duration {
-            color: #e3f2fd;
+        /* 放大查看按钮 */
+        .zoom-btn {
+            display: block;
+            margin: 15px auto 0;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .chapter-title {
-            color: #2196F3;
-            font-size: 15px;
-            font-weight: bold;
-            margin: 15px 0 10px 0;
-            padding: 8px 10px;
-            background-color: #e3f2fd;
-            border-left: 4px solid #2196F3;
-            border-radius: 4px;
+        .zoom-btn:hover {
+            background-color: #2980b9;
         }
 
-        .video-section {
-            width: 70%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 3px solid #2196F3;
-        }
-
-        .video-player-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
-        }
-
-        .video-player {
+        /* 放大查看模态框 */
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            flex: 1;
-            max-height: calc(100% - 60px);
-            background-color: #000;
-            border: 2px solid #2196F3;
-            border-radius: 4px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .zoom-modal.active {
+            display: flex;
+        }
+
+        .zoom-content {
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
         }
 
-        .document-button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #2196F3;
+        .close-zoom {
+            position: absolute;
+            top: 20px;
+            right: 30px;
             color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            font-size: 2rem;
             cursor: pointer;
-            align-self: center;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-            flex-shrink: 0;
+            transition: color 0.3s ease;
         }
 
-        .document-button:hover {
-            background-color: #1976D2;
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .close-zoom:hover {
+            color: #ccc;
         }
     </style>
 </head>
@@ -914,79 +768,29 @@
         </div>
     </nav>
 
-    <main class="main-content">
-        <h2>PokePay介绍：激活Wise账户、支持3DS、可申请实体卡（刷卡|ATM取现）</h2>
-
-        <div class="two-column-layout">
-            <div class="left-column">
-                <p>黄金用途：支持Wise入金激活账户，查看<a href="https://blog.aibochinese.com/payment/wise" class="btn" target="_blank">教程</a> | <a href="https://blog.aibochinese.com/post/pokepay-active-wise" class="btn" target="_blank">成功案例</a></p>
-
-                <h3>一、领18USD优惠券（邀请码：401166）</h3>
-
-                <p>受邀渠道：<button><a href="https://app.pokepay.cc/pages/invitation/regist?r=401166" class="btn" target="_blank">点击注册</a></button></p>
-                <p>中国大陆和美国IP无法成功注册，推荐试用<a href="https://dedicatedlines.top" class="btn" target="_blank">海外流量</a>，注册成功后不受限；建议使用outlook或谷歌邮箱</p>
-                <h2>二、充值</h2>
-
-                <div class="info-box">
-                    <p class="small-text">
-                        「<strong>免费<a href="https://dedicatedlines.top/" target="_blank" rel="noopener"><mark>海外网络流量</mark></a></strong> + 访问<strong><a href="https://accounts.maxweb.red/zh-CN/register?ref=569491541" target="_blank" rel="noopener"><mark>币安 web3</mark></a></strong>」
-                    </p>
-                    <p class="small-text">
-                        建议BSP网络，从币安充值USDT零手续费【<a href="self recharge.html" target="_blank" rel="noopener"><strong>教程</strong></a>】
-                    </p>
-                </div>
-                
-                <p>
-                    <a href="Proxy Recharge.html" target="_blank" rel="noopener">代充服务</a>：人工费$1/笔
-                </p>
-            </div>
-            <div class="right-column">
-                <div class="video-container">
-                    <video controls width="100%" height="315">
-                        <source src="https://cf.aibochinese.com/%E5%9B%BD%E9%99%85%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1/PokePay%E6%BF%80%E6%B4%BBWise%E6%95%99%E7%A8%8B.mp4" type="video/mp4">
-                        您的浏览器不支持视频播放
-                    </video>
+    <!-- 案例内容 -->
+    <div class="case-container">
+        <h1 class="case-title">Pokepay的Visa卡入金激活Wise案例</h1>
+        
+        <div class="case-grid">
+            <!-- 案例一 -->
+            <div class="case-card">
+                <h3>Pokepay激活Wise案例</h3>
+                <div class="image-slider">
+                    <div class="slider-wrapper">
+                        <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/pokepay-active-wise01.jpg" alt="Pokepay激活Wise案例图片" class="slider-image active">
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-btn prev" onclick="changeSlide(this, -1)"><</button>
+                        <button class="slider-btn next" onclick="changeSlide(this, 1)">></button>
+                    </div>
+                    <div class="image-info">图片 1 / 1</div>
+                    <button class="zoom-btn" onclick="openZoom(this)">放大查看</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <h2>三、可申请实体卡，支持中国大陆刷卡和ATM取现</h2>
-        <div style="text-align: center;">
-            <img src="https://cf.aibochinese.com/%E5%9B%BD%E9%99%85%E8%99%9A%E6%8B%9F%E4%BF%A1%E7%94%A8%E5%8D%A1/photo_2026-01-19_13-57-29.jpg" 
-                 style="max-width: 70%; height: auto;" />
-        </div>
-        <script>
-            function zoomImage(button) {
-                const img = button.parentElement.querySelector('img');
-                if (img.style.transform === 'scale(1.5)') {
-                    img.style.transform = 'scale(1)';
-                    img.style.zIndex = '1';
-                    img.style.position = 'relative';
-                } else {
-                    img.style.transform = 'scale(1.5)';
-                    img.style.zIndex = '1000';
-                    img.style.position = 'relative';
-                    img.style.transition = 'transform 0.3s ease';
-                }
-            }
-        </script>
-  
-            <div class="video-container">
-        <div class="video-section">
-            <div class="video-title" id="currentTitle">2026年个人打通全球收付款渠道</div>
-            <div class="video-player-container">
-                <video class="video-player" id="videoPlayer" controls>
-                    <source src="https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2026%E5%B9%B41%E6%9C%88/Wise%E8%B4%A6%E6%88%B7%E6%9C%89%E5%A4%9A%E9%87%8D%E8%A6%81%EF%BC%9F2026%E5%B9%B4%E6%BF%80%E6%B4%BBwise%E6%9C%80%E4%BC%98%E8%A7%A3%EF%BC%8C%E4%BD%8E%E6%88%90%E6%9C%AC%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%AE%80%E5%8D%95/Wise%E8%B4%A6%E6%88%B7%E6%9C%89%E5%A4%9A%E9%87%8D%E8%A6%81%EF%BC%9F2026%E5%B9%B4%E6%BF%80%E6%B4%BBwise%E6%9C%80%E4%BC%98%E8%A7%A3%EF%BC%8C%E4%BD%8E%E6%88%90%E6%9C%AC%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%AE%80%E5%8D%95.mp4" type="video/mp4">
-                </video>
-                <button class="document-button">查看相应文档说明</button>
-            </div>
-        </div>
-
-        <div class="playlist-section">
-            <div class="playlist-header">视频列表</div>
-            <div id="playlist"></div>
-        </div>
-  </main>
     <!-- 页脚（完整保留） -->
     <footer>
         <div class="footer">
@@ -1008,7 +812,7 @@
     <div class="mobile-nav">
         <div class="nav-container">
             <!-- 首页按钮 -->
-            <a href="https://blog.aibochinese.com/" class="nav-item">
+            <a href="https://blog.aibochinese.com/" class="nav-item active">
                 <i class="fa fa-home icon"></i>
                 <span class="text">首页</span>
             </a>
@@ -1096,6 +900,12 @@
         </div>
     </div>
 
+    <!-- 放大查看模态框 -->
+    <div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+        <span class="close-zoom">&times;</span>
+        <img src="" alt="放大图片" class="zoom-content">
+    </div>
+
     <script>
         // 搜索弹窗控制函数
         function toggleSearchModal() {
@@ -1121,15 +931,18 @@
         window.onclick = function(event) {
             const searchModal = document.getElementById('searchModal');
             const wechatModal = document.getElementById('wechatModal');
+            const zoomModal = document.getElementById('zoomModal');
             
             if (event.target === searchModal) {
                 closeSearchModal();
             } else if (event.target === wechatModal) {
                 closeWechatModal();
+            } else if (event.target === zoomModal) {
+                closeZoom();
             }
         };
     </script>
-    <!-- Pagefind 搜索 -->
+       <!-- Pagefind 搜索（已完美修复） -->
     <script src="/post/pagefind/pagefind-ui.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', function () {
@@ -1259,149 +1072,76 @@
             console.log('终极链接修复方案已激活');
         })();
     </script>
- <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",           // 或 WebPage、Article、FAQPage、Product等
-  "name": "PokePay介绍：激活Wise账户、支持3DS、可申请实体卡（刷卡|ATM取现）",
-  "keywords": "Pokepay,支持3DS, 激活wise,实卡，ATM取现，刷卡",
-  "description": "PokePay介绍：激活Wise账户、支持3DS、可申请实体卡（刷卡|ATM取现）",
-  "url": "https://blog.aibochinese.com/payment/feiyangka.html",
-  "datePublished": "2025-11-2",
-  "dateModified": "2025-11-29",
-  "author": {"@type": "Person", "name": "AbelZou"},
-  "publisher": {
-    "@type": "Organization",
-    "name": "爱博·客",
-    "logo": {"@type": "ImageObject", "url": "https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png"}
-  }
-}
-</script>   
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
-     crossorigin="anonymous"></script>
-                   <script>
-        const videos = [
-           {
-                chapter: "思路和总指引",
-                title: "1.最优解：用Visa借记卡激活Wisa账户",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2026%E5%B9%B41%E6%9C%88/Wise%E8%B4%A6%E6%88%B7%E6%9C%89%E5%A4%9A%E9%87%8D%E8%A6%81%EF%BC%9F2026%E5%B9%B4%E6%BF%80%E6%B4%BBwise%E6%9C%80%E4%BC%98%E8%A7%A3%EF%BC%8C%E4%BD%8E%E6%88%90%E6%9C%AC%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%AE%80%E5%8D%95/Wise%E8%B4%A6%E6%88%B7%E6%9C%89%E5%A4%9A%E9%87%8D%E8%A6%81%EF%BC%9F2026%E5%B9%B4%E6%BF%80%E6%B4%BBwise%E6%9C%80%E4%BC%98%E8%A7%A3%EF%BC%8C%E4%BD%8E%E6%88%90%E6%9C%AC%EF%BC%8C%E6%93%8D%E4%BD%9C%E7%AE%80%E5%8D%95.mp4",
-                duration: "15:34",
-                document: "https://blog.aibochinese.com/payment/feiyangka"
-            },
-            {
-                chapter: "思路和总指引",
-                title: "2.飞扬卡充值教程：怎么节省开卡和充值费用？领券、选主网+备注",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2026%E5%B9%B41%E6%9C%88/%E9%A3%9E%E6%89%AC%E5%8D%A1%E5%85%85%E5%80%BC%E6%95%99%E7%A8%8B%EF%BC%9A%E6%80%8E%E4%B9%88%E8%8A%82%E7%9C%81%E5%BC%80%E5%8D%A1%E5%92%8C%E5%85%85%E5%80%BC%E8%B4%B9%E7%94%A8%EF%BC%9F%E9%A2%86%E5%88%B8%E3%80%81%E9%80%89%E4%B8%BB%E7%BD%91%2B%E5%A4%87%E6%B3%A8/%E9%A3%9E%E6%89%AC%E5%8D%A1%E5%85%85%E5%80%BC%E6%95%99%E7%A8%8B%EF%BC%9A%E6%80%8E%E4%B9%88%E8%8A%82%E7%9C%81%E5%BC%80%E5%8D%A1%E5%92%8C%E5%85%85%E5%80%BC%E8%B4%B9%E7%94%A8%EF%BC%9F%E9%A2%86%E5%88%B8%E3%80%81%E9%80%89%E4%B8%BB%E7%BD%91%2B%E5%A4%87%E6%B3%A8.mp4",
-                duration: "4:34",
-                document: "https://blog.aibochinese.com/payment/feiyangka"
-            },
-          {
-                chapter: "思路和总指引",
-                title: "3.跨境收付款的中转站：Wise账户的重要性",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E5%9B%BD%E5%86%85%E4%B8%AA%E4%BA%BA%E6%89%93%E9%80%9A%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%C2%B7%E5%A6%82%E4%BD%95%E6%BF%80%E6%B4%BBwise%C2%B7Paypalstripe%20%20%E8%BF%91%E6%97%A0%E6%8D%9F%E6%8F%90%E7%8E%B0%C2%B7%E6%8B%A5%E6%9C%89%E5%A4%9A%E5%9B%BD%E6%9C%AC%E5%9C%B0%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7/%E5%9B%BD%E5%86%85%E4%B8%AA%E4%BA%BA%E6%89%93%E9%80%9A%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%C2%B7%E5%A6%82%E4%BD%95%E6%BF%80%E6%B4%BBwise%C2%B7Paypalstripe%20%20%E8%BF%91%E6%97%A0%E6%8D%9F%E6%8F%90%E7%8E%B0%C2%B7%E6%8B%A5%E6%9C%89%E5%A4%9A%E5%9B%BD%E6%9C%AC%E5%9C%B0%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7.mp4",
-                duration: "15:34",
-                document: "https://blog.aibochinese.com/payment/wise"
-            },
-            {
-                chapter: "思路和总指引",
-                title: "2.如何打通全球收付款渠道",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B412%E6%9C%88/%E5%9B%BD%E5%86%85%E4%B8%AA%E4%BA%BA%E6%89%93%E9%80%9A%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%C2%B7%E5%A6%82%E4%BD%95%E6%BF%80%E6%B4%BBwise%C2%B7Paypalstripe%20%20%E8%BF%91%E6%97%A0%E6%8D%9F%E6%8F%90%E7%8E%B0%C2%B7%E6%8B%A5%E6%9C%89%E5%A4%9A%E5%9B%BD%E6%9C%AC%E5%9C%B0%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7/%E5%9B%BD%E5%86%85%E4%B8%AA%E4%BA%BA%E6%89%93%E9%80%9A%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%C2%B7%E5%A6%82%E4%BD%95%E6%BF%80%E6%B4%BBwise%C2%B7Paypalstripe%20%20%E8%BF%91%E6%97%A0%E6%8D%9F%E6%8F%90%E7%8E%B0%C2%B7%E6%8B%A5%E6%9C%89%E5%A4%9A%E5%9B%BD%E6%9C%AC%E5%9C%B0%E9%93%B6%E8%A1%8C%E8%B4%A6%E6%88%B7.mp4",
-                duration: "15:34",
-                document: "https://blog.aibochinese.com/payment/global-payments-guide"
-            },
-            {
-                chapter: "证明材料的提供",
-                title: "1、国内地址证明",
-                url: "#",
-                duration: "10:20",
-                document: "https://blog.aibochinese.com/payment/pay"
-            },
-           {
-                chapter: "海外收款讲解",
-                title: "3.代充美元USDT,以及兑换回RMB【CTC服务】",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E4%BB%A3%E5%85%85%E7%BE%8E%E5%85%83USDT%2C%E4%BB%A5%E5%8F%8A%E5%85%91%E6%8D%A2%E5%9B%9ERMB%E3%80%90CTC%E6%9C%8D%E5%8A%A1%E3%80%91/%E4%BB%A3%E5%85%85%E7%BE%8E%E5%85%83USDT%2C%E4%BB%A5%E5%8F%8A%E5%85%91%E6%8D%A2%E5%9B%9ERMB%E3%80%90CTC%E6%9C%8D%E5%8A%A1%E3%80%91.mp4",
-                duration: "4:13",
-                document: "https://blog.aibochinese.com/payment/Proxy%20Recharge"
-            },
-            {
-                chapter: "提现回RMB教程",
-                title: "1.省钱有招：USDT链上转账怎么选择网络？",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F/%E7%9C%81%E9%92%B1%E6%9C%89%E6%8B%9B%EF%BC%9AUSDT%E9%93%BE%E4%B8%8A%E8%BD%AC%E8%B4%A6%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9%E7%BD%91%E7%BB%9C%EF%BC%9F.mp4",
-                duration: "4:15",
-                document: "https://blog.aibochinese.com/web3/binance"
-            },
-            {
-                chapter: "海外支付方式",
-                title: "开通Roogoo联名万事达卡，海外订阅消费无忧",
-                url: "https://cf.aibochinese.com/%E8%A7%86%E9%A2%91%E7%A8%BF%E4%BB%B6/2025%E5%B9%B411%E6%9C%88/Roogoo%20U%E5%8D%A1%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C%20%E5%85%8D%E8%B4%B9%E5%BC%80%E5%8D%A1%EF%BC%8C%E6%B6%88%E8%B4%B90%E7%A3%A8%E6%8D%9F/Roogoo%20U%E5%8D%A1%E7%9C%9F%E5%AE%9E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C%20%E5%85%8D%E8%B4%B9%E5%BC%80%E5%8D%A1%EF%BC%8C%E6%B6%88%E8%B4%B90%E7%A3%A8%E6%8D%9F.mp4",
-                duration: "13:15",
-                document: "https://blog.aibochinese.com/payment/apply%20V-cards"
+
+    <!-- 图片轮播和放大功能 -->
+    <script>
+        // 切换图片
+        function changeSlide(button, direction) {
+            const slider = button.closest('.image-slider');
+            const images = slider.querySelectorAll('.slider-image');
+            const imageInfo = slider.querySelector('.image-info');
+            let currentIndex = 0;
+            
+            // 找到当前激活的图片
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    currentIndex = index;
+                }
+            });
+            
+            // 计算新索引
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0) {
+                newIndex = images.length - 1;
+            } else if (newIndex >= images.length) {
+                newIndex = 0;
             }
-
-        ];
-
-        const playlist = document.getElementById('playlist');
-        const videoPlayer = document.getElementById('videoPlayer');
-        const currentTitle = document.getElementById('currentTitle');
-        let currentVideoDocument = ''; // 存储当前视频的文档链接
-
-        // 按章节分组视频
-        const videosByChapter = videos.reduce((acc, video) => {
-            if (!acc[video.chapter]) {
-                acc[video.chapter] = [];
-            }
-            acc[video.chapter].push(video);
-            return acc;
-        }, {});
-
-        // 设置初始视频的文档链接（默认第一个视频）
-        if (videos.length > 0) {
-            currentVideoDocument = videos[0].document;
+            
+            // 更新图片显示
+            images[currentIndex].classList.remove('active');
+            images[newIndex].classList.add('active');
+            
+            // 更新图片信息
+            imageInfo.textContent = `图片 ${newIndex + 1} / ${images.length}`;
         }
 
-        // 渲染视频列表
-        Object.entries(videosByChapter).forEach(([chapter, chapterVideos]) => {
-            // 创建章节标题
-            const chapterTitle = document.createElement('div');
-            chapterTitle.className = 'chapter-title';
-            chapterTitle.textContent = chapter;
-            playlist.appendChild(chapterTitle);
+        // 打开放大查看
+        function openZoom(button) {
+            const slider = button.closest('.image-slider');
+            const activeImage = slider.querySelector('.slider-image.active');
+            const zoomModal = document.getElementById('zoomModal');
+            const zoomContent = zoomModal.querySelector('.zoom-content');
+            
+            zoomContent.src = activeImage.src;
+            zoomModal.classList.add('active');
+        }
 
-            // 创建该章节下的视频项
-            chapterVideos.forEach((video, index) => {
-                const item = document.createElement('div');
-                item.className = 'video-item';
-                item.innerHTML = `
-                    <div class="video-item-title">${video.title}</div>
-                    <div class="video-item-duration">时长: ${video.duration}</div>
-                `;
-                
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.video-item').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                    item.classList.add('active');
-                    
-                    videoPlayer.src = video.url;
-                    currentTitle.textContent = video.title;
-                    currentVideoDocument = video.document; // 更新当前视频的文档链接
-                    videoPlayer.play();
-                });
-                
-                playlist.appendChild(item);
-            });
-        });
-
-        // 添加查看文档按钮点击事件
-        const documentButton = document.querySelector('.document-button');
-        documentButton.addEventListener('click', () => {
-            if (currentVideoDocument) {
-                // 使用新窗口打开文档链接
-                window.open(currentVideoDocument, '_blank');
-            } else {
-                alert('当前视频暂无相关文档');
-            }
-        });
+        // 关闭放大查看
+        function closeZoom() {
+            const zoomModal = document.getElementById('zoomModal');
+            zoomModal.classList.remove('active');
+        }
     </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "name": "Pokepay的Visa卡入金激活Wise案例",
+        "keywords": "Pokepay,Visa卡,入金激活,Wise",
+        "description": "分享Pokepay的Visa卡入金激活Wise案例，帮助您了解如何使用Pokepay激活Wise",
+        "url": "https://blog.aibochinese.com/post/pokepay-active-wise.html",
+        "datePublished": "2026-01-26",
+        "dateModified": "2026-01-26",
+        "author": {"@type": "Person", "name": "AbelZou"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "爱博·客",
+            "logo": {"@type": "ImageObject", "url": "https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/%E5%B8%B8%E7%94%A8%E6%A8%A1%E6%9D%BF%E5%9B%BE%E7%89%87/50-50%20%E7%88%B1%E5%8D%9A%E5%AE%A2logo.png"}
+        }
+    }
+    </script>   
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6203499194676961"
+         crossorigin="anonymous"></script>
 </body>
 </html>
