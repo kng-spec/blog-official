@@ -468,8 +468,9 @@
             color: white;
             padding: 2rem;
             text-align: center;
-            border-radius: 15px;
-            margin-top: 3rem;
+            border-radius: 0;
+            margin-top: 0;
+            width: 100%;
         }
 
         .footer p {
@@ -565,7 +566,27 @@
             }
 
             .main-content {
-                padding: 30px 20px 50px;
+                padding: 30px 0 50px;
+            }
+
+            .pinkwallet-container {
+                padding: 20px 15px;
+            }
+
+            .video-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .video-section {
+                width: 100%;
+                border-right: none;
+                border-bottom: 3px solid #2196F3;
+            }
+
+            .playlist-section {
+                width: 100%;
+                max-height: 300px;
             }
             
             .mobile-nav {
@@ -717,16 +738,17 @@
     
     /* PinkWallet 页面样式 */
     .main-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 80px 20px 50px;
+        width: 100%;
+        margin: 0;
+        padding: 80px 0 50px;
     }
     
     .pinkwallet-container {
         background: white;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        border-radius: 0;
+        padding: 30px 20px;
+        box-shadow: none;
+        width: 100%;
     }
     
     h1 {
@@ -815,11 +837,11 @@
                /* 课程列表 */
         .video-container {
             display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
             background-color: white;
             border: 3px solid #2196F3;
-            border-radius: 8px;
+            border-radius: 0;
             overflow: hidden;
             height: 80vh;
         }
@@ -836,6 +858,8 @@
             font-size: 15px;
             margin-bottom: 15px;
             font-weight: bold;
+            text-align: center;
+            width: 100%;
         }
 
         .video-player {
@@ -1003,7 +1027,7 @@
 
     <main class="main-content">
         <div class="pinkwallet-container">
-            <h2>PinkWallet-跨境收付款、开通境外银行、Visa借记卡，投资全球各类资产等，成为商家和KOL轻松赚美刀！</h2>
+            <h2 style="text-align: center;">PinkWallet-终极全球金融资产钱包</h2>
             
             <div style="text-align: center; margin: 30px 0;">
                 <p style="font-size: 1.2rem; font-weight: bold;">查看<a href="https://drive.aibochinese.com/s/L4mh4" style="color:red" target="_blank" rel="noopener noreferrer">白皮书</a>、<a href="https://drive.aibochinese.com/s/4dVfb" style="color:red" target="_blank" rel="noopener noreferrer">监管牌照链接</a> | 注册时填入邀请码 AIBOBlog：</p>
@@ -1027,12 +1051,198 @@
             <div id="playlist"></div>
         </div>
     </div>
-            <h2>PinkWallet实力和监管安全</h2>
-            <p>目前已获得了FSP券商许可、欧洲VASP、美国MSB、加拿大MSB等7大合规牌照</p>
+ 
+                 <!-- 合规牌照部分 -->
+            <div style="background-color: #000; color: #fff; padding: 60px 20px; margin: 0; border-radius: 0; text-align: center;">
+                <p style="font-size: 1rem; color: #999; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    以全球监管为准绳，已获得包括美国MSB、加拿大MSB在内的多项金融与虚拟资产牌照。
+                </p>
+                <div class="license-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; width: 100%; margin: 0;">
+                    <!-- 新西兰FSP -->
+                    <div style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #333;">
+                        <div style="width: 100%; margin-bottom: 20px;">
+                            <a href="https://fsp-register.companiesoffice.govt.nz/" target="_blank">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/pinkwallet/%E7%9B%91%E7%AE%A1%E7%89%8C%E7%85%A701.png" alt="新西兰 FSP" style="width: 100%; height: auto; border-radius: 8px;" />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 欧盟VASP -->
+                    <div style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #333;">
+                        <div style="width: 100%; margin-bottom: 20px;">
+                            <a href="https://www.slaskie.kas.gov.pl/izba-administracji-skarbowej-w-katowicach/zalatwianie-spraw/rejestr-dzialalnosci-w-zakresie-walut-wirtualnych/-/asset_publisher/R7Yl/content/rejestr-dzialalnosci-w-zakresie-walut-wirtualnych?redirect=https%3A%2F%2Fwww.slaskie.kas.gov.pl%2Fizba-administracji-skarbowej-w-katowicach%2Fzalatwianie-spraw%2Frejestr-dzialalnosci-w-zakresie-walut-wirtualnych%3Fp_p_id%3D101_INSTANCE_R7Yl%26p_p_lifecycle%3D0%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_col_id%3Dcolumn-2%26p_p_col_count%3D1#p_p_id_101_INSTANCE_R7Yl_" target="_blank">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/pinkwallet/%E7%9B%91%E7%AE%A1%E7%89%8C%E7%85%A702.png" alt="欧盟 VASP" style="width: 100%; height: auto; border-radius: 8px;" />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 美国MSB -->
+                    <div style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #333;">
+                        <div style="width: 100%; margin-bottom: 20px;">
+                            <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/pinkwallet/%E7%9B%91%E7%AE%A1%E7%89%8C%E7%85%A703.png" alt="美国 MSB" style="width: 100%; height: auto; border-radius: 8px;" />
+                        </div>
+                    </div>
+                    <!-- 加拿大MSB -->
+                    <div style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #333;">
+                        <div style="width: 100%; margin-bottom: 20px;">
+                            <a href="https://fintrac-canafe.canada.ca/msb-esm/reg-eng" target="_blank">
+                                <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/%E8%B7%A8%E5%A2%83%E6%94%B6%E4%BB%98%E6%AC%BE/pinkwallet/%E7%9B%91%E7%AE%A1%E7%89%8C%E7%85%A704.png" alt="加拿大 MSB" style="width: 100%; height: auto; border-radius: 8px;" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>      
             
-            <h2>用数据看Pinkwallet</h2>
-            <div class="img-container">
-                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/pinkwallet/pinkwallet-1.png" alt="PinkWallet数据" style="max-width: 100%; height: auto;">
+            <style>
+                /* 合规牌照网格布局调整 */
+                @media (max-width: 768px) {
+                    .license-grid {
+                        grid-template-columns: repeat(2, 1fr) !important;
+                    }
+                }
+                
+                .product-features {
+                    background-color: #000;
+                    padding: 60px 20px;
+                    margin: 0;
+                    border-radius: 0;
+                    text-align: center;
+                }
+                
+                .features-title {
+                    color: #fff;
+                    font-size: 2rem;
+                    margin-bottom: 40px;
+                    position: relative;
+                    display: inline-block;
+                }
+                
+                .features-title::before,
+                .features-title::after {
+                    content: "——";
+                    color: #e91e63;
+                    margin: 0 20px;
+                }
+                
+                .features-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 20px;
+                    width: 100%;
+                    margin: 0;
+                }
+                
+                .feature-card {
+                    background-color: #1a1a1a;
+                    border-radius: 10px;
+                    padding: 30px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    border: 1px solid #333;
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .feature-card::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: linear-gradient(90deg, #e91e63, #f06292);
+                    transform: scaleX(0);
+                    transition: transform 0.3s ease;
+                }
+                
+                .feature-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+                }
+                
+                .feature-card:hover::before {
+                    transform: scaleX(1);
+                }
+                
+                .feature-icon {
+                    font-size: 2.5rem;
+                    margin-bottom: 20px;
+                    display: block;
+                }
+                
+                .feature-title {
+                    color: #fff;
+                    font-size: 1.2rem;
+                    margin-bottom: 15px;
+                    font-weight: bold;
+                }
+                
+                .feature-description {
+                    color: #999;
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                }
+                
+                /* 响应式设计 */
+                @media (max-width: 768px) {
+                    .features-title {
+                        font-size: 1.5rem;
+                    }
+                    
+                    .features-title::before,
+                    .features-title::after {
+                        margin: 0 10px;
+                    }
+                    
+                    .feature-card {
+                        padding: 20px;
+                    }
+                    
+                    /* 移动端一行展示两个卡片 */
+                    .features-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 15px;
+                    }
+                    
+                    /* 合规牌照部分移动端一行展示两个卡片 */
+                    .license-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 15px;
+                    }
+                }
+            </style>
+            
+            <div class="product-features">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="color: #e91e63;">💳</div>
+                        <h3 class="feature-title">银行卡买币</h3>
+                        <p class="feature-description">国际银行卡支付，快捷买币</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="color: #e91e63;">⚡</div>
+                        <h3 class="feature-title">极速换汇</h3>
+                        <p class="feature-description">50+法币与2000+加密货币，极速零，一键换汇</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="color: #e91e63;">🌍</div>
+                        <h3 class="feature-title">加密货币国际汇款</h3>
+                        <p class="feature-description">支持50+国家地区跨境汇款，收费低，到账速度快</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="color: #e91e63;">💸</div>
+                        <h3 class="feature-title">加密货币直接消费</h3>
+                        <p class="feature-description">免费申请Pink-Visa卡，全渠道消费不设限</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="color: #e91e63;">📈</div>
+                        <h3 class="feature-title">免费美股开户</h3>
+                        <p class="feature-description">操作便捷，注册+KYC即可完成开户，投资美股</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon" style="color: #e91e63;">🏦</div>
+                        <h3 class="feature-title">足不出户，开设海外银行账户</h3>
+                        <p class="feature-description">个人专属银行账户在线免费开通，拥有海外个人同名iban账户</p>
+                    </div>
+                </div>
             </div>
             
             <div class="highlight">
@@ -1045,15 +1255,7 @@
                 <li>内部转账：无手续费，秒到账</li>
                 <li>国内外的消费订阅：通过名下自己的银行汇款回国不需要提供资料证明</li>
             </ul>
-            <div class="img-container">
-                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/pinkwallet/pinkwallet-2.png" alt="PinkWallet跨境收付款" style="max-width: 100%; height: auto;">
-            </div>
-            
-            <p>Visa借记卡 满足资金在国内日常的消费</p>
-            <div class="img-container">
-                <img src="https://cf.aibochinese.com/%E7%88%B1%E5%8D%9A%C2%B7%E5%AE%A2%E5%9B%BE%E7%89%87%E5%BA%93/pinkwallet/pinkwallet-3.png" alt="PinkWallet Visa借记卡" style="max-width: 100%; height: auto;">
-            </div>
-            
+
             <h3>二、成为代理商赚返佣</h3>
             <p>通过我的渠道注册账户，后期我会帮您沟通和申请；以及分享推广经验给您</p>
             <p>开代理有返佣账户-隔天可提现至资金账户：代理自己交易也会返佣</p>
