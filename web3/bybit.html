@@ -471,6 +471,8 @@
             text-align: center;
             border-radius: 15px;
             margin-top: 3rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .footer p {
@@ -560,6 +562,7 @@
         @media (max-width: 768px) {
             body {
                 padding-top: 70px;
+                margin: 0;
             }
 
             .nav-container {
@@ -569,6 +572,12 @@
 
             .main-content {
                 padding: 30px 20px 50px;
+                width: 100%;
+                margin: 0;
+            }
+            
+            .card-image {
+                max-width: 70%;
             }
             
             .mobile-nav {
@@ -715,6 +724,14 @@
         @media (max-width: 980px) { .three-up { grid-template-columns: repeat(2, 300px); } }
         @media (max-width: 660px) { .three-up { grid-template-columns: 1fr; max-width: 300px; } }
         
+        /* 基本样式重置 */
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
         /* 暗黑色调风格 */
         body {
             background-color: #121212;
@@ -722,9 +739,10 @@
         }
         
         .main-content {
-
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
             padding: 100px 20px 50px;
+            box-sizing: border-box;
         }
         
         h1 {
@@ -782,6 +800,8 @@
             padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .highlight {
@@ -831,7 +851,7 @@
         <section class="content-section">
             <h1>Bybit使用指南-未来的综合链上银行</h1>
             
-            <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/bybit/bybit.gif" alt="Bybit" class="card-image">
+            <img src="https://cf.aibochinese.com/%E7%B4%A0%E6%9D%90%E7%AB%99/bybit/bybit.gif" alt="Bybit" class="card-image" style="width:70%;">
             
             <p>受邀渠道福利多：<a href="https://partner.bybit.com/b/AIBO" target="_blank">https://partner.bybit.com/b/AIBO</a></p>
             
